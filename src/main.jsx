@@ -1,14 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
 import "./index.css";
+import App from "./App.jsx";
 import "./assets/font.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <HashRouter>
+    {/* Ensure basename is EXACTLY /tfsp (no trailing slash) */}
+    <BrowserRouter basename="/tfsp">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>,
 );
