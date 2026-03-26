@@ -10,5 +10,5 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter basename="/tfsp">
       <App />
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
