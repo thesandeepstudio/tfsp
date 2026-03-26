@@ -11,8 +11,6 @@ function App() {
     <>
       {/* Navbar is always visible */}
       <Navbar />
-      <Home />
-
 
       {/* Routes handle page navigation */}
       <Routes>
