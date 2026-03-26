@@ -1,0 +1,11 @@
+/* src/assets/font.css */
+
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* Create a class to use the font */
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
