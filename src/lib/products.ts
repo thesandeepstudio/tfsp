@@ -16,6 +16,8 @@ export type Product = {
   description: string;
   colors?: ColorOption[];
   sizes?: string[];
+  image?: string;
+  gallery?: string[];
 };
 
 export const categoryLabels: Record<Category, string> = {
