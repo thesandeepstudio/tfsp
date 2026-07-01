@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BASE_PATH } from "@/lib/base-path";
 import { categoryLabels, type Product } from "@/lib/products";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
@@ -85,7 +86,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                     activeView === i ? "border-black" : "border-transparent"
                   }`}
                 >
-                  <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+                  <Image src={`${BASE_PATH}${src}`} alt="" fill sizes="80px" className="object-cover" />
                 </button>
               ))
             : views.map((view, i) => (
@@ -112,7 +113,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           )}
           {activeImage && (
             <Image
-              src={activeImage}
+              src={`${BASE_PATH}${activeImage}`}
               alt={product.name}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BASE_PATH } from "@/lib/base-path";
 import type { Product } from "@/lib/products";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
@@ -29,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
         {product.image ? (
           <Image
-            src={product.image}
+            src={`${BASE_PATH}${product.image}`}
             alt={product.name}
             fill
             sizes="(min-width: 1024px) 16vw, 45vw"
