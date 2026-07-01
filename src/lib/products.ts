@@ -64,6 +64,7 @@ export const products: Product[] = [
     category: "merch",
     gradient: gradients[1],
     description: "A brushed-fleece hoodie with a dropped shoulder and kangaroo pocket for everyday layering.",
+    image: "/products/product1.png",
     colors: [
       { name: "Sand", gradient: gradients[1] },
       { name: "Slate", gradient: gradients[2] },
@@ -79,6 +80,7 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[2],
     description: "A structured six-panel cap with an embroidered logo and an adjustable snapback closure.",
+    image: "/products/product1.png",
     sizes: ["One Size"],
   },
   {
@@ -89,6 +91,7 @@ export const products: Product[] = [
     category: "merch",
     gradient: gradients[3],
     description: "A heavy-duty canvas tote with reinforced handles, sized for everyday carry.",
+    image: "/products/product1.png",
     sizes: ["One Size"],
   },
   {
@@ -100,6 +103,7 @@ export const products: Product[] = [
     tag: "Sale",
     gradient: gradients[4],
     description: "A midweight crewneck sweatshirt with a soft interior fleece and ribbed cuffs.",
+    image: "/products/product1.png",
     colors: [
       { name: "Rose", gradient: gradients[4] },
       { name: "Stone", gradient: gradients[0] },
@@ -114,6 +118,7 @@ export const products: Product[] = [
     category: "merch",
     gradient: gradients[5],
     description: "A set of three hard-enamel pins with polished metal plating and a rubber pin back.",
+    image: "/products/product1.png",
     sizes: ["One Size"],
   },
 
@@ -127,6 +132,7 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[6],
     description: "An 18x24 matte print on heavyweight paper, ready to frame.",
+    image: "/products/product1.png",
     sizes: ["A4", "A3", "A2"],
   },
   {
@@ -137,6 +143,7 @@ export const products: Product[] = [
     category: "posters",
     gradient: gradients[7],
     description: "A 12x18 gradient print with a soft-touch finish, printed on demand.",
+    image: "/products/product1.png",
     sizes: ["A4", "A3", "A2"],
   },
   {
@@ -148,6 +155,7 @@ export const products: Product[] = [
     tag: "Back in Stock",
     gradient: gradients[8],
     description: "A minimalist single-line illustration printed on archival-quality paper.",
+    image: "/products/product1.png",
     sizes: ["A4", "A3", "A2"],
   },
   {
@@ -158,6 +166,7 @@ export const products: Product[] = [
     category: "posters",
     gradient: gradients[0],
     description: "A large-format 24x36 print listing this year's stops, printed in limited numbers.",
+    image: "/products/product1.png",
     sizes: ["A3", "A2", "A1"],
   },
   {
@@ -169,6 +178,7 @@ export const products: Product[] = [
     tag: "Sale",
     gradient: gradients[1],
     description: "A vivid gradient print designed to pop under warm or cool lighting alike.",
+    image: "/products/product1.png",
     sizes: ["A4", "A3", "A2"],
   },
   {
@@ -179,6 +189,7 @@ export const products: Product[] = [
     category: "posters",
     gradient: gradients[2],
     description: "A ready-to-hang framed print with a slim black wood frame and shatter-resistant glazing.",
+    image: "/products/product1.png",
   },
 
   // Stickers
@@ -191,6 +202,7 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[3],
     description: "A weatherproof die-cut vinyl sticker, sized for laptops and water bottles.",
+    image: "/products/product1.png",
   },
   {
     id: "s2",
@@ -200,6 +212,7 @@ export const products: Product[] = [
     category: "stickers",
     gradient: gradients[4],
     description: "A pack of five holographic stickers that shift color as the light moves.",
+    image: "/products/product1.png",
   },
   {
     id: "s3",
@@ -209,6 +222,7 @@ export const products: Product[] = [
     category: "stickers",
     gradient: gradients[5],
     description: "A full A5 sheet of mixed icon stickers, matte finish, easy peel backing.",
+    image: "/products/product1.png",
   },
   {
     id: "s4",
@@ -219,6 +233,7 @@ export const products: Product[] = [
     tag: "Back in Stock",
     gradient: gradients[6],
     description: "A set of eight small icon stickers, perfect for notebooks and phone cases.",
+    image: "/products/product1.png",
   },
   {
     id: "s5",
@@ -228,6 +243,7 @@ export const products: Product[] = [
     category: "stickers",
     gradient: gradients[7],
     description: "A single glow-in-the-dark vinyl sticker that charges under any light source.",
+    image: "/products/product1.png",
   },
   {
     id: "s6",
@@ -238,6 +254,7 @@ export const products: Product[] = [
     tag: "Sale",
     gradient: gradients[8],
     description: "A durable outdoor-rated bumper sticker built to survive sun and rain.",
+    image: "/products/product1.png",
   },
   {
     id: "s7",
@@ -247,6 +264,7 @@ export const products: Product[] = [
     category: "stickers",
     gradient: gradients[0],
     description: "A roll of 50 washi-paper stickers for journaling and planners.",
+    image: "/products/product1.png",
   },
   {
     id: "s8",
@@ -256,6 +274,7 @@ export const products: Product[] = [
     category: "stickers",
     gradient: gradients[1],
     description: "A combo pack pairing a glossy enamel-look sticker with two matte companions.",
+    image: "/products/product1.png",
   },
   {
     id: "s9",
@@ -266,6 +285,7 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[2],
     description: "A dense 20-sticker bomb pack for covering laptops, boards, and cases edge to edge.",
+    image: "/products/product1.png",
   },
 ];
 
