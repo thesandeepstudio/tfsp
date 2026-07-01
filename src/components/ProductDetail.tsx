@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { categoryLabels, type Product } from "@/lib/products";
 
@@ -50,6 +51,14 @@ export default function ProductDetail({ product }: { product: Product }) {
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
     product.gradient;
 
+  const images =
+    product.gallery && product.gallery.length > 0
+      ? product.gallery
+      : product.image
+        ? [product.image]
+        : [];
+  const activeImage = images[activeView] ?? images[0];
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-10 sm:px-8">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
@@ -66,27 +75,50 @@ export default function ProductDetail({ product }: { product: Product }) {
 
       <div className="grid gap-6 lg:grid-cols-[80px_1fr_380px] lg:gap-10">
         <div className="hidden gap-3 lg:flex lg:flex-col">
-          {views.map((view, i) => (
-            <button
-              key={view}
-              onClick={() => setActiveView(i)}
-              aria-label={view}
-              className={`aspect-square w-full overflow-hidden border bg-linear-to-br ${activeGradient} ${
-                activeView === i ? "border-black" : "border-transparent"
-              }`}
-            />
-          ))}
+          {images.length > 0
+            ? images.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => setActiveView(i)}
+                  aria-label={`View ${i + 1}`}
+                  className={`relative aspect-square w-full overflow-hidden border ${
+                    activeView === i ? "border-black" : "border-transparent"
+                  }`}
+                >
+                  <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+                </button>
+              ))
+            : views.map((view, i) => (
+                <button
+                  key={view}
+                  onClick={() => setActiveView(i)}
+                  aria-label={view}
+                  className={`aspect-square w-full overflow-hidden border bg-linear-to-br ${activeGradient} ${
+                    activeView === i ? "border-black" : "border-transparent"
+                  }`}
+                />
+              ))}
         </div>
 
         <div
-          className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${activeGradient}`}
+          className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
           {product.tag && (
             <span
-              className={`absolute left-3 top-3 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
+              className={`absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
             >
               {product.tag}
             </span>
+          )}
+          {activeImage && (
+            <Image
+              src={activeImage}
+              alt={product.name}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
           )}
         </div>
 
