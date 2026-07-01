@@ -40,13 +40,14 @@ export const products: Product[] = [
   // Merch
   {
     id: "m1",
-    slug: "heavyweight-boxy-tee",
-    name: "Heavyweight Boxy Tee",
-    price: 1200,
+    slug: "badge",
+    name: "Badge",
+    price: 1600,
     category: "merch",
     tag: "New",
     gradient: gradients[0],
     description: "A relaxed, boxy-fit tee in heavyweight cotton jersey. Built to hold its shape wash after wash.",
+    image: "/products/product1.png",
     colors: [
       { name: "Ecru", gradient: gradients[0] },
       { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
@@ -57,7 +58,7 @@ export const products: Product[] = [
     id: "m2",
     slug: "oversized-hoodie",
     name: "Oversized Hoodie",
-    price: 2400,
+    price: 2900,
     category: "merch",
     gradient: gradients[1],
     description: "A brushed-fleece hoodie with a dropped shoulder and kangaroo pocket for everyday layering.",
