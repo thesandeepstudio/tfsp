@@ -13,6 +13,7 @@ const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
 };
 
 const views = ["Front", "Back", "Detail", "Worn"];
+const FRAME_PRICE = 300;
 
 function AccordionItem({
   title,
@@ -49,6 +50,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [activePaperSize, setActivePaperSize] = useState(
     product.paperOptions?.[0]?.prices[0]?.size
   );
+  const [activeShape, setActiveShape] = useState<"Rectangle" | "Circle">(
+    "Rectangle"
+  );
+  const [activeFrame, setActiveFrame] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
 
@@ -59,9 +64,11 @@ export default function ProductDetail({ product }: { product: Product }) {
   const selectedPaperOption = product.paperOptions?.find(
     (paper) => paper.name === activePaper
   );
-  const currentPrice =
+  const basePrice =
     selectedPaperOption?.prices.find((p) => p.size === activePaperSize)
       ?.price ?? product.price;
+  const currentPrice =
+    product.paperOptions && activeFrame ? basePrice + FRAME_PRICE : basePrice;
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -202,19 +209,91 @@ export default function ProductDetail({ product }: { product: Product }) {
                 Size
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {selectedPaperOption.prices.map(({ size }) => (
+                {selectedPaperOption.prices.map(({ size }) => {
+                  const disabled =
+                    product.paperOptions &&
+                    activeShape === "Circle" &&
+                    size !== "A4";
+                  return (
                   <button
                     key={size}
+                    disabled={disabled}
                     onClick={() => setActivePaperSize(size)}
                     className={`flex h-10 min-w-10 items-center justify-center px-3 text-sm ${
-                      activePaperSize === size
+                      disabled
+                        ? "cursor-not-allowed border border-black/10 text-black/30"
+                        : activePaperSize === size
                         ? "bg-black text-white"
                         : "border border-black/20 hover:border-black"
                     }`}
                   >
                     {size}
                   </button>
-                ))}
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {product.paperOptions && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Shape
+              </p>
+              <div className="mt-2 flex gap-2">
+                <button
+                  onClick={() => setActiveShape("Rectangle")}
+                  className={`flex h-10 items-center justify-center px-3 text-sm ${
+                    activeShape === "Rectangle"
+                      ? "bg-black text-white"
+                      : "border border-black/20 hover:border-black"
+                  }`}
+                >
+                  Rectangle
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveShape("Circle");
+                    setActivePaperSize("A4");
+                  }}
+                  className={`flex h-10 items-center justify-center px-3 text-sm ${
+                    activeShape === "Circle"
+                      ? "bg-black text-white"
+                      : "border border-black/20 hover:border-black"
+                  }`}
+                >
+                  Circle (A4 Only)
+                </button>
+              </div>
+            </div>
+          )}
+
+          {product.paperOptions && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Frame
+              </p>
+              <div className="mt-2 flex flex-col gap-2">
+                <button
+                  onClick={() => setActiveFrame(false)}
+                  className={`border px-3 py-2 text-left text-sm ${
+                    !activeFrame
+                      ? "border-black bg-black text-white"
+                      : "border-black/20 hover:border-black"
+                  }`}
+                >
+                  Print Only (No Frame)
+                </button>
+                <button
+                  onClick={() => setActiveFrame(true)}
+                  className={`border px-3 py-2 text-left text-sm ${
+                    activeFrame
+                      ? "border-black bg-black text-white"
+                      : "border-black/20 hover:border-black"
+                  }`}
+                >
+                  Add Premium Black Frame (+NPR {FRAME_PRICE})
+                </button>
               </div>
             </div>
           )}
