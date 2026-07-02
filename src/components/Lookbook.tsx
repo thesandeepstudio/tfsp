@@ -1,17 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
+import { BASE_PATH } from "@/lib/base-path";
 
 const seasons = [
   {
     id: "fw25",
     label: "FW25",
     title: "Fall / Winter 2025",
-    gradient: "from-neutral-900 to-neutral-600",
+    image: "/Banners/banner_001.png",
   },
   {
     id: "ss26",
     label: "SS26",
     title: "Spring / Summer 2026",
-    gradient: "from-amber-200 to-orange-100",
+    image: "/Banners/banner_002.png",
   },
 ];
 
@@ -28,15 +30,23 @@ export default function Lookbook() {
         {seasons.map((season) => (
           <div
             key={season.id}
-            className={`group relative flex aspect-4/5 flex-col justify-end overflow-hidden rounded-sm bg-linear-to-br ${season.gradient} p-6 sm:aspect-16/10`}
+            className="group relative flex aspect-4/5 flex-col justify-end overflow-hidden rounded-sm p-6 sm:aspect-16/10"
           >
+            <Image
+              src={`${BASE_PATH}${season.image}`}
+              alt={season.title}
+              fill
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/30" />
             <span className="absolute right-6 top-6 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
               {season.label}
             </span>
-            <h3 className="text-2xl font-semibold text-white">{season.title}</h3>
+            <h3 className="relative text-2xl font-semibold text-white">{season.title}</h3>
             <Link
               href="/merch"
-              className="mt-3 inline-block w-fit border-b border-white text-sm font-medium text-white transition group-hover:opacity-70"
+              className="relative mt-3 inline-block w-fit border-b border-white text-sm font-medium text-white transition group-hover:opacity-70"
             >
               View Lookbook
             </Link>
