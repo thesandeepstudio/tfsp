@@ -10,6 +10,7 @@ export type Product = {
   slug: string;
   name: string;
   price: number;
+  compareAtPrice?: number;
   category: Category;
   tag?: "New" | "Sale" | "Back in Stock";
   gradient: string;
@@ -45,14 +46,15 @@ export const products: Product[] = [
     id: "m7",
     slug: "birth-of-star-tee",
     name: "Birth of Star",
-    price: 0, // TODO: set your price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     tag: "New",
     gradient: gradients[0],
     description: "An Exhibit A graphic tee with the Birth of Star print on the back.",
     image: "/products/exhibit-a/birth-of-star-gray-back.jpg",
     colors: [
-      { name: "Gray", gradient: gradients[2] },
+      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
       { name: "White", gradient: gradients[0] },
     ],
     gallery: [
@@ -67,7 +69,8 @@ export const products: Product[] = [
     id: "m8",
     slug: "star-tee",
     name: "Star",
-    price: 0, // TODO: set your price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     tag: "New",
     gradient: gradients[2],
@@ -75,7 +78,7 @@ export const products: Product[] = [
     image: "/products/exhibit-a/star-white-back.jpg",
     colors: [
       { name: "White", gradient: gradients[0] },
-      { name: "Gray", gradient: gradients[2] },
+      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
     ],
     gallery: [
       "/products/exhibit-a/star-white-back.jpg",
@@ -89,14 +92,15 @@ export const products: Product[] = [
     id: "m9",
     slug: "the-crow-tee",
     name: "The Crow",
-    price: 0, // TODO: set your price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     tag: "New",
     gradient: gradients[6],
     description: "An Exhibit A graphic tee with the The Crow print on the back.",
     image: "/products/exhibit-a/the-crow-gray-back.jpg",
     colors: [
-      { name: "Gray", gradient: gradients[2] },
+      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
       { name: "White", gradient: gradients[0] },
     ],
     gallery: [
@@ -111,7 +115,8 @@ export const products: Product[] = [
     id: "m10",
     slug: "the-ritual-tee",
     name: "The Ritual",
-    price: 0, // TODO: set your price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     tag: "New",
     gradient: gradients[8],
@@ -119,7 +124,7 @@ export const products: Product[] = [
     image: "/products/exhibit-a/the-ritual-white-back.jpg",
     colors: [
       { name: "White", gradient: gradients[0] },
-      { name: "Gray", gradient: gradients[2] },
+      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
     ],
     gallery: [
       "/products/exhibit-a/the-ritual-white-back.jpg",
@@ -132,14 +137,64 @@ export const products: Product[] = [
 
   // Badges
   {
-    id: "m1",
-    slug: "badge",
-    name: "Badge",
-    price: 1600,
+    id: "b1",
+    slug: "eye-badge",
+    name: "Eye Badge",
+    price: 100,
+    compareAtPrice: 150,
+    category: "badges",
+    tag: "New",
+    gradient: gradients[7],
+    description: "A single pin badge from the collection.",
+    image: "/products/badge/1.png",
+    sizes: ["44mm", "58mm"],
+  },
+  {
+    id: "b2",
+    slug: "mascot-badge",
+    name: "Mascot Badge",
+    price: 100,
+    compareAtPrice: 150,
+    category: "badges",
+    gradient: gradients[1],
+    description: "A single pin badge from the collection.",
+    image: "/products/badge/2.png",
+    sizes: ["44mm", "58mm"],
+  },
+  {
+    id: "b3",
+    slug: "headphones-badge",
+    name: "Headphones Badge",
+    price: 100,
+    compareAtPrice: 150,
+    category: "badges",
+    gradient: gradients[4],
+    description: "A single pin badge from the collection.",
+    image: "/products/badge/3.png",
+    sizes: ["44mm", "58mm"],
+  },
+  {
+    id: "b4",
+    slug: "sketch-badge",
+    name: "Sketch Badge",
+    price: 100,
+    compareAtPrice: 150,
+    category: "badges",
+    gradient: gradients[6],
+    description: "A single pin badge from the collection.",
+    image: "/products/badge/4.png",
+    sizes: ["44mm", "58mm"],
+  },
+  {
+    id: "b5",
+    slug: "badge-set",
+    name: "Badge Set",
+    price: 100, // TODO: bundle price likely higher than a single badge — confirm
+    compareAtPrice: 150,
     category: "badges",
     tag: "New",
     gradient: gradients[0],
-    description: "A relaxed, boxy-fit tee in heavyweight cotton jersey. Built to hold its shape wash after wash.",
+    description: "The full set of four pin badges, sold together.",
     image: "/products/badge/main.png",
     gallery: [
       "/products/badge/main.png",
@@ -148,11 +203,6 @@ export const products: Product[] = [
       "/products/badge/3.png",
       "/products/badge/4.png",
     ],
-    colors: [
-      { name: "Ecru", gradient: gradients[0] },
-      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },
 
   // Posters
@@ -165,7 +215,7 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[6],
     description: "An 18x24 matte print on heavyweight paper, ready to frame.",
-    sizes: ["A4", "A3", "A2"],
+    sizes: ["A3", "A4", "Framed"],
   },
   {
     id: "p2",
@@ -175,7 +225,7 @@ export const products: Product[] = [
     category: "posters",
     gradient: gradients[7],
     description: "A 12x18 gradient print with a soft-touch finish, printed on demand.",
-    sizes: ["A4", "A3", "A2"],
+    sizes: ["A3", "A4", "Framed"],
   },
   {
     id: "p3",
@@ -186,7 +236,7 @@ export const products: Product[] = [
     tag: "Back in Stock",
     gradient: gradients[8],
     description: "A minimalist single-line illustration printed on archival-quality paper.",
-    sizes: ["A4", "A3", "A2"],
+    sizes: ["A3", "A4", "Framed"],
   },
   {
     id: "p4",
@@ -196,7 +246,7 @@ export const products: Product[] = [
     category: "posters",
     gradient: gradients[0],
     description: "A large-format 24x36 print listing this year's stops, printed in limited numbers.",
-    sizes: ["A3", "A2", "A1"],
+    sizes: ["A3", "A4", "Framed"],
   },
   {
     id: "p5",
@@ -207,7 +257,7 @@ export const products: Product[] = [
     tag: "Sale",
     gradient: gradients[1],
     description: "A vivid gradient print designed to pop under warm or cool lighting alike.",
-    sizes: ["A4", "A3", "A2"],
+    sizes: ["A3", "A4", "Framed"],
   },
   {
     id: "p6",

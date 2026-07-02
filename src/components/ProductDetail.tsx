@@ -128,7 +128,12 @@ export default function ProductDetail({ product }: { product: Product }) {
             {categoryLabels[product.category]}
           </p>
           <h1 className="mt-1 text-2xl font-medium">{product.name}</h1>
-          <p className="mt-1 text-base">
+          <p className="mt-1 flex items-center gap-2 text-base">
+            {product.compareAtPrice && (
+              <span className="text-black/40 line-through">
+                NPR {product.compareAtPrice.toLocaleString()}
+              </span>
+            )}
             NPR {product.price.toLocaleString()}
           </p>
 
