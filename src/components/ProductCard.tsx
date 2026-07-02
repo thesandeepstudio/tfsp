@@ -70,6 +70,11 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="mt-2 flex items-start justify-between gap-2">
         <h3 className="text-sm text-black">{product.name}</h3>
         <span className="whitespace-nowrap text-sm text-black">
+          {product.compareAtPrice && (
+            <span className="mr-1.5 text-black/40 line-through">
+              NPR {product.compareAtPrice.toLocaleString()}
+            </span>
+          )}
           NPR {product.price.toLocaleString()}
         </span>
       </div>
