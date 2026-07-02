@@ -1,4 +1,4 @@
-export type Category = "merch" | "posters" | "stickers";
+export type Category = "merch" | "posters" | "stickers" | "badges";
 
 export type ColorOption = {
   name: string;
@@ -24,6 +24,7 @@ export const categoryLabels: Record<Category, string> = {
   merch: "Merch",
   posters: "Posters",
   stickers: "Stickers",
+  badges: "Badges",
 };
 
 const gradients = [
@@ -41,11 +42,101 @@ const gradients = [
 export const products: Product[] = [
   // Merch
   {
+    id: "m7",
+    slug: "birth-of-star-tee",
+    name: "Birth of Star",
+    price: 0, // TODO: set your price
+    category: "merch",
+    tag: "New",
+    gradient: gradients[0],
+    description: "An Exhibit A graphic tee with the Birth of Star print on the back.",
+    image: "/products/exhibit-a/birth-of-star-gray-back.jpg",
+    colors: [
+      { name: "Gray", gradient: gradients[2] },
+      { name: "White", gradient: gradients[0] },
+    ],
+    gallery: [
+      "/products/exhibit-a/birth-of-star-gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+      "/products/exhibit-a/birth-of-star-white-back.jpg",
+      "/products/exhibit-a/white-front.jpg",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
+  {
+    id: "m8",
+    slug: "star-tee",
+    name: "Star",
+    price: 0, // TODO: set your price
+    category: "merch",
+    tag: "New",
+    gradient: gradients[2],
+    description: "An Exhibit A graphic tee with the Star print on the back.",
+    image: "/products/exhibit-a/star-white-back.jpg",
+    colors: [
+      { name: "White", gradient: gradients[0] },
+      { name: "Gray", gradient: gradients[2] },
+    ],
+    gallery: [
+      "/products/exhibit-a/star-white-back.jpg",
+      "/products/exhibit-a/white-front.jpg",
+      "/products/exhibit-a/star-gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
+  {
+    id: "m9",
+    slug: "the-crow-tee",
+    name: "The Crow",
+    price: 0, // TODO: set your price
+    category: "merch",
+    tag: "New",
+    gradient: gradients[6],
+    description: "An Exhibit A graphic tee with the The Crow print on the back.",
+    image: "/products/exhibit-a/the-crow-gray-back.jpg",
+    colors: [
+      { name: "Gray", gradient: gradients[2] },
+      { name: "White", gradient: gradients[0] },
+    ],
+    gallery: [
+      "/products/exhibit-a/the-crow-gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+      "/products/exhibit-a/the-crow-white-back.jpg",
+      "/products/exhibit-a/white-front.jpg",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
+  {
+    id: "m10",
+    slug: "the-ritual-tee",
+    name: "The Ritual",
+    price: 0, // TODO: set your price
+    category: "merch",
+    tag: "New",
+    gradient: gradients[8],
+    description: "An Exhibit A graphic tee with the The Ritual print on the back.",
+    image: "/products/exhibit-a/the-ritual-white-back.jpg",
+    colors: [
+      { name: "White", gradient: gradients[0] },
+      { name: "Gray", gradient: gradients[2] },
+    ],
+    gallery: [
+      "/products/exhibit-a/the-ritual-white-back.jpg",
+      "/products/exhibit-a/white-front.jpg",
+      "/products/exhibit-a/the-ritual-gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
+
+  // Badges
+  {
     id: "m1",
     slug: "badge",
     name: "Badge",
     price: 1600,
-    category: "merch",
+    category: "badges",
     tag: "New",
     gradient: gradients[0],
     description: "A relaxed, boxy-fit tee in heavyweight cotton jersey. Built to hold its shape wash after wash.",
@@ -60,94 +151,6 @@ export const products: Product[] = [
     colors: [
       { name: "Ecru", gradient: gradients[0] },
       { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-  },
-  {
-    id: "m7",
-    slug: "birth-of-star-tee",
-    name: "Birth of Star",
-    price: 0, // TODO: set your price
-    category: "merch",
-    tag: "New",
-    gradient: gradients[0],
-    description: "An Exhibit A graphic tee with the Birth of Star print on the back.",
-    image: "/products/exhibit-a/gray-front.jpg",
-    colors: [
-      { name: "Gray", gradient: gradients[2] },
-      { name: "White", gradient: gradients[0] },
-    ],
-    gallery: [
-      "/products/exhibit-a/gray-front.jpg",
-      "/products/exhibit-a/birth-of-star-gray-back.jpg",
-      "/products/exhibit-a/white-front.jpg",
-      "/products/exhibit-a/birth-of-star-white-back.jpg",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-  },
-  {
-    id: "m8",
-    slug: "star-tee",
-    name: "Star",
-    price: 0, // TODO: set your price
-    category: "merch",
-    tag: "New",
-    gradient: gradients[2],
-    description: "An Exhibit A graphic tee with the Star print on the back.",
-    image: "/products/exhibit-a/gray-front.jpg",
-    colors: [
-      { name: "Gray", gradient: gradients[2] },
-      { name: "White", gradient: gradients[0] },
-    ],
-    gallery: [
-      "/products/exhibit-a/gray-front.jpg",
-      "/products/exhibit-a/star-gray-back.jpg",
-      "/products/exhibit-a/white-front.jpg",
-      "/products/exhibit-a/star-white-back.jpg",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-  },
-  {
-    id: "m9",
-    slug: "the-crow-tee",
-    name: "The Crow",
-    price: 0, // TODO: set your price
-    category: "merch",
-    tag: "New",
-    gradient: gradients[6],
-    description: "An Exhibit A graphic tee with the The Crow print on the back.",
-    image: "/products/exhibit-a/gray-front.jpg",
-    colors: [
-      { name: "Gray", gradient: gradients[2] },
-      { name: "White", gradient: gradients[0] },
-    ],
-    gallery: [
-      "/products/exhibit-a/gray-front.jpg",
-      "/products/exhibit-a/the-crow-gray-back.jpg",
-      "/products/exhibit-a/white-front.jpg",
-      "/products/exhibit-a/the-crow-white-back.jpg",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-  },
-  {
-    id: "m10",
-    slug: "the-ritual-tee",
-    name: "The Ritual",
-    price: 0, // TODO: set your price
-    category: "merch",
-    tag: "New",
-    gradient: gradients[8],
-    description: "An Exhibit A graphic tee with the The Ritual print on the back.",
-    image: "/products/exhibit-a/gray-front.jpg",
-    colors: [
-      { name: "Gray", gradient: gradients[2] },
-      { name: "White", gradient: gradients[0] },
-    ],
-    gallery: [
-      "/products/exhibit-a/gray-front.jpg",
-      "/products/exhibit-a/the-ritual-gray-back.jpg",
-      "/products/exhibit-a/white-front.jpg",
-      "/products/exhibit-a/the-ritual-white-back.jpg",
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },

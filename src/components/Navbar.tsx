@@ -8,6 +8,7 @@ const links = [
   { label: "Merch", href: "/merch" },
   { label: "Posters", href: "/posters" },
   { label: "Stickers", href: "/stickers" },
+  { label: "Badges", href: "/badges" },
   { label: "Lookbook", href: "/#lookbook" },
 ];
 

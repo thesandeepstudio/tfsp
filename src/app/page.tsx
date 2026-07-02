@@ -23,6 +23,13 @@ export default function Home() {
         products={getProductsByCategory("posters")}
         viewAllHref="/posters"
       />
+      <FeaturedCollection
+        id="badges"
+        title="Badges"
+        subtitle="Pin badges, sold individually or as sets."
+        products={getProductsByCategory("badges")}
+        viewAllHref="/badges"
+      />
       <Lookbook />
       <StickerGallery />
       <Newsletter />
