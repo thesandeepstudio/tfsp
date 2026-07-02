@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? "/tfsp" : "";
+
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/tfsp",
+  basePath,
   trailingSlash: true,
   images: {
     unoptimized: true,
