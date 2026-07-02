@@ -45,12 +45,23 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
+  const [activePaper, setActivePaper] = useState(product.paperOptions?.[0]?.name);
+  const [activePaperSize, setActivePaperSize] = useState(
+    product.paperOptions?.[0]?.prices[0]?.size
+  );
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
     product.gradient;
+
+  const selectedPaperOption = product.paperOptions?.find(
+    (paper) => paper.name === activePaper
+  );
+  const currentPrice =
+    selectedPaperOption?.prices.find((p) => p.size === activePaperSize)
+      ?.price ?? product.price;
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -134,7 +145,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 NPR {product.compareAtPrice.toLocaleString()}
               </span>
             )}
-            NPR {product.price.toLocaleString()}
+            NPR {currentPrice.toLocaleString()}
           </p>
 
           {product.colors && product.colors.length > 0 && (
@@ -154,6 +165,55 @@ export default function ProductDetail({ product }: { product: Product }) {
                         : "border-black/20"
                     }`}
                   />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {product.paperOptions && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Paper Quality
+              </p>
+              <div className="mt-2 flex flex-col gap-2">
+                {product.paperOptions.map((paper) => (
+                  <button
+                    key={paper.name}
+                    onClick={() => {
+                      setActivePaper(paper.name);
+                      setActivePaperSize(paper.prices[0]?.size);
+                    }}
+                    className={`border px-3 py-2 text-left text-sm ${
+                      activePaper === paper.name
+                        ? "border-black bg-black text-white"
+                        : "border-black/20 hover:border-black"
+                    }`}
+                  >
+                    {paper.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {selectedPaperOption && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Size
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {selectedPaperOption.prices.map(({ size }) => (
+                  <button
+                    key={size}
+                    onClick={() => setActivePaperSize(size)}
+                    className={`flex h-10 min-w-10 items-center justify-center px-3 text-sm ${
+                      activePaperSize === size
+                        ? "bg-black text-white"
+                        : "border border-black/20 hover:border-black"
+                    }`}
+                  >
+                    {size}
+                  </button>
                 ))}
               </div>
             </div>
@@ -220,7 +280,7 @@ export default function ProductDetail({ product }: { product: Product }) {
             className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85"
           >
             <span>{added ? "Added ✓" : "Add to Cart"}</span>
-            <span>NPR {product.price.toLocaleString()}</span>
+            <span>NPR {currentPrice.toLocaleString()}</span>
           </button>
 
           <Link
