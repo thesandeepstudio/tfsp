@@ -5,6 +5,11 @@ export type ColorOption = {
   gradient: string;
 };
 
+export type PaperOption = {
+  name: string;
+  prices: { size: string; price: number }[];
+};
+
 export type Product = {
   id: string;
   slug: string;
@@ -17,6 +22,7 @@ export type Product = {
   description: string;
   colors?: ColorOption[];
   sizes?: string[];
+  paperOptions?: PaperOption[];
   image?: string;
   gallery?: string[];
 };
@@ -38,6 +44,23 @@ const gradients = [
   "from-zinc-300 to-zinc-100",
   "from-lime-200 to-lime-50",
   "from-neutral-300 to-neutral-100",
+];
+
+const paperOptions: PaperOption[] = [
+  {
+    name: "300 GSM Artboard Paper",
+    prices: [
+      { size: "A4", price: 100 },
+      { size: "A3", price: 150 },
+    ],
+  },
+  {
+    name: "300 GSM Ivory Paper",
+    prices: [
+      { size: "A4", price: 150 },
+      { size: "A3", price: 199 },
+    ],
+  },
 ];
 
 export const products: Product[] = [
@@ -210,54 +233,54 @@ export const products: Product[] = [
     id: "p1",
     slug: "skyline-print-poster",
     name: "Skyline Print Poster",
-    price: 850,
+    price: 100,
     category: "posters",
     tag: "New",
     gradient: gradients[6],
-    description: "An 18x24 matte print on heavyweight paper, ready to frame.",
-    sizes: ["A3", "A4", "Framed"],
+    description: "A matte print on heavyweight paper, ready to frame.",
+    paperOptions,
   },
   {
     id: "p2",
     slug: "retro-wave-poster",
     name: "Retro Wave Poster",
-    price: 750,
+    price: 100,
     category: "posters",
     gradient: gradients[7],
-    description: "A 12x18 gradient print with a soft-touch finish, printed on demand.",
-    sizes: ["A3", "A4", "Framed"],
+    description: "A gradient print with a soft-touch finish, printed on demand.",
+    paperOptions,
   },
   {
     id: "p3",
     slug: "minimal-line-art-poster",
     name: "Minimal Line Art Poster",
-    price: 700,
+    price: 100,
     category: "posters",
     tag: "Back in Stock",
     gradient: gradients[8],
     description: "A minimalist single-line illustration printed on archival-quality paper.",
-    sizes: ["A3", "A4", "Framed"],
+    paperOptions,
   },
   {
     id: "p4",
     slug: "tour-dates-poster",
     name: "Tour Dates Poster",
-    price: 950,
+    price: 100,
     category: "posters",
     gradient: gradients[0],
-    description: "A large-format 24x36 print listing this year's stops, printed in limited numbers.",
-    sizes: ["A3", "A4", "Framed"],
+    description: "A large-format print listing this year's stops, printed in limited numbers.",
+    paperOptions,
   },
   {
     id: "p5",
     slug: "neon-glow-poster",
     name: "Neon Glow Poster",
-    price: 800,
+    price: 100,
     category: "posters",
     tag: "Sale",
     gradient: gradients[1],
     description: "A vivid gradient print designed to pop under warm or cool lighting alike.",
-    sizes: ["A3", "A4", "Framed"],
+    paperOptions,
   },
   {
     id: "p6",

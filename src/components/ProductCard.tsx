@@ -75,6 +75,7 @@ export default function ProductCard({ product }: { product: Product }) {
               NPR {product.compareAtPrice.toLocaleString()}
             </span>
           )}
+          {product.paperOptions ? "From " : ""}
           NPR {product.price.toLocaleString()}
         </span>
       </div>
