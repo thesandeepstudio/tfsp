@@ -13,7 +13,6 @@ const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
 };
 
 const views = ["Front", "Back", "Detail", "Worn"];
-const FRAME_PRICE = 300;
 
 function AccordionItem({
   title,
@@ -50,10 +49,6 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [activePaperSize, setActivePaperSize] = useState(
     product.paperOptions?.[0]?.prices[0]?.size
   );
-  const [activeShape, setActiveShape] = useState<"Rectangle" | "Circle">(
-    "Rectangle"
-  );
-  const [activeFrame, setActiveFrame] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
 
@@ -64,25 +59,9 @@ export default function ProductDetail({ product }: { product: Product }) {
   const selectedPaperOption = product.paperOptions?.find(
     (paper) => paper.name === activePaper
   );
-
-  const sizeShapeOptions = selectedPaperOption
-    ? [
-        ...selectedPaperOption.prices.map((p) => ({
-          label: `${p.size} Rectangle`,
-          size: p.size,
-          shape: "Rectangle" as const,
-        })),
-        ...(selectedPaperOption.prices.some((p) => p.size === "A4")
-          ? [{ label: "A4 Circle", size: "A4", shape: "Circle" as const }]
-          : []),
-      ]
-    : [];
-
-  const basePrice =
+  const currentPrice =
     selectedPaperOption?.prices.find((p) => p.size === activePaperSize)
       ?.price ?? product.price;
-  const currentPrice =
-    product.paperOptions && activeFrame ? basePrice + FRAME_PRICE : basePrice;
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -217,59 +196,25 @@ export default function ProductDetail({ product }: { product: Product }) {
             </div>
           )}
 
-          {sizeShapeOptions.length > 0 && (
+          {selectedPaperOption && (
             <div className="mt-6">
               <p className="text-xs uppercase tracking-wide text-black/60">
-                Size &amp; Shape
+                Size
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {sizeShapeOptions.map((option) => (
+                {selectedPaperOption.prices.map(({ size }) => (
                   <button
-                    key={option.label}
-                    onClick={() => {
-                      setActivePaperSize(option.size);
-                      setActiveShape(option.shape);
-                    }}
-                    className={`flex h-10 items-center justify-center px-3 text-sm ${
-                      activePaperSize === option.size &&
-                      activeShape === option.shape
+                    key={size}
+                    onClick={() => setActivePaperSize(size)}
+                    className={`flex h-10 min-w-10 items-center justify-center px-3 text-sm ${
+                      activePaperSize === size
                         ? "bg-black text-white"
                         : "border border-black/20 hover:border-black"
                     }`}
                   >
-                    {option.label}
+                    {size}
                   </button>
                 ))}
-              </div>
-            </div>
-          )}
-
-          {product.paperOptions && (
-            <div className="mt-6">
-              <p className="text-xs uppercase tracking-wide text-black/60">
-                Frame
-              </p>
-              <div className="mt-2 flex gap-2">
-                <button
-                  onClick={() => setActiveFrame(false)}
-                  className={`flex h-10 items-center justify-center px-3 text-sm ${
-                    !activeFrame
-                      ? "bg-black text-white"
-                      : "border border-black/20 hover:border-black"
-                  }`}
-                >
-                  Print Only
-                </button>
-                <button
-                  onClick={() => setActiveFrame(true)}
-                  className={`flex h-10 items-center justify-center px-3 text-sm ${
-                    activeFrame
-                      ? "bg-black text-white"
-                      : "border border-black/20 hover:border-black"
-                  }`}
-                >
-                  Add Matching Frame (+NPR {FRAME_PRICE})
-                </button>
               </div>
             </div>
           )}
