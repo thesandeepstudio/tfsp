@@ -15,7 +15,7 @@ export default function HeroVideo() {
       muted
       playsInline
       onEnded={() => setIndex((i) => (i + 1) % videos.length)}
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full object-cover grayscale"
     >
       <source src={`${BASE_PATH}${videos[index]}`} type="video/mp4" />
     </video>
