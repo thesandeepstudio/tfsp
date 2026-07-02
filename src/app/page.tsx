@@ -20,7 +20,7 @@ export default function Home() {
         id="posters"
         title="Posters Best Sellers"
         subtitle="All-time best sellers, restocked."
-        products={getProductsByCategory("posters").slice(0, 12)}
+        products={getProductsByCategory("posters")}
         viewAllHref="/posters"
       />
       <FeaturedCollection
