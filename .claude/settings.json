@@ -1,7 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Edit",
+      "Write",
+      "Bash(npm run *)",
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git log*)",
+      "Bash(git branch --show-current)",
+      "Bash(curl -s -o /dev/null -w \"github.com: %{http_code}\\\\n\" --connect-timeout 10 https://github.com)",
+      "Bash(curl -s -o /dev/null -w \"google.com: %{http_code}\\\\n\" --connect-timeout 10 https://google.com)",
+      "Bash(mkdir -p \"/d/Website/TFSP/public/products\")",
+      "Bash(perl -0777 -pe 's/\\(description: \"[^\"]*\",\\\\n\\)\\(?!\\\\s*image:\\)/$1    image: \"\\\\/products\\\\/product1.png\",\\\\n/g' -i src/lib/products.ts)",
+      "Bash(printf 'description: \"test\",\\\\ncolors: [1],\\\\n')",
+      "Bash(perl -0777 -pe 's/\\(description: \"[^\"]*\",\\\\n\\)\\(?!\\\\s*image:\\)/$1    image: \"\\\\/products\\\\/product1.png\",\\\\n/g' /tmp/test.txt)",
+      "Bash(perl -0777 -i.bak -pe 's/\\(description: \"[^\"]*\",\\\\n\\)\\(?!\\\\s*image:\\)/$1    image: \"\\\\/products\\\\/product1.png\",\\\\n/g' src/lib/products.ts)",
+      "Bash(rm -f src/lib/products.ts.bak)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://thesandeepstudio.github.io/tfsp/?nocache=$\\(date +%s\\)\")",
+      "Bash(curl -s http://localhost:3000/merch)",
+      "Read(//tmp/**)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 7188 //F)",
+      "Bash(taskkill //PID 26340 //F)"
     ]
   }
 }
