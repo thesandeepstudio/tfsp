@@ -116,12 +116,12 @@ export const products: Product[] = [
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/exhibit-a/gray-front.jpg",
+        image: "/products/exhibit-a/birth-of-star-gray-back.jpg",
       },
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/exhibit-a/white-front.jpg",
+        image: "/products/exhibit-a/birth-of-star-white-back.jpg",
       },
     ],
     gallery: [
@@ -147,12 +147,12 @@ export const products: Product[] = [
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/exhibit-a/white-front.jpg",
+        image: "/products/exhibit-a/star-white-back.jpg",
       },
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/exhibit-a/gray-front.jpg",
+        image: "/products/exhibit-a/star-gray-back.jpg",
       },
     ],
     gallery: [
@@ -178,12 +178,12 @@ export const products: Product[] = [
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/exhibit-a/gray-front.jpg",
+        image: "/products/exhibit-a/the-crow-gray-back.jpg",
       },
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/exhibit-a/white-front.jpg",
+        image: "/products/exhibit-a/the-crow-white-back.jpg",
       },
     ],
     gallery: [
@@ -209,12 +209,12 @@ export const products: Product[] = [
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/exhibit-a/white-front.jpg",
+        image: "/products/exhibit-a/the-ritual-white-back.jpg",
       },
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/exhibit-a/gray-front.jpg",
+        image: "/products/exhibit-a/the-ritual-gray-back.jpg",
       },
     ],
     gallery: [
