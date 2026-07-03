@@ -186,7 +186,13 @@ export default function ProductDetail({ product }: { product: Product }) {
                 {product.colors.map((color) => (
                   <button
                     key={color.name}
-                    onClick={() => setActiveColor(color.name)}
+                    onClick={() => {
+                      setActiveColor(color.name);
+                      if (color.image) {
+                        const idx = images.indexOf(color.image);
+                        if (idx !== -1) setActiveView(idx);
+                      }
+                    }}
                     aria-label={color.name}
                     className={`h-14 w-11 bg-linear-to-br ${color.gradient} border ${
                       activeColor === color.name
