@@ -85,7 +85,7 @@ const posterFormats: PosterFormat[] = [
         name: "300 GSM Artboard Paper",
         prices: [
           { size: "8×8 In", price: 150 },
-          { size: "10×10 In", price: 250 },
+          { size: "10×10 In", price: 200 },
         ],
       },
       {
