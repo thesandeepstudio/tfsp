@@ -27,12 +27,18 @@ export default function ProductCard({ product }: { product: Product }) {
       <div
         className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${product.gradient}`}
       >
-        {product.tag && (
-          <span
-            className={`absolute left-2 top-2 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
-          >
-            {tagLabels[product.tag]}
+        {product.inStock === false ? (
+          <span className="absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
+            Out of Stock
           </span>
+        ) : (
+          product.tag && (
+            <span
+              className={`absolute left-2 top-2 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
+            >
+              {tagLabels[product.tag]}
+            </span>
+          )
         )}
         <button
           onClick={(e) => {
@@ -66,7 +72,9 @@ export default function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             fill
             sizes="(min-width: 1024px) 16vw, 45vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+              product.inStock === false ? "opacity-50" : ""
+            }`}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-black/20 transition-transform duration-300 group-hover:scale-105">

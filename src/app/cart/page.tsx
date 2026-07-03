@@ -1,12 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
-  const { items, subtotal, removeItem, updateQuantity } = useCart();
+  const {
+    items,
+    subtotal,
+    coupon,
+    discount,
+    total,
+    couponError,
+    removeItem,
+    updateQuantity,
+    applyCoupon,
+    removeCoupon,
+  } = useCart();
+  const [couponInput, setCouponInput] = useState("");
 
   if (items.length === 0) {
     return (
@@ -87,17 +100,68 @@ export default function CartPage() {
         ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-between text-base font-semibold">
-        <span>Subtotal</span>
-        <span>NPR {subtotal.toLocaleString()}</span>
+      <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+        <input
+          type="text"
+          value={couponInput}
+          onChange={(e) => setCouponInput(e.target.value)}
+          placeholder="Discount code"
+          className="flex-1 border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+        />
+        {coupon ? (
+          <button
+            onClick={removeCoupon}
+            className="border border-black/20 px-4 py-2 text-sm uppercase tracking-wide hover:border-black"
+          >
+            Remove
+          </button>
+        ) : (
+          <button
+            onClick={() => applyCoupon(couponInput)}
+            className="bg-black px-4 py-2 text-sm uppercase tracking-wide text-white hover:bg-black/85"
+          >
+            Apply
+          </button>
+        )}
+      </div>
+      {couponError && (
+        <p className="mt-1 text-xs text-red-600">{couponError}</p>
+      )}
+      {coupon && (
+        <p className="mt-1 text-xs text-black/60">
+          Code &quot;{coupon.code}&quot; applied.
+        </p>
+      )}
+
+      <div className="mt-6 space-y-1 text-sm">
+        <div className="flex items-center justify-between">
+          <span>Subtotal</span>
+          <span>NPR {subtotal.toLocaleString()}</span>
+        </div>
+        {discount > 0 && (
+          <div className="flex items-center justify-between text-black/60">
+            <span>Discount</span>
+            <span>−NPR {discount.toLocaleString()}</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between text-base font-semibold">
+          <span>Total</span>
+          <span>NPR {total.toLocaleString()}</span>
+        </div>
       </div>
       <p className="mt-1 text-xs text-black/50">
-        Shipping and any add-ons are calculated at checkout.
+        Shipping is calculated at checkout.
       </p>
 
       <Link
+        href="/checkout"
+        className="mt-6 block bg-black px-5 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85"
+      >
+        Proceed to Checkout
+      </Link>
+      <Link
         href="/"
-        className="mt-6 block text-center text-sm underline hover:opacity-70"
+        className="mt-4 block text-center text-sm underline hover:opacity-70"
       >
         Continue Shopping
       </Link>

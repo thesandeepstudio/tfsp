@@ -33,6 +33,7 @@ export type Product = {
   formats?: PosterFormat[];
   image?: string;
   gallery?: string[];
+  inStock?: boolean;
 };
 
 export const categoryLabels: Record<Category, string> = {

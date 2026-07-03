@@ -13,6 +13,7 @@ import {
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useReviews } from "@/context/ReviewsContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -56,6 +57,43 @@ function AccordionItem({
   );
 }
 
+function StarRating({
+  rating,
+  onChange,
+  size = 16,
+}: {
+  rating: number;
+  onChange?: (rating: number) => void;
+  size?: number;
+}) {
+  return (
+    <div className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button
+          key={n}
+          type="button"
+          disabled={!onChange}
+          onClick={() => onChange?.(n)}
+          aria-label={`${n} star${n > 1 ? "s" : ""}`}
+          className={onChange ? "cursor-pointer" : "cursor-default"}
+        >
+          <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill={n <= rating ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-black"
+          >
+            <path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z" />
+          </svg>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function ProductDetail({ product }: { product: Product }) {
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
@@ -73,6 +111,12 @@ export default function ProductDetail({ product }: { product: Product }) {
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product.id);
+  const { getReviews, getAverageRating, addReview } = useReviews();
+  const reviews = getReviews(product.slug);
+  const averageRating = getAverageRating(product.slug);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
@@ -149,12 +193,18 @@ export default function ProductDetail({ product }: { product: Product }) {
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
-          {product.tag && (
-            <span
-              className={`absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
-            >
-              {product.tag}
+          {product.inStock === false ? (
+            <span className="absolute left-3 top-3 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
+              Out of Stock
             </span>
+          ) : (
+            product.tag && (
+              <span
+                className={`absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
+              >
+                {product.tag}
+              </span>
+            )
           )}
           {activeImage && (
             <Image
@@ -391,6 +441,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <button
+            disabled={product.inStock === false}
             onClick={() => {
               const variantParts = [
                 selectedFormat && product.formats && product.formats.length > 1
@@ -425,10 +476,18 @@ export default function ProductDetail({ product }: { product: Product }) {
               setAdded(true);
               setTimeout(() => setAdded(false), 1500);
             }}
-            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85"
+            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
-            <span>{added ? "Added ✓" : "Add to Cart"}</span>
-            <span>NPR {currentPrice.toLocaleString()}</span>
+            <span>
+              {product.inStock === false
+                ? "Out of Stock"
+                : added
+                  ? "Added ✓"
+                  : "Add to Cart"}
+            </span>
+            {product.inStock !== false && (
+              <span>NPR {currentPrice.toLocaleString()}</span>
+            )}
           </button>
 
           <Link
@@ -452,6 +511,79 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
         </div>
       )}
+
+      <div className="mt-16 border-t border-black/10 pt-10">
+        <div className="flex items-center gap-3">
+          <h2 className="font-display text-2xl tracking-wide">Reviews</h2>
+          {averageRating !== null && (
+            <>
+              <StarRating rating={Math.round(averageRating)} />
+              <span className="text-sm text-black/60">
+                {averageRating.toFixed(1)} ({reviews.length})
+              </span>
+            </>
+          )}
+        </div>
+
+        {reviews.length > 0 ? (
+          <div className="mt-6 space-y-6 divide-y divide-black/10">
+            {reviews.map((review) => (
+              <div key={review.id} className="pt-6 first:pt-0">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium">{review.name}</p>
+                  <StarRating rating={review.rating} size={13} />
+                </div>
+                <p className="mt-2 text-sm text-black/70">{review.comment}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-4 text-sm text-black/50">
+            No reviews yet — be the first to leave one.
+          </p>
+        )}
+
+        <div className="mt-8 max-w-md border-t border-black/10 pt-6">
+          <h3 className="text-sm font-semibold uppercase tracking-wide">
+            Write a Review
+          </h3>
+          <div className="mt-3">
+            <StarRating rating={reviewRating} onChange={setReviewRating} size={22} />
+          </div>
+          <input
+            type="text"
+            value={reviewName}
+            onChange={(e) => setReviewName(e.target.value)}
+            placeholder="Your name"
+            className="mt-3 w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+          />
+          <textarea
+            value={reviewComment}
+            onChange={(e) => setReviewComment(e.target.value)}
+            placeholder="Share your thoughts"
+            rows={3}
+            className="mt-3 w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+          />
+          <button
+            onClick={() => {
+              if (!reviewName.trim() || !reviewComment.trim() || reviewRating === 0)
+                return;
+              addReview(product.slug, {
+                name: reviewName,
+                rating: reviewRating,
+                comment: reviewComment,
+              });
+              setReviewName("");
+              setReviewRating(0);
+              setReviewComment("");
+            }}
+            disabled={!reviewName.trim() || !reviewComment.trim() || reviewRating === 0}
+            className="mt-3 bg-black px-6 py-2 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+          >
+            Submit Review
+          </button>
+        </div>
+      </div>
     </section>
   );
 }

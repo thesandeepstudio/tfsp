@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import SearchOverlay from "@/components/SearchOverlay";
 
 const links = [
   { label: "New Arrivals", href: "/new-arrivals" },
@@ -55,12 +56,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <button aria-label="Search" className="hover:opacity-60">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M21 21l-4.3-4.3" />
-            </svg>
-          </button>
+          <SearchOverlay />
           <button aria-label="Account" className="hidden hover:opacity-60 sm:block">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="8" r="4" />

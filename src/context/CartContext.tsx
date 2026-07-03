@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { calculateDiscount, findCoupon, type Coupon } from "@/lib/coupons";
 
 export type CartItem = {
   id: string;
@@ -25,23 +26,35 @@ type CartContextValue = {
   items: CartItem[];
   itemCount: number;
   subtotal: number;
+  coupon: Coupon | null;
+  discount: number;
+  total: number;
+  couponError: string | null;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  applyCoupon: (code: string) => void;
+  removeCoupon: () => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 const STORAGE_KEY = "tfsp-cart";
+const COUPON_KEY = "tfsp-coupon";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [coupon, setCoupon] = useState<Coupon | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) setItems(JSON.parse(stored));
+      const storedCoupon = localStorage.getItem(COUPON_KEY);
+      if (storedCoupon) setCoupon(JSON.parse(storedCoupon));
     } catch {
       // ignore malformed storage
     }
@@ -52,6 +65,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (!hydrated) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items, hydrated]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    if (coupon) {
+      localStorage.setItem(COUPON_KEY, JSON.stringify(coupon));
+    } else {
+      localStorage.removeItem(COUPON_KEY);
+    }
+  }, [coupon, hydrated]);
 
   const addItem: CartContextValue["addItem"] = (item, quantity = 1) => {
     setItems((prev) => {
@@ -77,8 +99,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const applyCoupon = (code: string) => {
+    const match = findCoupon(code);
+    if (match) {
+      setCoupon(match);
+      setCouponError(null);
+    } else {
+      setCouponError("That code isn't valid.");
+    }
+  };
+
+  const removeCoupon = () => {
+    setCoupon(null);
+    setCouponError(null);
+  };
+
+  const clearCart = () => {
+    setItems([]);
+    setCoupon(null);
+    setCouponError(null);
+  };
+
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.price, 0);
+  const discount = coupon ? calculateDiscount(coupon, subtotal) : 0;
+  const total = subtotal - discount;
 
   return (
     <CartContext.Provider
@@ -86,9 +131,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
         items,
         itemCount,
         subtotal,
+        coupon,
+        discount,
+        total,
+        couponError,
         addItem,
         removeItem,
         updateQuantity,
+        applyCoupon,
+        removeCoupon,
+        clearCart,
       }}
     >
       {children}
