@@ -192,6 +192,25 @@ export const products: Product[] = [
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },
+  {
+    id: "m11",
+    slug: "basic-tee",
+    name: "Basic Tee",
+    price: 899, // TODO: confirm price
+    category: "merch",
+    gradient: gradients[0],
+    description: "A plain, no-print tee — same fit and fabric as the Exhibit A collection.",
+    image: "/products/exhibit-a/gray-front.jpg",
+    colors: [
+      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
+      { name: "White", gradient: gradients[0] },
+    ],
+    gallery: [
+      "/products/exhibit-a/gray-front.jpg",
+      "/products/exhibit-a/white-front.jpg",
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
 
   // Badges
   {
