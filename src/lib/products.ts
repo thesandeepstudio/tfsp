@@ -79,9 +79,21 @@ const posterFormats: PosterFormat[] = [
   },
   {
     name: "Round",
-    sizes: [
-      { size: "8×8 In", price: 120 }, // TODO: confirm price
-      { size: "10×10 In", price: 180 }, // TODO: confirm price
+    paperOptions: [
+      {
+        name: "300 GSM Artboard Paper",
+        prices: [
+          { size: "8×8 In", price: 120 }, // TODO: confirm price
+          { size: "10×10 In", price: 180 }, // TODO: confirm price
+        ],
+      },
+      {
+        name: "300 GSM Ivory Paper",
+        prices: [
+          { size: "8×8 In", price: 150 }, // TODO: confirm price
+          { size: "10×10 In", price: 220 }, // TODO: confirm price
+        ],
+      },
     ],
   },
 ];
