@@ -11,6 +11,7 @@ import {
   type Product,
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import { useCart } from "@/context/CartContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -68,6 +69,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [frameChecked, setFrameChecked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
@@ -360,6 +362,36 @@ export default function ProductDetail({ product }: { product: Product }) {
 
           <button
             onClick={() => {
+              const variantParts = [
+                selectedFormat && product.formats && product.formats.length > 1
+                  ? selectedFormat.name
+                  : undefined,
+                selectedPaperOption?.name,
+                frameChecked ? "Framed" : undefined,
+              ].filter(Boolean) as string[];
+
+              addItem({
+                id: [
+                  product.id,
+                  activeColor,
+                  activeSize,
+                  activeFormatSize,
+                  activePaper,
+                  frameChecked ? "framed" : undefined,
+                ]
+                  .filter(Boolean)
+                  .join("-"),
+                productId: product.id,
+                slug: product.slug,
+                name: product.name,
+                image: activeImage ?? product.image ?? "",
+                price: currentPrice,
+                size: activeFormatSize ?? activeSize,
+                color: activeColor,
+                variantLabel:
+                  variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+              });
+
               setAdded(true);
               setTimeout(() => setAdded(false), 1500);
             }}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 const links = [
   { label: "New Arrivals", href: "/new-arrivals" },
@@ -14,6 +15,7 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { itemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-white">
@@ -63,12 +65,17 @@ export default function Navbar() {
               <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
             </svg>
           </button>
-          <button aria-label="Bag" className="hover:opacity-60">
+          <Link href="/cart" aria-label="Bag" className="relative hover:opacity-60">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M6 8h12l1 13H5L6 8z" />
               <path d="M9 8a3 3 0 016 0" />
             </svg>
-          </button>
+            {itemCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+                {itemCount}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
 
