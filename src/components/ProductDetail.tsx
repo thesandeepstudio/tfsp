@@ -12,6 +12,7 @@ import {
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -70,6 +71,8 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const wishlisted = isWishlisted(product.id);
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
@@ -169,7 +172,34 @@ export default function ProductDetail({ product }: { product: Product }) {
           <p className="text-xs uppercase tracking-wide text-black/50">
             {categoryLabels[product.category]}
           </p>
-          <h1 className="mt-1 text-2xl font-medium">{product.name}</h1>
+          <div className="mt-1 flex items-start justify-between gap-2">
+            <h1 className="text-2xl font-medium">{product.name}</h1>
+            <button
+              onClick={() =>
+                toggleWishlist({
+                  productId: product.id,
+                  slug: product.slug,
+                  name: product.name,
+                  image: product.image ?? "",
+                  price: product.price,
+                })
+              }
+              aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/20"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill={wishlisted ? "currentColor" : "none"}
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className={wishlisted ? "text-red-600" : "text-black"}
+              >
+                <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
+              </svg>
+            </button>
+          </div>
           <p className="mt-1 flex items-center gap-2 text-base">
             {product.compareAtPrice && (
               <span className="text-black/40 line-through">

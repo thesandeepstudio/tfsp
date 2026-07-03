@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import type { Product } from "@/lib/products";
+import { useWishlist } from "@/context/WishlistContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -16,6 +19,9 @@ const tagLabels: Record<NonNullable<Product["tag"]>, string> = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const wishlisted = isWishlisted(product.id);
+
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div
@@ -28,6 +34,32 @@ export default function ProductCard({ product }: { product: Product }) {
             {tagLabels[product.tag]}
           </span>
         )}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            toggleWishlist({
+              productId: product.id,
+              slug: product.slug,
+              name: product.name,
+              image: product.image ?? "",
+              price: product.price,
+            });
+          }}
+          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill={wishlisted ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className={wishlisted ? "text-red-600" : "text-black"}
+          >
+            <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
+          </svg>
+        </button>
         {product.image ? (
           <Image
             src={`${BASE_PATH}${product.image}`}
