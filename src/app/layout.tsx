@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { ReviewsProvider } from "@/context/ReviewsContext";
+import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -43,9 +44,11 @@ export default function RootLayout({
         <CartProvider>
           <WishlistProvider>
             <ReviewsProvider>
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <RecentlyViewedProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </RecentlyViewedProvider>
             </ReviewsProvider>
           </WishlistProvider>
         </CartProvider>

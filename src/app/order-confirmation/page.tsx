@@ -11,6 +11,8 @@ type Order = {
   subtotal: number;
   discount: number;
   couponCode: string | null;
+  shippingZone: string;
+  shippingCost: number;
   total: number;
   customer: { name: string; phone: string; address: string; notes: string };
 };
@@ -79,6 +81,10 @@ export default function OrderConfirmationPage() {
             <span>−NPR {order.discount.toLocaleString()}</span>
           </div>
         )}
+        <div className="flex justify-between">
+          <span>Shipping ({order.shippingZone})</span>
+          <span>NPR {order.shippingCost.toLocaleString()}</span>
+        </div>
         <div className="flex justify-between text-base font-semibold">
           <span>Total</span>
           <span>NPR {order.total.toLocaleString()}</span>

@@ -33,8 +33,12 @@ export type Product = {
   formats?: PosterFormat[];
   image?: string;
   gallery?: string[];
-  inStock?: boolean;
+  stockQuantity?: number;
 };
+
+export function isInStock(product: Product): boolean {
+  return product.stockQuantity === undefined || product.stockQuantity > 0;
+}
 
 export const categoryLabels: Record<Category, string> = {
   merch: "Merch",

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import {
   categoryLabels,
   getProductsByCategory,
+  isInStock,
   type PosterFormat,
   type Product,
 } from "@/lib/products";
@@ -14,6 +15,7 @@ import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useReviews } from "@/context/ReviewsContext";
+import { useRecentlyViewed } from "@/context/RecentlyViewedContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -117,6 +119,19 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [reviewName, setReviewName] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewComment, setReviewComment] = useState("");
+  const { items: recentlyViewed, addViewed } = useRecentlyViewed();
+
+  useEffect(() => {
+    addViewed({
+      productId: product.id,
+      slug: product.slug,
+      name: product.name,
+      image: product.image ?? "",
+      price: product.price,
+      gradient: product.gradient,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id]);
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
@@ -140,6 +155,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const relatedProducts = getProductsByCategory(product.category)
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
+
+  const recentlyViewedFiltered = recentlyViewed.filter(
+    (item) => item.productId !== product.id
+  );
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -193,7 +212,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
-          {product.inStock === false ? (
+          {!isInStock(product) ? (
             <span className="absolute left-3 top-3 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
               Out of Stock
             </span>
@@ -441,7 +460,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <button
-            disabled={product.inStock === false}
+            disabled={!isInStock(product)}
             onClick={() => {
               const variantParts = [
                 selectedFormat && product.formats && product.formats.length > 1
@@ -479,16 +498,23 @@ export default function ProductDetail({ product }: { product: Product }) {
             className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             <span>
-              {product.inStock === false
+              {!isInStock(product)
                 ? "Out of Stock"
                 : added
                   ? "Added ✓"
                   : "Add to Cart"}
             </span>
-            {product.inStock !== false && (
+            {isInStock(product) && (
               <span>NPR {currentPrice.toLocaleString()}</span>
             )}
           </button>
+          {isInStock(product) &&
+            product.stockQuantity !== undefined &&
+            product.stockQuantity <= 5 && (
+              <p className="mt-2 text-center text-xs text-red-600">
+                Only {product.stockQuantity} left in stock
+              </p>
+            )}
 
           <Link
             href={`/${product.category}`}
@@ -507,6 +533,41 @@ export default function ProductDetail({ product }: { product: Product }) {
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {relatedProducts.map((related) => (
               <ProductCard key={related.id} product={related} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {recentlyViewedFiltered.length > 0 && (
+        <div className="mt-16 border-t border-black/10 pt-10">
+          <h2 className="font-display text-2xl tracking-wide">
+            Recently Viewed
+          </h2>
+          <div className="no-scrollbar mt-6 flex gap-4 overflow-x-auto">
+            {recentlyViewedFiltered.map((item) => (
+              <Link
+                key={item.productId}
+                href={`/products/${item.slug}`}
+                className="w-32 shrink-0"
+              >
+                <div
+                  className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
+                >
+                  {item.image && (
+                    <Image
+                      src={`${BASE_PATH}${item.image}`}
+                      alt={item.name}
+                      fill
+                      sizes="128px"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <p className="mt-1.5 truncate text-xs">{item.name}</p>
+                <p className="text-xs text-black/60">
+                  NPR {item.price.toLocaleString()}
+                </p>
+              </Link>
             ))}
           </div>
         </div>

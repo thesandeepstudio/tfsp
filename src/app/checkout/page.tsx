@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { shippingZones } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -12,6 +13,9 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [zoneId, setZoneId] = useState(shippingZones[0].id);
+  const zone = shippingZones.find((z) => z.id === zoneId) ?? shippingZones[0];
+  const grandTotal = total + zone.price;
 
   if (items.length === 0) {
     return (
@@ -38,7 +42,9 @@ export default function CheckoutPage() {
       subtotal,
       discount,
       couponCode: coupon?.code ?? null,
-      total,
+      shippingZone: zone.label,
+      shippingCost: zone.price,
+      total: grandTotal,
       customer: { name, phone, address, notes },
     };
 
@@ -85,6 +91,33 @@ export default function CheckoutPage() {
               rows={2}
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
+
+            <div>
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Delivery Location
+              </p>
+              <div className="mt-2 flex flex-col gap-2">
+                {shippingZones.map((z) => (
+                  <button
+                    key={z.id}
+                    type="button"
+                    onClick={() => setZoneId(z.id)}
+                    className={`flex items-center justify-between border px-3 py-2 text-left text-sm ${
+                      zoneId === z.id
+                        ? "border-black bg-black text-white"
+                        : "border-black/20 hover:border-black"
+                    }`}
+                  >
+                    <span>{z.label}</span>
+                    <span>NPR {z.price.toLocaleString()}</span>
+                  </button>
+                ))}
+              </div>
+              <p className="mt-1 text-xs text-black/50">
+                Exact rates by location coming soon — current pricing is a
+                flat estimate.
+              </p>
+            </div>
           </div>
 
           <button
@@ -124,9 +157,13 @@ export default function CheckoutPage() {
                 <span>−NPR {discount.toLocaleString()}</span>
               </div>
             )}
+            <div className="flex justify-between">
+              <span>Shipping ({zone.label})</span>
+              <span>NPR {zone.price.toLocaleString()}</span>
+            </div>
             <div className="flex justify-between text-base font-semibold">
               <span>Total</span>
-              <span>NPR {total.toLocaleString()}</span>
+              <span>NPR {grandTotal.toLocaleString()}</span>
             </div>
           </div>
         </div>

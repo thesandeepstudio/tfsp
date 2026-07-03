@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
-import type { Product } from "@/lib/products";
+import { isInStock, type Product } from "@/lib/products";
 import { useWishlist } from "@/context/WishlistContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
@@ -21,15 +21,20 @@ const tagLabels: Record<NonNullable<Product["tag"]>, string> = {
 export default function ProductCard({ product }: { product: Product }) {
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product.id);
+  const inStock = isInStock(product);
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div
         className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${product.gradient}`}
       >
-        {product.inStock === false ? (
+        {!inStock ? (
           <span className="absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
             Out of Stock
+          </span>
+        ) : product.stockQuantity !== undefined && product.stockQuantity <= 5 ? (
+          <span className="absolute left-2 top-2 z-10 bg-black px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+            Only {product.stockQuantity} left
           </span>
         ) : (
           product.tag && (
@@ -73,7 +78,7 @@ export default function ProductCard({ product }: { product: Product }) {
             fill
             sizes="(min-width: 1024px) 16vw, 45vw"
             className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
-              product.inStock === false ? "opacity-50" : ""
+              !inStock ? "opacity-50" : ""
             }`}
           />
         ) : (
