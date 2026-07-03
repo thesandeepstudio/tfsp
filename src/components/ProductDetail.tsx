@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
-import { categoryLabels, type Product } from "@/lib/products";
+import { categoryLabels, type PosterFormat, type Product } from "@/lib/products";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -13,6 +13,13 @@ const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
 };
 
 const views = ["Front", "Back", "Detail", "Worn"];
+const FRAME_PRICE = 300;
+
+function firstSizeFor(format: PosterFormat) {
+  return format.paperOptions
+    ? format.paperOptions[0]?.prices[0]?.size
+    : format.sizes?.[0]?.size;
+}
 
 function AccordionItem({
   title,
@@ -45,10 +52,14 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
-  const [activePaper, setActivePaper] = useState(product.paperOptions?.[0]?.name);
-  const [activePaperSize, setActivePaperSize] = useState(
-    product.paperOptions?.[0]?.prices[0]?.size
+  const [activeFormat, setActiveFormat] = useState(product.formats?.[0]?.name);
+  const [activePaper, setActivePaper] = useState(
+    product.formats?.[0]?.paperOptions?.[0]?.name
   );
+  const [activeFormatSize, setActiveFormatSize] = useState(
+    product.formats?.[0] ? firstSizeFor(product.formats[0]) : undefined
+  );
+  const [frameChecked, setFrameChecked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
 
@@ -56,12 +67,16 @@ export default function ProductDetail({ product }: { product: Product }) {
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
     product.gradient;
 
-  const selectedPaperOption = product.paperOptions?.find(
+  const selectedFormat = product.formats?.find((f) => f.name === activeFormat);
+  const selectedPaperOption = selectedFormat?.paperOptions?.find(
     (paper) => paper.name === activePaper
   );
+  const formatSizePrices = selectedPaperOption?.prices ?? selectedFormat?.sizes;
+  const basePrice =
+    formatSizePrices?.find((p) => p.size === activeFormatSize)?.price ??
+    product.price;
   const currentPrice =
-    selectedPaperOption?.prices.find((p) => p.size === activePaperSize)
-      ?.price ?? product.price;
+    product.formats && frameChecked ? basePrice + FRAME_PRICE : basePrice;
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -170,44 +185,48 @@ export default function ProductDetail({ product }: { product: Product }) {
             </div>
           )}
 
-          {product.paperOptions && (
+          {product.formats && product.formats.length > 1 && (
             <div className="mt-6">
               <p className="text-xs uppercase tracking-wide text-black/60">
-                Paper Quality
+                Format
               </p>
-              <div className="mt-2 flex flex-col gap-2">
-                {product.paperOptions.map((paper) => (
+              <div className="mt-2 flex gap-4">
+                {product.formats.map((format) => (
                   <button
-                    key={paper.name}
+                    key={format.name}
                     onClick={() => {
-                      setActivePaper(paper.name);
-                      setActivePaperSize(paper.prices[0]?.size);
+                      setActiveFormat(format.name);
+                      setActivePaper(format.paperOptions?.[0]?.name);
+                      setActiveFormatSize(firstSizeFor(format));
                     }}
-                    className={`border px-3 py-2 text-left text-sm ${
-                      activePaper === paper.name
-                        ? "border-black bg-black text-white"
-                        : "border-black/20 hover:border-black"
-                    }`}
+                    className="flex items-center gap-2 text-sm"
                   >
-                    {paper.name}
+                    <span
+                      className={`h-3.5 w-3.5 rounded-full border ${
+                        activeFormat === format.name
+                          ? "border-black bg-black"
+                          : "border-black/40"
+                      }`}
+                    />
+                    {format.name}
                   </button>
                 ))}
               </div>
             </div>
           )}
 
-          {selectedPaperOption && (
+          {formatSizePrices && (
             <div className="mt-6">
               <p className="text-xs uppercase tracking-wide text-black/60">
                 Size
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {selectedPaperOption.prices.map(({ size }) => (
+                {formatSizePrices.map(({ size }) => (
                   <button
                     key={size}
-                    onClick={() => setActivePaperSize(size)}
+                    onClick={() => setActiveFormatSize(size)}
                     className={`flex h-10 min-w-10 items-center justify-center px-3 text-sm ${
-                      activePaperSize === size
+                      activeFormatSize === size
                         ? "bg-black text-white"
                         : "border border-black/20 hover:border-black"
                     }`}
@@ -216,6 +235,49 @@ export default function ProductDetail({ product }: { product: Product }) {
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {selectedFormat?.paperOptions && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Paper
+              </p>
+              <div className="mt-2 flex flex-col gap-2">
+                {selectedFormat.paperOptions.map((paper) => (
+                  <button
+                    key={paper.name}
+                    onClick={() => setActivePaper(paper.name)}
+                    className="flex items-center gap-2 text-left text-sm"
+                  >
+                    <span
+                      className={`h-3.5 w-3.5 rounded-full border ${
+                        activePaper === paper.name
+                          ? "border-black bg-black"
+                          : "border-black/40"
+                      }`}
+                    />
+                    {paper.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {product.formats && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Frame
+              </p>
+              <label className="mt-2 flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={frameChecked}
+                  onChange={(e) => setFrameChecked(e.target.checked)}
+                  className="h-4 w-4"
+                />
+                Add Frame (+NPR {FRAME_PRICE})
+              </label>
             </div>
           )}
 
