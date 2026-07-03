@@ -206,12 +206,12 @@ export const products: Product[] = [
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/Tee/gray-back.jpg",
+        image: "/products/exhibit-a/gray-front.jpg",
       },
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/Tee/white-back.png",
+        image: "/products/exhibit-a/white-front.jpg",
       },
     ],
     gallery: [
