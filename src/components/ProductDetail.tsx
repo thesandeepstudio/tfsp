@@ -202,6 +202,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                       setActiveFormat(format.name);
                       setActivePaper(format.paperOptions?.[0]?.name);
                       setActiveFormatSize(firstSizeFor(format));
+                      setFrameChecked(false);
                     }}
                     className="flex items-center gap-2 text-sm"
                   >
@@ -268,7 +269,7 @@ export default function ProductDetail({ product }: { product: Product }) {
             </div>
           )}
 
-          {product.formats && (
+          {selectedFormat?.framePrices && (
             <div className="mt-6">
               <p className="text-xs uppercase tracking-wide text-black/60">
                 Frame
