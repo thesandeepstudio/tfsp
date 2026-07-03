@@ -113,8 +113,16 @@ export const products: Product[] = [
     description: "An Exhibit A graphic tee with the Birth of Star print on the back.",
     image: "/products/exhibit-a/birth-of-star-gray-back.jpg",
     colors: [
-      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
-      { name: "White", gradient: gradients[0] },
+      {
+        name: "Charcoal",
+        gradient: "from-neutral-700 to-neutral-500",
+        image: "/products/exhibit-a/birth-of-star-gray-back.jpg",
+      },
+      {
+        name: "White",
+        gradient: gradients[0],
+        image: "/products/exhibit-a/birth-of-star-white-back.jpg",
+      },
     ],
     gallery: [
       "/products/exhibit-a/birth-of-star-gray-back.jpg",
@@ -122,7 +130,7 @@ export const products: Product[] = [
       "/products/exhibit-a/birth-of-star-white-back.jpg",
       "/products/exhibit-a/white-front.jpg",
     ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    sizes: ["S", "M", "L"],
   },
   {
     id: "m8",
@@ -136,8 +144,16 @@ export const products: Product[] = [
     description: "An Exhibit A graphic tee with the Star print on the back.",
     image: "/products/exhibit-a/star-white-back.jpg",
     colors: [
-      { name: "White", gradient: gradients[0] },
-      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
+      {
+        name: "White",
+        gradient: gradients[0],
+        image: "/products/exhibit-a/star-white-back.jpg",
+      },
+      {
+        name: "Charcoal",
+        gradient: "from-neutral-700 to-neutral-500",
+        image: "/products/exhibit-a/star-gray-back.jpg",
+      },
     ],
     gallery: [
       "/products/exhibit-a/star-white-back.jpg",
@@ -145,7 +161,7 @@ export const products: Product[] = [
       "/products/exhibit-a/star-gray-back.jpg",
       "/products/exhibit-a/gray-front.jpg",
     ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    sizes: ["S", "M", "L"],
   },
   {
     id: "m9",
@@ -159,8 +175,16 @@ export const products: Product[] = [
     description: "An Exhibit A graphic tee with the The Crow print on the back.",
     image: "/products/exhibit-a/the-crow-gray-back.jpg",
     colors: [
-      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
-      { name: "White", gradient: gradients[0] },
+      {
+        name: "Charcoal",
+        gradient: "from-neutral-700 to-neutral-500",
+        image: "/products/exhibit-a/the-crow-gray-back.jpg",
+      },
+      {
+        name: "White",
+        gradient: gradients[0],
+        image: "/products/exhibit-a/the-crow-white-back.jpg",
+      },
     ],
     gallery: [
       "/products/exhibit-a/the-crow-gray-back.jpg",
@@ -168,7 +192,7 @@ export const products: Product[] = [
       "/products/exhibit-a/the-crow-white-back.jpg",
       "/products/exhibit-a/white-front.jpg",
     ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    sizes: ["S", "M", "L"],
   },
   {
     id: "m10",
@@ -182,8 +206,16 @@ export const products: Product[] = [
     description: "An Exhibit A graphic tee with the The Ritual print on the back.",
     image: "/products/exhibit-a/the-ritual-white-back.jpg",
     colors: [
-      { name: "White", gradient: gradients[0] },
-      { name: "Charcoal", gradient: "from-neutral-700 to-neutral-500" },
+      {
+        name: "White",
+        gradient: gradients[0],
+        image: "/products/exhibit-a/the-ritual-white-back.jpg",
+      },
+      {
+        name: "Charcoal",
+        gradient: "from-neutral-700 to-neutral-500",
+        image: "/products/exhibit-a/the-ritual-gray-back.jpg",
+      },
     ],
     gallery: [
       "/products/exhibit-a/the-ritual-white-back.jpg",
@@ -191,13 +223,14 @@ export const products: Product[] = [
       "/products/exhibit-a/the-ritual-gray-back.jpg",
       "/products/exhibit-a/gray-front.jpg",
     ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    sizes: ["S", "M", "L"],
   },
   {
     id: "m11",
     slug: "origin",
     name: "Origin",
-    price: 899, // TODO: confirm price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     gradient: gradients[0],
     description: "A plain, no-print tee — same fit and fabric as the Exhibit A collection.",
@@ -206,19 +239,19 @@ export const products: Product[] = [
       {
         name: "Charcoal",
         gradient: "from-neutral-700 to-neutral-500",
-        image: "/products/Tee/gray-back.jpg",
+        image: "/products/exhibit-a/gray-front.jpg",
       },
       {
         name: "White",
         gradient: gradients[0],
-        image: "/products/Tee/white-back.png",
+        image: "/products/exhibit-a/white-front.jpg",
       },
     ],
     gallery: [
-      "/products/Tee/gray-back.jpg",
       "/products/exhibit-a/gray-front.jpg",
-      "/products/Tee/white-back.png",
+      "/products/Tee/gray-back.jpg",
       "/products/exhibit-a/white-front.jpg",
+      "/products/Tee/white-back.png",
     ],
     sizes: ["S", "M", "L"],
   },
