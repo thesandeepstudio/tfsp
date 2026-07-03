@@ -369,12 +369,6 @@ export default function ProductDetail({ product }: { product: Product }) {
           >
             Back to {categoryLabels[product.category]}
           </Link>
-
-          <ul className="mt-8 space-y-1 text-xs text-black/60">
-            <li>Ships across Nepal in 2-3 business days.</li>
-            <li>Easy 14-day returns.</li>
-            <li>Quality checked before dispatch.</li>
-          </ul>
         </div>
       </div>
 
