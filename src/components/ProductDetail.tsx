@@ -75,8 +75,12 @@ export default function ProductDetail({ product }: { product: Product }) {
   const basePrice =
     formatSizePrices?.find((p) => p.size === activeFormatSize)?.price ??
     product.price;
-  const currentPrice =
-    product.formats && frameChecked ? basePrice + FRAME_PRICE : basePrice;
+  const framedPrice = selectedFormat?.framePrices?.find(
+    (p) => p.size === activeFormatSize
+  )?.price;
+  const currentPrice = frameChecked
+    ? (framedPrice ?? basePrice + FRAME_PRICE)
+    : basePrice;
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -276,7 +280,10 @@ export default function ProductDetail({ product }: { product: Product }) {
                   onChange={(e) => setFrameChecked(e.target.checked)}
                   className="h-4 w-4"
                 />
-                Add Frame (+NPR {FRAME_PRICE})
+                Add Frame
+                {framedPrice
+                  ? ` (NPR ${framedPrice.toLocaleString()})`
+                  : ` (+NPR ${FRAME_PRICE})`}
               </label>
             </div>
           )}

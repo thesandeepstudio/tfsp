@@ -14,6 +14,7 @@ export type PosterFormat = {
   name: string;
   paperOptions?: PaperOption[];
   sizes?: { size: string; price: number }[];
+  framePrices?: { size: string; price: number }[];
 };
 
 export type Product = {
@@ -71,12 +72,16 @@ const posterFormats: PosterFormat[] = [
         ],
       },
     ],
+    framePrices: [
+      { size: "A4", price: 800 },
+      { size: "A3", price: 1600 },
+    ],
   },
   {
     name: "Round",
     sizes: [
-      { size: "8×8", price: 120 }, // TODO: confirm price
-      { size: "10×10", price: 180 }, // TODO: confirm price
+      { size: "8×8 In", price: 120 }, // TODO: confirm price
+      { size: "10×10 In", price: 180 }, // TODO: confirm price
     ],
   },
 ];
