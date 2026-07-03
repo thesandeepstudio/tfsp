@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import SearchOverlay from "@/components/SearchOverlay";
 
 const links = [
   { label: "New Arrivals", href: "/new-arrivals" },
@@ -14,6 +17,8 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { itemCount } = useCart();
+  const { itemCount: wishlistCount } = useWishlist();
 
   return (
     <header className="sticky top-0 z-50 bg-white">
@@ -51,24 +56,38 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <button aria-label="Search" className="hover:opacity-60">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M21 21l-4.3-4.3" />
-            </svg>
-          </button>
+          <SearchOverlay />
           <button aria-label="Account" className="hidden hover:opacity-60 sm:block">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="8" r="4" />
               <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
             </svg>
           </button>
-          <button aria-label="Bag" className="hover:opacity-60">
+          <Link
+            href="/wishlist"
+            aria-label="Wishlist"
+            className="relative hidden hover:opacity-60 sm:block"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
+            </svg>
+            {wishlistCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
+          <Link href="/cart" aria-label="Bag" className="relative hover:opacity-60">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M6 8h12l1 13H5L6 8z" />
               <path d="M9 8a3 3 0 016 0" />
             </svg>
-          </button>
+            {itemCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+                {itemCount}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
 

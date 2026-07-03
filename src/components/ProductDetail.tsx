@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import {
   categoryLabels,
   getProductsByCategory,
+  isInStock,
   type PosterFormat,
   type Product,
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { useReviews } from "@/context/ReviewsContext";
+import { useRecentlyViewed } from "@/context/RecentlyViewedContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -54,6 +59,43 @@ function AccordionItem({
   );
 }
 
+function StarRating({
+  rating,
+  onChange,
+  size = 16,
+}: {
+  rating: number;
+  onChange?: (rating: number) => void;
+  size?: number;
+}) {
+  return (
+    <div className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button
+          key={n}
+          type="button"
+          disabled={!onChange}
+          onClick={() => onChange?.(n)}
+          aria-label={`${n} star${n > 1 ? "s" : ""}`}
+          className={onChange ? "cursor-pointer" : "cursor-default"}
+        >
+          <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill={n <= rating ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-black"
+          >
+            <path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z" />
+          </svg>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function ProductDetail({ product }: { product: Product }) {
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
@@ -68,6 +110,28 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [frameChecked, setFrameChecked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const wishlisted = isWishlisted(product.id);
+  const { getReviews, getAverageRating, addReview } = useReviews();
+  const reviews = getReviews(product.slug);
+  const averageRating = getAverageRating(product.slug);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
+  const { items: recentlyViewed, addViewed } = useRecentlyViewed();
+
+  useEffect(() => {
+    addViewed({
+      productId: product.id,
+      slug: product.slug,
+      name: product.name,
+      image: product.image ?? "",
+      price: product.price,
+      gradient: product.gradient,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id]);
 
   const activeGradient =
     product.colors?.find((c) => c.name === activeColor)?.gradient ??
@@ -91,6 +155,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const relatedProducts = getProductsByCategory(product.category)
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
+
+  const recentlyViewedFiltered = recentlyViewed.filter(
+    (item) => item.productId !== product.id
+  );
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -144,12 +212,18 @@ export default function ProductDetail({ product }: { product: Product }) {
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
-          {product.tag && (
-            <span
-              className={`absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
-            >
-              {product.tag}
+          {!isInStock(product) ? (
+            <span className="absolute left-3 top-3 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
+              Out of Stock
             </span>
+          ) : (
+            product.tag && (
+              <span
+                className={`absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide ${tagStyles[product.tag]}`}
+              >
+                {product.tag}
+              </span>
+            )
           )}
           {activeImage && (
             <Image
@@ -167,7 +241,34 @@ export default function ProductDetail({ product }: { product: Product }) {
           <p className="text-xs uppercase tracking-wide text-black/50">
             {categoryLabels[product.category]}
           </p>
-          <h1 className="mt-1 text-2xl font-medium">{product.name}</h1>
+          <div className="mt-1 flex items-start justify-between gap-2">
+            <h1 className="text-2xl font-medium">{product.name}</h1>
+            <button
+              onClick={() =>
+                toggleWishlist({
+                  productId: product.id,
+                  slug: product.slug,
+                  name: product.name,
+                  image: product.image ?? "",
+                  price: product.price,
+                })
+              }
+              aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/20"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill={wishlisted ? "currentColor" : "none"}
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className={wishlisted ? "text-red-600" : "text-black"}
+              >
+                <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
+              </svg>
+            </button>
+          </div>
           <p className="mt-1 flex items-center gap-2 text-base">
             {product.compareAtPrice && (
               <span className="text-black/40 line-through">
@@ -359,15 +460,61 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <button
+            disabled={!isInStock(product)}
             onClick={() => {
+              const variantParts = [
+                selectedFormat && product.formats && product.formats.length > 1
+                  ? selectedFormat.name
+                  : undefined,
+                selectedPaperOption?.name,
+                frameChecked ? "Framed" : undefined,
+              ].filter(Boolean) as string[];
+
+              addItem({
+                id: [
+                  product.id,
+                  activeColor,
+                  activeSize,
+                  activeFormatSize,
+                  activePaper,
+                  frameChecked ? "framed" : undefined,
+                ]
+                  .filter(Boolean)
+                  .join("-"),
+                productId: product.id,
+                slug: product.slug,
+                name: product.name,
+                image: activeImage ?? product.image ?? "",
+                price: currentPrice,
+                size: activeFormatSize ?? activeSize,
+                color: activeColor,
+                variantLabel:
+                  variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+              });
+
               setAdded(true);
               setTimeout(() => setAdded(false), 1500);
             }}
-            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85"
+            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
-            <span>{added ? "Added ✓" : "Add to Cart"}</span>
-            <span>NPR {currentPrice.toLocaleString()}</span>
+            <span>
+              {!isInStock(product)
+                ? "Out of Stock"
+                : added
+                  ? "Added ✓"
+                  : "Add to Cart"}
+            </span>
+            {isInStock(product) && (
+              <span>NPR {currentPrice.toLocaleString()}</span>
+            )}
           </button>
+          {isInStock(product) &&
+            product.stockQuantity !== undefined &&
+            product.stockQuantity <= 5 && (
+              <p className="mt-2 text-center text-xs text-red-600">
+                Only {product.stockQuantity} left in stock
+              </p>
+            )}
 
           <Link
             href={`/${product.category}`}
@@ -390,6 +537,114 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
         </div>
       )}
+
+      {recentlyViewedFiltered.length > 0 && (
+        <div className="mt-16 border-t border-black/10 pt-10">
+          <h2 className="font-display text-2xl tracking-wide">
+            Recently Viewed
+          </h2>
+          <div className="no-scrollbar mt-6 flex gap-4 overflow-x-auto">
+            {recentlyViewedFiltered.map((item) => (
+              <Link
+                key={item.productId}
+                href={`/products/${item.slug}`}
+                className="w-32 shrink-0"
+              >
+                <div
+                  className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
+                >
+                  {item.image && (
+                    <Image
+                      src={`${BASE_PATH}${item.image}`}
+                      alt={item.name}
+                      fill
+                      sizes="128px"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <p className="mt-1.5 truncate text-xs">{item.name}</p>
+                <p className="text-xs text-black/60">
+                  NPR {item.price.toLocaleString()}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-16 border-t border-black/10 pt-10">
+        <div className="flex items-center gap-3">
+          <h2 className="font-display text-2xl tracking-wide">Reviews</h2>
+          {averageRating !== null && (
+            <>
+              <StarRating rating={Math.round(averageRating)} />
+              <span className="text-sm text-black/60">
+                {averageRating.toFixed(1)} ({reviews.length})
+              </span>
+            </>
+          )}
+        </div>
+
+        {reviews.length > 0 ? (
+          <div className="mt-6 space-y-6 divide-y divide-black/10">
+            {reviews.map((review) => (
+              <div key={review.id} className="pt-6 first:pt-0">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium">{review.name}</p>
+                  <StarRating rating={review.rating} size={13} />
+                </div>
+                <p className="mt-2 text-sm text-black/70">{review.comment}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-4 text-sm text-black/50">
+            No reviews yet — be the first to leave one.
+          </p>
+        )}
+
+        <div className="mt-8 max-w-md border-t border-black/10 pt-6">
+          <h3 className="text-sm font-semibold uppercase tracking-wide">
+            Write a Review
+          </h3>
+          <div className="mt-3">
+            <StarRating rating={reviewRating} onChange={setReviewRating} size={22} />
+          </div>
+          <input
+            type="text"
+            value={reviewName}
+            onChange={(e) => setReviewName(e.target.value)}
+            placeholder="Your name"
+            className="mt-3 w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+          />
+          <textarea
+            value={reviewComment}
+            onChange={(e) => setReviewComment(e.target.value)}
+            placeholder="Share your thoughts"
+            rows={3}
+            className="mt-3 w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+          />
+          <button
+            onClick={() => {
+              if (!reviewName.trim() || !reviewComment.trim() || reviewRating === 0)
+                return;
+              addReview(product.slug, {
+                name: reviewName,
+                rating: reviewRating,
+                comment: reviewComment,
+              });
+              setReviewName("");
+              setReviewRating(0);
+              setReviewComment("");
+            }}
+            disabled={!reviewName.trim() || !reviewComment.trim() || reviewRating === 0}
+            className="mt-3 bg-black px-6 py-2 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+          >
+            Submit Review
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
