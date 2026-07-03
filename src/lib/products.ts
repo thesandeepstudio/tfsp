@@ -195,8 +195,8 @@ export const products: Product[] = [
   },
   {
     id: "m11",
-    slug: "basic-tee",
-    name: "Basic Tee",
+    slug: "origin",
+    name: "Origin",
     price: 899, // TODO: confirm price
     category: "merch",
     gradient: gradients[0],
@@ -214,7 +214,12 @@ export const products: Product[] = [
         image: "/products/Tee/white-back.png",
       },
     ],
-    gallery: ["/products/Tee/gray-back.jpg", "/products/Tee/white-back.png"],
+    gallery: [
+      "/products/Tee/gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+      "/products/Tee/white-back.png",
+      "/products/exhibit-a/white-front.jpg",
+    ],
     sizes: ["S", "M", "L"],
   },
 
