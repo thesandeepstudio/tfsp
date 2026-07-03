@@ -4,7 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
-import { categoryLabels, type PosterFormat, type Product } from "@/lib/products";
+import {
+  categoryLabels,
+  getProductsByCategory,
+  type PosterFormat,
+  type Product,
+} from "@/lib/products";
+import ProductCard from "@/components/ProductCard";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
@@ -81,6 +87,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const currentPrice = frameChecked
     ? (framedPrice ?? basePrice + FRAME_PRICE)
     : basePrice;
+
+  const relatedProducts = getProductsByCategory(product.category)
+    .filter((p) => p.id !== product.id)
+    .slice(0, 4);
 
   const images =
     product.gallery && product.gallery.length > 0
@@ -367,6 +377,19 @@ export default function ProductDetail({ product }: { product: Product }) {
           </ul>
         </div>
       </div>
+
+      {relatedProducts.length > 0 && (
+        <div className="mt-16 border-t border-black/10 pt-10">
+          <h2 className="font-display text-2xl tracking-wide">
+            You Might Also Like
+          </h2>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+            {relatedProducts.map((related) => (
+              <ProductCard key={related.id} product={related} />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
