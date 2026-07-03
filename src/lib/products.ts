@@ -201,7 +201,7 @@ export const products: Product[] = [
     category: "merch",
     gradient: gradients[0],
     description: "A plain, no-print tee — same fit and fabric as the Exhibit A collection.",
-    image: "/products/Tee/gray-back.jpg",
+    image: "/products/exhibit-a/gray-front.jpg",
     colors: [
       {
         name: "Charcoal",
