@@ -72,7 +72,14 @@ export default function Footer() {
           >
             Instagram
           </a>
-          <a href="#" className="hover:text-black">TikTok</a>
+          <a
+            href="https://vt.tiktok.com/ZSC4MSDKt/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            TikTok
+          </a>
           <a href="#" className="hover:text-black">X</a>
         </div>
       </div>
