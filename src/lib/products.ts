@@ -310,8 +310,8 @@ export const products: Product[] = [
     id: "b5",
     slug: "badge-set",
     name: "Badge Set",
-    price: 100, // TODO: bundle price likely higher than a single badge — confirm
-    compareAtPrice: 150,
+    price: 350,
+    compareAtPrice: 450,
     category: "badges",
     tag: "New",
     gradient: gradients[0],

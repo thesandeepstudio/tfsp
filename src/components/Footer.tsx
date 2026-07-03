@@ -64,7 +64,14 @@ export default function Footer() {
       <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-black/10 pt-6 text-xs text-black/50 sm:flex-row">
         <p>&copy; {new Date().getFullYear()} TFSP. All rights reserved.</p>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-black">Instagram</a>
+          <a
+            href="https://www.instagram.com/tfsp__/?hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            Instagram
+          </a>
           <a href="#" className="hover:text-black">TikTok</a>
           <a href="#" className="hover:text-black">X</a>
         </div>
