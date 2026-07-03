@@ -229,7 +229,8 @@ export const products: Product[] = [
     id: "m11",
     slug: "origin",
     name: "Origin",
-    price: 899, // TODO: confirm price
+    price: 1599,
+    compareAtPrice: 1800,
     category: "merch",
     gradient: gradients[0],
     description: "A plain, no-print tee — same fit and fabric as the Exhibit A collection.",
