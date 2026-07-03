@@ -215,10 +215,10 @@ export const products: Product[] = [
       },
     ],
     gallery: [
-      "/products/Tee/gray-back.jpg",
       "/products/exhibit-a/gray-front.jpg",
-      "/products/Tee/white-back.png",
+      "/products/Tee/gray-back.jpg",
       "/products/exhibit-a/white-front.jpg",
+      "/products/Tee/white-back.png",
     ],
     sizes: ["S", "M", "L"],
   },
