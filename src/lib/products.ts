@@ -3,11 +3,19 @@ export type Category = "merch" | "posters" | "stickers" | "badges";
 export type ColorOption = {
   name: string;
   gradient: string;
+  image?: string;
 };
 
 export type PaperOption = {
   name: string;
   prices: { size: string; price: number }[];
+};
+
+export type PosterFormat = {
+  name: string;
+  paperOptions?: PaperOption[];
+  sizes?: { size: string; price: number }[];
+  framePrices?: { size: string; price: number }[];
 };
 
 export type Product = {
@@ -22,7 +30,7 @@ export type Product = {
   description: string;
   colors?: ColorOption[];
   sizes?: string[];
-  paperOptions?: PaperOption[];
+  formats?: PosterFormat[];
   image?: string;
   gallery?: string[];
 };
@@ -46,19 +54,47 @@ const gradients = [
   "from-neutral-300 to-neutral-100",
 ];
 
-const paperOptions: PaperOption[] = [
+const posterFormats: PosterFormat[] = [
   {
-    name: "300 GSM Artboard Paper",
-    prices: [
-      { size: "A4", price: 100 },
-      { size: "A3", price: 150 },
+    name: "Standard",
+    paperOptions: [
+      {
+        name: "300 GSM Artboard Paper",
+        prices: [
+          { size: "A4", price: 100 },
+          { size: "A3", price: 150 },
+        ],
+      },
+      {
+        name: "300 GSM Ivory Paper",
+        prices: [
+          { size: "A4", price: 150 },
+          { size: "A3", price: 199 },
+        ],
+      },
+    ],
+    framePrices: [
+      { size: "A4", price: 800 },
+      { size: "A3", price: 1600 },
     ],
   },
   {
-    name: "300 GSM Ivory Paper",
-    prices: [
-      { size: "A4", price: 150 },
-      { size: "A3", price: 199 },
+    name: "Round",
+    paperOptions: [
+      {
+        name: "300 GSM Artboard Paper",
+        prices: [
+          { size: "8×8 In", price: 120 }, // TODO: confirm price
+          { size: "10×10 In", price: 180 }, // TODO: confirm price
+        ],
+      },
+      {
+        name: "300 GSM Ivory Paper",
+        prices: [
+          { size: "8×8 In", price: 150 }, // TODO: confirm price
+          { size: "10×10 In", price: 220 }, // TODO: confirm price
+        ],
+      },
     ],
   },
 ];
@@ -157,6 +193,35 @@ export const products: Product[] = [
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },
+  {
+    id: "m11",
+    slug: "origin",
+    name: "Origin",
+    price: 899, // TODO: confirm price
+    category: "merch",
+    gradient: gradients[0],
+    description: "A plain, no-print tee — same fit and fabric as the Exhibit A collection.",
+    image: "/products/exhibit-a/gray-front.jpg",
+    colors: [
+      {
+        name: "Charcoal",
+        gradient: "from-neutral-700 to-neutral-500",
+        image: "/products/Tee/gray-back.jpg",
+      },
+      {
+        name: "White",
+        gradient: gradients[0],
+        image: "/products/Tee/white-back.png",
+      },
+    ],
+    gallery: [
+      "/products/Tee/gray-back.jpg",
+      "/products/exhibit-a/gray-front.jpg",
+      "/products/Tee/white-back.png",
+      "/products/exhibit-a/white-front.jpg",
+    ],
+    sizes: ["S", "M", "L"],
+  },
 
   // Badges
   {
@@ -239,7 +304,7 @@ export const products: Product[] = [
     gradient: gradients[3],
     description: "An original TFSP graphic poster print.",
     image: "/products/Posters/the-sick-evolution.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p8",
@@ -251,7 +316,7 @@ export const products: Product[] = [
     gradient: gradients[4],
     description: "An original TFSP graphic poster print.",
     image: "/products/Posters/do-it-for-the-plot.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p9",
@@ -262,7 +327,7 @@ export const products: Product[] = [
     gradient: gradients[5],
     description: "Album cover print for Chumbak's \"Bageko Bagai.\"",
     image: "/products/Posters/chumbak-bageko-bagai.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p10",
@@ -273,7 +338,7 @@ export const products: Product[] = [
     gradient: gradients[6],
     description: "Album cover print for Albatross's \"Jo Jaas Sanga Sambandhit Chha.\"",
     image: "/products/Posters/albatross-jo-jaas-sanga-sambandhit-chha.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p11",
@@ -284,7 +349,7 @@ export const products: Product[] = [
     gradient: gradients[7],
     description: "Album cover print for Albatross's \"Ma Ra Malai.\"",
     image: "/products/Posters/albatross-ma-ra-malai.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p12",
@@ -295,7 +360,7 @@ export const products: Product[] = [
     gradient: gradients[8],
     description: "Album cover print for Monkey Temple Nepal's self-titled release.",
     image: "/products/Posters/monkey-temple-nepal.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p13",
@@ -306,7 +371,7 @@ export const products: Product[] = [
     gradient: gradients[0],
     description: "Album cover print for Sabin Rai & The Pharaoh's \"Dhanyabad.\"",
     image: "/products/Posters/sabin-rai-dhanyabad.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p14",
@@ -317,7 +382,7 @@ export const products: Product[] = [
     gradient: gradients[1],
     description: "Album cover print for Tribal Rain's \"Roka Yo Samay.\"",
     image: "/products/Posters/tribal-rain-roka-yo-samay.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p15",
@@ -328,7 +393,7 @@ export const products: Product[] = [
     gradient: gradients[2],
     description: "Album cover print for A$AP Rocky's \"Testing.\"",
     image: "/products/Posters/asap-rocky-testing.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p16",
@@ -339,7 +404,7 @@ export const products: Product[] = [
     gradient: gradients[3],
     description: "Album cover print for Tyler, The Creator's \"IGOR.\"",
     image: "/products/Posters/tyler-the-creator-igor.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p17",
@@ -350,7 +415,7 @@ export const products: Product[] = [
     gradient: gradients[4],
     description: "Album cover print for The Weeknd's \"Starboy.\"",
     image: "/products/Posters/the-weeknd-starboy.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p18",
@@ -361,7 +426,7 @@ export const products: Product[] = [
     gradient: gradients[5],
     description: "Album cover print for Travis Scott's \"Astroworld.\"",
     image: "/products/Posters/travis-scott-astroworld.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p19",
@@ -372,7 +437,7 @@ export const products: Product[] = [
     gradient: gradients[6],
     description: "Album cover print for Kanye West's \"My Beautiful Dark Twisted Fantasy.\"",
     image: "/products/Posters/kanye-west-mbdtf.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p20",
@@ -383,7 +448,7 @@ export const products: Product[] = [
     gradient: gradients[7],
     description: "Album cover print for 21 Savage & Metro Boomin's \"Savage Mode.\"",
     image: "/products/Posters/21-savage-savage-mode.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p21",
@@ -394,7 +459,7 @@ export const products: Product[] = [
     gradient: gradients[8],
     description: "Album cover print for Frank Ocean's \"Blonde.\"",
     image: "/products/Posters/frank-ocean-blonde.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p22",
@@ -405,7 +470,7 @@ export const products: Product[] = [
     gradient: gradients[0],
     description: "Album cover print for Binaash's \"Binaashkaari.\"",
     image: "/products/Posters/binaash-binaashkaari.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p23",
@@ -416,7 +481,7 @@ export const products: Product[] = [
     gradient: gradients[1],
     description: "Cover print for Underside Nepal's \"Wild.\"",
     image: "/products/Posters/underside-nepal-wild.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p24",
@@ -427,7 +492,7 @@ export const products: Product[] = [
     gradient: gradients[2],
     description: "Album cover print for Antim Grahan's \"Forever Winter.\"",
     image: "/products/Posters/antim-grahan-forever-winter.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p25",
@@ -438,7 +503,7 @@ export const products: Product[] = [
     gradient: gradients[3],
     description: "Album cover print for Antim Grahan's \"Goat Legion.\"",
     image: "/products/Posters/antim-grahan-goat-legion.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p26",
@@ -449,7 +514,7 @@ export const products: Product[] = [
     gradient: gradients[4],
     description: "Album cover print for Screaming Marionette's \"Corrupted Society.\"",
     image: "/products/Posters/screaming-marionette-corrupted-society.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p27",
@@ -460,7 +525,7 @@ export const products: Product[] = [
     gradient: gradients[5],
     description: "Album cover print for Underside's \"Satan in Your Stereo.\"",
     image: "/products/Posters/underside-satan-in-your-stereo.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p28",
@@ -471,7 +536,7 @@ export const products: Product[] = [
     gradient: gradients[6],
     description: "Album cover print for Albatross's \"Atti Bhayo.\"",
     image: "/products/Posters/albatross-atti-bhayo.png",
-    paperOptions,
+    formats: posterFormats,
   },
   {
     id: "p29",
@@ -482,7 +547,7 @@ export const products: Product[] = [
     gradient: gradients[7],
     description: "Album cover print for Chumbak's self-titled release.",
     image: "/products/Posters/chumbak-self-titled.png",
-    paperOptions,
+    formats: posterFormats,
   },
 
   // Stickers
