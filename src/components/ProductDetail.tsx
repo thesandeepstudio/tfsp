@@ -252,7 +252,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   );
 
   return (
-    <section className="px-4 py-10 sm:px-8">
+    <section className="mx-auto max-w-[1600px] px-4 py-10 sm:px-8">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
         <Link href="/" className="hover:text-black">
           Home
