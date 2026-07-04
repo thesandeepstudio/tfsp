@@ -269,7 +269,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
         <div className="hidden lg:block">{accordion}</div>
 
         <div
-          className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
+          className={`relative aspect-square w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
           {!isInStock(product) ? (
             <span className="absolute left-3 top-3 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
