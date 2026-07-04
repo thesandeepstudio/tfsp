@@ -56,21 +56,36 @@ export default function AdminCouponsPage() {
       setError("Enter a valid discount value.");
       return;
     }
-    await setDoc(doc(db, "coupons", normalized), {
-      type,
-      value: numericValue,
-      active: true,
-    });
-    setCode("");
-    setValue("");
+    try {
+      await setDoc(doc(db, "coupons", normalized), {
+        type,
+        value: numericValue,
+        active: true,
+      });
+      setCode("");
+      setValue("");
+    } catch (err) {
+      console.error("Failed to add coupon:", err);
+      setError("Save failed — try logging out and back in.");
+    }
   };
 
   const toggleActive = async (couponCode: string, active: boolean) => {
-    await updateDoc(doc(db, "coupons", couponCode), { active: !active });
+    try {
+      await updateDoc(doc(db, "coupons", couponCode), { active: !active });
+    } catch (err) {
+      console.error("Failed to update coupon:", err);
+      setError("Update failed — try logging out and back in.");
+    }
   };
 
   const handleDelete = async (couponCode: string) => {
-    await deleteDoc(doc(db, "coupons", couponCode));
+    try {
+      await deleteDoc(doc(db, "coupons", couponCode));
+    } catch (err) {
+      console.error("Failed to delete coupon:", err);
+      setError("Delete failed — try logging out and back in.");
+    }
   };
 
   return (

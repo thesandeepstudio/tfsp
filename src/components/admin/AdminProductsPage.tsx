@@ -20,20 +20,28 @@ function ProductRow({ product }: { product: Product }) {
   const [tag, setTag] = useState<TagValue>(product.tag ?? "None");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSave = async () => {
     setSaving(true);
     setSaved(false);
+    setError(null);
     const data = {
       price: Number(price) || 0,
       compareAtPrice: compareAtPrice.trim() ? Number(compareAtPrice) : deleteField(),
       stockQuantity: stockQuantity.trim() ? Number(stockQuantity) : deleteField(),
       tag: tag === "None" ? deleteField() : tag,
     };
-    await setDoc(doc(db, "products", product.id), data, { merge: true });
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 1500);
+    try {
+      await setDoc(doc(db, "products", product.id), data, { merge: true });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 1500);
+    } catch (err) {
+      console.error("Failed to save product:", err);
+      setError("Save failed — try logging out and back in.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -86,6 +94,7 @@ function ProductRow({ product }: { product: Product }) {
         >
           {saving ? "..." : saved ? "Saved" : "Save"}
         </button>
+        {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
       </td>
     </tr>
   );

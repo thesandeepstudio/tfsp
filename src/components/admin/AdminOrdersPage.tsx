@@ -66,7 +66,11 @@ export default function AdminOrdersPage() {
   }, []);
 
   const updateStatus = async (docId: string, status: OrderStatus) => {
-    await updateDoc(doc(db, "orders", docId), { status });
+    try {
+      await updateDoc(doc(db, "orders", docId), { status });
+    } catch (err) {
+      console.error("Failed to update order status:", err);
+    }
   };
 
   return (
