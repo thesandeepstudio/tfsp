@@ -13,8 +13,15 @@ type Order = {
   couponCode: string | null;
   shippingZone: string;
   shippingCost: number;
+  deliveryTime: string;
   total: number;
-  customer: { name: string; phone: string; address: string; notes: string };
+  customer: {
+    name: string;
+    phone: string;
+    city: string;
+    address: string;
+    notes: string;
+  };
 };
 
 export default function OrderConfirmationPage() {
@@ -85,6 +92,11 @@ export default function OrderConfirmationPage() {
           <span>Shipping ({order.shippingZone})</span>
           <span>NPR {order.shippingCost.toLocaleString()}</span>
         </div>
+        {order.deliveryTime && (
+          <p className="pt-1 text-xs text-black/50">
+            Estimated delivery: {order.deliveryTime}
+          </p>
+        )}
         <div className="flex justify-between text-base font-semibold">
           <span>Total</span>
           <span>NPR {order.total.toLocaleString()}</span>
@@ -97,6 +109,7 @@ export default function OrderConfirmationPage() {
         </p>
         <p className="mt-1">{order.customer.name}</p>
         <p>{order.customer.address}</p>
+        <p>{order.customer.city}</p>
         <p>{order.customer.phone}</p>
       </div>
 

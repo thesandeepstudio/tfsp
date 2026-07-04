@@ -1,32 +1,29 @@
-export type ShippingZone = {
-  id: string;
-  label: string;
+import rawRates from "./delivery-rates.json";
+
+export type DeliveryRate = {
+  location: string;
   price: number;
+  deliveryTime: string;
 };
 
-// Placeholder flat rates by zone — exact per-location pricing to be
-// refined later.
-export const shippingZones: ShippingZone[] = [
-  { id: "inside-valley", label: "Inside Valley (Kathmandu)", price: 100 },
-  { id: "outside-valley", label: "Outside Valley", price: 175 },
-];
+export const deliveryRates: DeliveryRate[] = rawRates;
 
-// Keywords that indicate an address is inside the Kathmandu Valley.
-const insideValleyKeywords = [
-  "kathmandu",
-  "ktm",
-  "lalitpur",
-  "patan",
-  "bhaktapur",
-  "kirtipur",
-  "valley",
-];
+export const deliveryLocations: string[] = deliveryRates.map(
+  (r) => r.location
+);
 
-export function detectShippingZone(address: string): ShippingZone {
-  const normalized = address.trim().toLowerCase();
-  if (normalized.length === 0) return shippingZones[0];
-  const isInsideValley = insideValleyKeywords.some((keyword) =>
-    normalized.includes(keyword)
-  );
-  return isInsideValley ? shippingZones[0] : shippingZones[1];
+const FALLBACK_RATE: DeliveryRate = {
+  location: "Other",
+  price: 200,
+  deliveryTime: "2-4 days",
+};
+
+export function getDeliveryRate(location: string): DeliveryRate | undefined {
+  const normalized = location.trim().toLowerCase();
+  if (!normalized) return undefined;
+  return deliveryRates.find((r) => r.location.toLowerCase() === normalized);
+}
+
+export function getDeliveryRateOrFallback(location: string): DeliveryRate {
+  return getDeliveryRate(location) ?? FALLBACK_RATE;
 }

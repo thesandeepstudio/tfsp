@@ -1,0 +1,2747 @@
+[
+  {
+    "location": "Aarughat",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Amardaha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Amargadhi",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "AmariArghakhanchi",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Amlekhgunj",
+    "price": 190,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Amuwa",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Anbukhaireni",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "ArjunchaupariSyangja",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Arnaha",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Arunkhola",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "AryaBhanjyang",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Attariya",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Aurabani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Aurahi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "AurahiDhanusha",
+    "price": 190,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Auraiya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Badigad",
+    "price": 240,
+    "deliveryTime": "2-3 dasy"
+  },
+  {
+    "location": "Badnihar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "BaglungBazar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bagmara",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bagthala",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "BahauriPidari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bahrabise",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bahundangi",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bahuni",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Baidauli",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BaisjangarTanahu",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Balara",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Balawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Baletaxar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bamka",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Bandipur",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Banepa",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bangalachuli",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bani",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Baniyani",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bankul",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BansbariMorang",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bansgadhi",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Baragadhi",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Barahathawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bardaghat",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bardibas",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bariyarpatti",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bariyarpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Barju",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Barpak",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Basabasahi",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BASANTAPURBAZAR",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bastipur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BastipurMakawanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bateshwor",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bauniya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bayalbas",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bayarghari",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bela",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "BelakaRampur",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Belatari",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Belauri",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Belbari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Beldangi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BelhiChapena",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Belsot",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BeltarBasaha",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Beni",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Besisahar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhadrapur",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhagwanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhairahawa",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhajani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhaktapur",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhakundebesi",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhaluwang",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhandara",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhangaha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhawanipur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhedetar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhimad",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bhiman",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhimphedi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhingri",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "BhisawaShikta",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhojpur",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bhokraha",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BhurangTatopani",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Bhurigaun",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Bijuwar",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Bindabasini",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Biratchowk",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Biratnagar",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Birbas",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BirendraBazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Birgunj",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Birtamod",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Biruwa",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bishnupur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BishnupurSaptari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BishnupurSarlahi",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bishrampur",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Bitthad",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Bodebarsain",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Brahampuri",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Brahmadev",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Brindaban",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "BUDAR",
+    "price": 240,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Budhabare",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Bulingtar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Burtibang",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Buttabari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Butwal",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "ChainpurBajhang",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "ChainpurSankhuwasab",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ChakarghattiSunsari",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chakchake",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "ChakraghattaSarlahi",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chame",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Chanauli",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Chandranigahapur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chandrauta",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ChanhiBazar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chapakot",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Charaali",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Charaudi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Charikot",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Chatara",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ChaughadaBazar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chaumala",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chaurjahari",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chautara",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "ChawanniBeldandi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chidika",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Chinchu",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chisapani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Chormara",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Chyama",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DAIJEE",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DailekhBazaar",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Daldale",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Damak",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Daman",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DamarChowk",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Damauli",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Damrabhitta",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Danabari",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DandaBazar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DarbangMyagdi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DarchulaKhalanga",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "DarvanPyuthan",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Dedgaun",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Devghat",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "DevtalBenauli",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "DewahiGonahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dewanganj",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "DhadingBesi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhakdai",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dhalkebar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhanauji",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dhangadhi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhangadhimai",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dhankaul",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "DhankutaBazaar",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dhanusadham",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dharan",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dharke",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhaubini",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dhulabari",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhulikhel",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dhunche",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Diktel",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Diman",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dingla",
+    "price": 240,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Dipayal",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "DodharaChadani",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dudhauli",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Duduwa",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Duhabi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Duipiple",
+    "price": 245,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dulegauda",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dullu",
+    "price": 240,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "DumariKalyanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Dumkibas",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dumre",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Dunai",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Durgauli",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ekadara",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Fattepur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "FatuwaHarsaha",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Fikkal",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "GaddaChauki",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gadhawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gaidakot",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Gaighat",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "GairBazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gajuri",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Galchi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Galkot",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Galyang",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gamgadhi",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "GaneshpurKapilbastu",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "GaneshpurSiraha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Garuda",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gaur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gauradaha",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Gauriganj",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "GaushalaMahottari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Geruwa",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Geta",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ghachok",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ghorahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Godak",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Godawari",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "GodawariKailali",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Godeta",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gokuleshwor",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Gokulganga",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Golbazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "GOPETAR",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "GopigunjJamuniya",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "GorkhaBazar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Gorusinge",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Gothalapani",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Gulariya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hakpara",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Haldibari",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Halesi",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "HanspurKathpulla",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hanumannagr",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hapure",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "HaraiyaRupandehi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Harinagara",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "HarinasTanahu",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Haripur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Haripurwa",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hariwon",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Harkapur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Harnaiya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "HarnaiyaSiyari",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Harthok",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hasuliya",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Hatemalochowk",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hatiya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Hekuli",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Hemja",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Hetauda",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Hile",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Holeri",
+    "price": 215,
+    "deliveryTime": "3-4 Days"
+  },
+  {
+    "location": "IlamBazar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Inaruwa",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Itahari",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jagarnathpur",
+    "price": 165,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Jagatpur",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jahada",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "JajarkotKhalanga",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Jaleshwor",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Janakpur",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "JangalSahiya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jangrahawa",
+    "price": 190,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Jayanagar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jhalari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jhiljhile",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jhumka",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jhyalbas",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jiri",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "JitpurCharnumber",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jiwakhola",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Jogbuda",
+    "price": 240,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Jogikuti",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jomsom",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Joshipur",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "JugedaKailali",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "JugediChitwan",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Jugle",
+    "price": 215,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Jumla",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Kadmaha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kakarbhitta",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kalabanjar",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kalagaudi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kalaiya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kalikamai",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kalyanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KamalBazar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kanchibajar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kanyam",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Karaiyamai",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Karsiya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KatahariMornag",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Katahariya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KATARI",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kathmandu",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kaudena",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kawasoti",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "KerabariMorang",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KerkhaBazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khadadevi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khairahani",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "KhaireniRupandehi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khajura",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KhajuriChanha",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khandanda",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khandbari",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khayarmara",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khimti",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khudibazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khudunabari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Khurkot",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kirtipur",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kohalpur",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Kolhabi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kolti",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kotihawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Krishnanagar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KrishnanagarMadi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Krishnapur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "KristiNachnechaur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kuntabesi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kurintar",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kushma",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Kushmishera",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Labani",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lagma",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lahan",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Lalbandi",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Lalitpur",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Laljhadi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lamahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lamki",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Latinath",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Laukahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "LaxmipurPatari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lekhnath",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Lele",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Letang",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "LikhuDhobi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Liwang",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Loharpatti",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lokaha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lothar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lubhu",
+    "price": 100,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Luham",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Lukla",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Lumbini",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Madhopur",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Madhumalla",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "MadiPalpa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MAHADEVA",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MaharajgunjKapilbas",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MahashilaLunkhu",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mahendranagar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MaheshpurThuthibari",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Maheshwori",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mahottari",
+    "price": 190,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Mahuli",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mainapokhari",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Majhagawa",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MajhgaunKamahariya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Majhuwa",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Makwanpurgadhi",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Malangwa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Malekhu",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Manahari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Manakamana",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Manara",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Manebhanjyang",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MangalbareIlam",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mangalsen",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Manigram",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Manjhariya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Manma",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ManpurMainapokhar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Manthali",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "MarphaMustang",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Martadi",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Masuriya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Matihani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Matsari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Maulapur",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Meghauli",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mehelkuna",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Melamchi",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Mirchaiya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Mirmiphat",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Motipur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "MuktinathMustang",
+    "price": 240,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Mungling",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Murgiya",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Musikot",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Myanglung",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nadhiman",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nagarain",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nagarkot",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "NalagadhKalimati",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "NamcheBazar",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Naraha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "NarainapurBanke",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Narayanghat",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "NarayanpurDang",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "NaudandaKaski",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nawarajpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nepalgunj",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "NepaltarIlam",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "NepaltarUdayapur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Netachowk",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Nijgadh",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Odari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Okhaldhunga",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pacharauta",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PadamPokhari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Padampur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pahalmanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pakadi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PakahaMainpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pakhribas",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pakkadi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Palungtar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pame",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Panauti",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Panmara",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PARASI",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "ParsaSarlahi",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Parwanipur",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pashupatinagar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PatanBaitadi",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PaterwaSugauli",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pathari",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Patichaur",
+    "price": 245,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pato",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phalebas",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phalebisaune",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phaparbari",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pharping",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Pharsatikar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phedikhola",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PhetaBazar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phidim",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PhulbariKailali",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Phungling",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Piluwa",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pipra",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Piprahawa",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Pokhara",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Pokhariya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Prakashpur",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Prasauni",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PumdiPokhara",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Punarbas",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Puranchaur",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Putalibazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PutaliChowk",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "PyuthanKhalanga",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ragaicha",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rajahar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rajapur",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rajarani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rajbiraj",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Rajdevi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rajgadh",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ramailo",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "RamechhapBazar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ramgopalpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ramnagar",
+    "price": 165,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "RamnagarKhairawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "RampurPalpa",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rangeli",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Ranke",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Ratanpur",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "RatuwamaiSombare",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Ridi",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rukumkot",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Rupani",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Rupnagar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sabaila",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SakhadaChhinnamasta",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SakhuwaPrasauni",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SAKUWAMAHENDRANAGAR",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Salleri",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SalliBazar",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SalyanKhalanga",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Samanpur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Samshergunj",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Samsi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sandhikharka",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sanfebagar",
+    "price": 265,
+    "deliveryTime": "4-5 days"
+  },
+  {
+    "location": "Sangrampur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sanischare",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Sankhu",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Sapahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sarangkot",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sardi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Saruwatha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Satti",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sauraha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sedhawa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Shaktikhor",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ShantinagarJhapa",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Shantipur",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sharanamati",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Shivagunj",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "ShreeAntu",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sidhuwa",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Silgadhi",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Simaltari",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Simara",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Simikot",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Simrangadh",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sindhuli",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "SINGATATOPANI",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Singati",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Siraha",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sisaniya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sonama",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Subarna",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sukhipur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sukkhad",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sulichaur",
+    "price": 265,
+    "deliveryTime": "3-4 days"
+  },
+  {
+    "location": "Sunawal",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Sundarbazar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Sundarijal",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Sunjhoda",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Surkhet",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Surunga",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Suryapura",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "SyauleBazar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tamghas",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tamnagar",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tandi",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Tansen",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "TarakholaBaglung",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "TarapattiSirsiya",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Taratal",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Taulihawa",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "TerhathumBasantapur",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Thankot",
+    "price": 150,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Tharmare",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "TharpuTanahu",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Thori",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "THUTIPIPAL",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "TigerTopHill",
+    "price": 165,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Tikapur",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tinkoriya",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tinpiple",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "TopaBazar",
+    "price": 190,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Trishuli",
+    "price": 240,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Tulsipur",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Tulsiyahi",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Tumlingtar",
+    "price": 265,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "Urlabari",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Waling",
+    "price": 215,
+    "deliveryTime": "1-2 days"
+  },
+  {
+    "location": "Wamitaksar",
+    "price": 240,
+    "deliveryTime": "2-3 days"
+  },
+  {
+    "location": "YADUKUSH",
+    "price": 215,
+    "deliveryTime": "2-3 days"
+  }
+]

@@ -4,17 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { detectShippingZone } from "@/lib/shipping";
+import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, coupon, discount, total, clearCart } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
-  const zone = detectShippingZone(address);
-  const grandTotal = total + zone.price;
+  const rate = getDeliveryRate(city);
+  const shippingCost = rate?.price ?? 0;
+  const grandTotal = total + shippingCost;
 
   if (items.length === 0) {
     return (
@@ -32,7 +34,8 @@ export default function CheckoutPage() {
   }
 
   const placeOrder = () => {
-    if (!name.trim() || !phone.trim() || !address.trim()) return;
+    if (!name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate)
+      return;
 
     const order = {
       id: `TFSP-${Date.now()}`,
@@ -41,10 +44,11 @@ export default function CheckoutPage() {
       subtotal,
       discount,
       couponCode: coupon?.code ?? null,
-      shippingZone: zone.label,
-      shippingCost: zone.price,
+      shippingZone: rate.location,
+      shippingCost: rate.price,
+      deliveryTime: rate.deliveryTime,
       total: grandTotal,
-      customer: { name, phone, address, notes },
+      customer: { name, phone, city, address, notes },
     };
 
     localStorage.setItem("tfsp-last-order", JSON.stringify(order));
@@ -77,19 +81,34 @@ export default function CheckoutPage() {
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
             <div>
-              <textarea
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Delivery address"
-                rows={3}
+              <input
+                type="text"
+                list="delivery-cities"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Delivery city (e.g. Kathmandu)"
                 className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
               />
-              {address.trim().length > 0 && (
+              <datalist id="delivery-cities">
+                {deliveryLocations.map((loc) => (
+                  <option key={loc} value={loc} />
+                ))}
+              </datalist>
+              {city.trim().length > 0 && (
                 <p className="mt-1 text-xs text-black/50">
-                  Delivery zone: {zone.label} — NPR {zone.price.toLocaleString()}
+                  {rate
+                    ? `NPR ${rate.price.toLocaleString()} · ${rate.deliveryTime}`
+                    : "City not found — please pick one from the list."}
                 </p>
               )}
             </div>
+            <textarea
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Street address / landmark"
+              rows={3}
+              className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+            />
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -101,7 +120,9 @@ export default function CheckoutPage() {
 
           <button
             onClick={placeOrder}
-            disabled={!name.trim() || !phone.trim() || !address.trim()}
+            disabled={
+              !name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate
+            }
             className="mt-6 w-full bg-black px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             Place Order
@@ -134,8 +155,8 @@ export default function CheckoutPage() {
               </div>
             )}
             <div className="flex justify-between">
-              <span>Shipping ({zone.label})</span>
-              <span>NPR {zone.price.toLocaleString()}</span>
+              <span>Shipping{rate ? ` (${rate.location})` : ""}</span>
+              <span>NPR {shippingCost.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-base font-semibold">
               <span>Total</span>
