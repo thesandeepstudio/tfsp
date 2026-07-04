@@ -1,8 +1,11 @@
+"use client";
+
 import ProductCard from "@/components/ProductCard";
-import { getProductsByCategory } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 
 export default function StickersPage() {
-  const stickerProducts = getProductsByCategory("stickers");
+  const { products } = useProducts();
+  const stickerProducts = products.filter((p) => p.category === "stickers");
 
   return (
     <section className="px-4 py-12 sm:px-8">

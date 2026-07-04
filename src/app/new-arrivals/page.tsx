@@ -1,8 +1,11 @@
+"use client";
+
 import ProductCard from "@/components/ProductCard";
-import { getProductsByTag } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 
 export default function NewArrivalsPage() {
-  const newProducts = getProductsByTag("New");
+  const { products } = useProducts();
+  const newProducts = products.filter((p) => p.tag === "New");
 
   return (
     <section className="px-4 py-12 sm:px-8">

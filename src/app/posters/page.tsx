@@ -1,8 +1,11 @@
+"use client";
+
 import ProductCard from "@/components/ProductCard";
-import { getProductsByCategory } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 
 export default function PostersPage() {
-  const posterProducts = getProductsByCategory("posters");
+  const { products } = useProducts();
+  const posterProducts = products.filter((p) => p.category === "posters");
 
   return (
     <section className="px-4 py-12 sm:px-8">

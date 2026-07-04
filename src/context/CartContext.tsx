@@ -33,7 +33,7 @@ type CartContextValue = {
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
-  applyCoupon: (code: string) => void;
+  applyCoupon: (code: string) => Promise<void>;
   removeCoupon: () => void;
   clearCart: () => void;
 };
@@ -99,8 +99,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const applyCoupon = (code: string) => {
-    const match = findCoupon(code);
+  const applyCoupon = async (code: string) => {
+    const match = await findCoupon(code);
     if (match) {
       setCoupon(match);
       setCouponError(null);

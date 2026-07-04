@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -14,6 +16,7 @@ export default function CheckoutPage() {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [placing, setPlacing] = useState(false);
   const rate = getDeliveryRate(city);
   const shippingCost = rate?.price ?? 0;
   const grandTotal = total + shippingCost;
@@ -33,9 +36,11 @@ export default function CheckoutPage() {
     );
   }
 
-  const placeOrder = () => {
+  const placeOrder = async () => {
     if (!name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate)
       return;
+
+    setPlacing(true);
 
     const order = {
       id: `TFSP-${Date.now()}`,
@@ -50,6 +55,16 @@ export default function CheckoutPage() {
       total: grandTotal,
       customer: { name, phone, city, address, notes },
     };
+
+    try {
+      await addDoc(collection(db, "orders"), {
+        ...order,
+        status: "new",
+        createdAt: serverTimestamp(),
+      });
+    } catch {
+      // Order log is best-effort — don't block checkout if it fails.
+    }
 
     localStorage.setItem("tfsp-last-order", JSON.stringify(order));
     clearCart();
@@ -121,11 +136,16 @@ export default function CheckoutPage() {
           <button
             onClick={placeOrder}
             disabled={
-              !name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate
+              placing ||
+              !name.trim() ||
+              !phone.trim() ||
+              !city.trim() ||
+              !address.trim() ||
+              !rate
             }
             className="mt-6 w-full bg-black px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
-            Place Order
+            {placing ? "Placing Order..." : "Place Order"}
           </button>
         </div>
 

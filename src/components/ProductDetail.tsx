@@ -6,13 +6,13 @@ import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import {
   categoryLabels,
-  getProductsByCategory,
   isInStock,
   type PosterFormat,
   type Product,
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useProduct, useProducts } from "@/context/ProductsContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useReviews } from "@/context/ReviewsContext";
 import { useRecentlyViewed } from "@/context/RecentlyViewedContext";
@@ -96,7 +96,10 @@ function StarRating({
   );
 }
 
-export default function ProductDetail({ product }: { product: Product }) {
+export default function ProductDetail({ product: initialProduct }: { product: Product }) {
+  const { product: liveProduct } = useProduct(initialProduct.id);
+  const { products: allProducts } = useProducts();
+  const product = liveProduct ?? initialProduct;
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
@@ -152,8 +155,8 @@ export default function ProductDetail({ product }: { product: Product }) {
     ? (framedPrice ?? basePrice + FRAME_PRICE)
     : basePrice;
 
-  const relatedProducts = getProductsByCategory(product.category)
-    .filter((p) => p.id !== product.id)
+  const relatedProducts = allProducts
+    .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
   const recentlyViewedFiltered = recentlyViewed.filter(
