@@ -310,7 +310,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           </div>
 
           {images.length > 1 && (
-            <div className="absolute bottom-3 left-3 z-10 flex flex-col gap-2">
+            <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col gap-2 opacity-60">
               {images.map((src, i) => (
                 <button
                   key={src}
