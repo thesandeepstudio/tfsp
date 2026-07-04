@@ -57,8 +57,11 @@ export default function CheckoutPage() {
     };
 
     try {
+      // Firestore rejects `undefined` field values, which optional cart
+      // item fields (size/color/variantLabel) can have — strip them.
+      const firestoreSafeOrder = JSON.parse(JSON.stringify(order));
       await addDoc(collection(db, "orders"), {
-        ...order,
+        ...firestoreSafeOrder,
         status: "new",
         createdAt: serverTimestamp(),
       });
