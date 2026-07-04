@@ -32,7 +32,7 @@ export default function Navbar() {
         <span className="hidden sm:block" />
       </div>
 
-      <div className="flex items-center justify-between border-b border-black/10 px-4 py-2 sm:px-8">
+      <div className="flex items-center justify-between border-b border-black/10 px-4 py-0.5 sm:px-8">
         <button
           className="flex flex-col gap-1.5 md:hidden"
           aria-label="Toggle menu"
