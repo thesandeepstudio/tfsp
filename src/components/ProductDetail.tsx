@@ -173,12 +173,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   const activeImage = images[activeView] ?? images[0];
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleImageScroll = () => {
-    const el = imageContainerRef.current;
-    if (!el || el.clientHeight === 0) return;
-    setActiveView(Math.round(el.scrollTop / el.clientHeight));
-  };
+  const settleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const animateScrollTop = (el: HTMLElement, target: number, duration = 400) => {
     const start = el.scrollTop;
@@ -193,6 +188,24 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
     };
 
     requestAnimationFrame(step);
+  };
+
+  const handleImageScroll = () => {
+    const el = imageContainerRef.current;
+    if (!el || el.clientHeight === 0) return;
+    const index = Math.round(el.scrollTop / el.clientHeight);
+    setActiveView(index);
+
+    // No CSS scroll-snap anymore (it fought with the wheel animation),
+    // so settle touch/trackpad scrolling onto a clean image boundary
+    // once the user stops scrolling.
+    if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+    settleTimeoutRef.current = setTimeout(() => {
+      const target = index * el.clientHeight;
+      if (Math.abs(el.scrollTop - target) > 1) {
+        animateScrollTop(el, target, 200);
+      }
+    }, 120);
   };
 
   const scrollToImage = (i: number) => {
@@ -320,10 +333,10 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           <div
             ref={imageContainerRef}
             onScroll={handleImageScroll}
-            className="no-scrollbar h-full w-full snap-y snap-mandatory overflow-y-scroll"
+            className="no-scrollbar h-full w-full overflow-y-scroll"
           >
             {images.map((src, i) => (
-              <div key={src} className="relative h-full w-full shrink-0 snap-start">
+              <div key={src} className="relative h-full w-full shrink-0">
                 <Image
                   src={`${BASE_PATH}${src}`}
                   alt={product.name}
