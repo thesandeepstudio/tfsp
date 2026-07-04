@@ -256,6 +256,14 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
     </div>
   );
 
+  const trustBadges = (
+    <ul className="mt-6 space-y-1.5 text-xs text-black/60">
+      <li>Cash on delivery, anywhere in Nepal.</li>
+      <li>Easy returns — see our returns policy.</li>
+      <li>Quality checked before it ships.</li>
+    </ul>
+  );
+
   return (
     <section className="mx-auto max-w-[1600px] px-4 py-10 sm:px-8">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
@@ -271,7 +279,10 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
       </nav>
 
       <div className="grid gap-6 lg:grid-cols-[240px_1fr_380px] lg:gap-10">
-        <div className="hidden lg:block">{accordion}</div>
+        <div className="hidden lg:block">
+          {accordion}
+          {trustBadges}
+        </div>
 
         <div
           className={`relative aspect-square w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
@@ -521,9 +532,12 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
 
           <div className="mt-8 lg:hidden">{accordion}</div>
 
-          <div className="mt-8 flex items-stretch gap-2">
-            {isInStock(product) && (
-              <div className="flex items-center border border-black/20">
+          {isInStock(product) && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Quantity
+              </p>
+              <div className="mt-2 flex h-10 w-fit items-center border border-black/20">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   aria-label="Decrease quantity"
@@ -531,7 +545,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                 >
                   −
                 </button>
-                <span className="flex h-full w-10 items-center justify-center text-sm">
+                <span className="flex h-full w-12 items-center justify-center text-sm">
                   {quantity}
                 </span>
                 <button
@@ -542,62 +556,62 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                   +
                 </button>
               </div>
+            </div>
+          )}
+
+          <button
+            disabled={!isInStock(product)}
+            onClick={() => {
+              const variantParts = [
+                selectedFormat && product.formats && product.formats.length > 1
+                  ? selectedFormat.name
+                  : undefined,
+                selectedPaperOption?.name,
+                frameChecked ? "Framed" : undefined,
+              ].filter(Boolean) as string[];
+
+              addItem(
+                {
+                  id: [
+                    product.id,
+                    activeColor,
+                    activeSize,
+                    activeFormatSize,
+                    activePaper,
+                    frameChecked ? "framed" : undefined,
+                  ]
+                    .filter(Boolean)
+                    .join("-"),
+                  productId: product.id,
+                  slug: product.slug,
+                  name: product.name,
+                  image: activeImage ?? product.image ?? "",
+                  price: currentPrice,
+                  size: activeFormatSize ?? activeSize,
+                  color: activeColor,
+                  variantLabel:
+                    variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+                },
+                quantity
+              );
+
+              setAdded(true);
+              setQuantity(1);
+              setTimeout(() => setAdded(false), 1500);
+            }}
+            className="mt-6 flex w-full items-center justify-between bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+          >
+            <span>
+              {!isInStock(product)
+                ? "Out of Stock"
+                : added
+                  ? "Added ✓"
+                  : "Add to Cart"}
+            </span>
+            {isInStock(product) && (
+              <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
             )}
-
-            <button
-              disabled={!isInStock(product)}
-              onClick={() => {
-                const variantParts = [
-                  selectedFormat && product.formats && product.formats.length > 1
-                    ? selectedFormat.name
-                    : undefined,
-                  selectedPaperOption?.name,
-                  frameChecked ? "Framed" : undefined,
-                ].filter(Boolean) as string[];
-
-                addItem(
-                  {
-                    id: [
-                      product.id,
-                      activeColor,
-                      activeSize,
-                      activeFormatSize,
-                      activePaper,
-                      frameChecked ? "framed" : undefined,
-                    ]
-                      .filter(Boolean)
-                      .join("-"),
-                    productId: product.id,
-                    slug: product.slug,
-                    name: product.name,
-                    image: activeImage ?? product.image ?? "",
-                    price: currentPrice,
-                    size: activeFormatSize ?? activeSize,
-                    color: activeColor,
-                    variantLabel:
-                      variantParts.length > 0 ? variantParts.join(" · ") : undefined,
-                  },
-                  quantity
-                );
-
-                setAdded(true);
-                setQuantity(1);
-                setTimeout(() => setAdded(false), 1500);
-              }}
-              className="flex flex-1 items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
-            >
-              <span>
-                {!isInStock(product)
-                  ? "Out of Stock"
-                  : added
-                    ? "Added ✓"
-                    : "Add to Cart"}
-              </span>
-              {isInStock(product) && (
-                <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
-              )}
-            </button>
-          </div>
+          </button>
           {isInStock(product) &&
             product.stockQuantity !== undefined &&
             product.stockQuantity <= 5 && (
@@ -613,11 +627,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
             Go to Checkout
           </Link>
 
-          <ul className="mt-6 space-y-1.5 text-xs text-black/60">
-            <li>Cash on delivery, anywhere in Nepal.</li>
-            <li>Easy returns — see our returns policy.</li>
-            <li>Quality checked before it ships.</li>
-          </ul>
+          <div className="lg:hidden">{trustBadges}</div>
 
           <Link
             href={`/${product.category}`}
