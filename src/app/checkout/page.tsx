@@ -4,18 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { shippingZones } from "@/lib/shipping";
+import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, coupon, discount, total, clearCart } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
-  const [zoneId, setZoneId] = useState(shippingZones[0].id);
-  const zone = shippingZones.find((z) => z.id === zoneId) ?? shippingZones[0];
-  const grandTotal = total + zone.price;
+  const rate = getDeliveryRate(city);
+  const shippingCost = rate?.price ?? 0;
+  const grandTotal = total + shippingCost;
 
   if (items.length === 0) {
     return (
@@ -33,7 +34,8 @@ export default function CheckoutPage() {
   }
 
   const placeOrder = () => {
-    if (!name.trim() || !phone.trim() || !address.trim()) return;
+    if (!name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate)
+      return;
 
     const order = {
       id: `TFSP-${Date.now()}`,
@@ -42,10 +44,11 @@ export default function CheckoutPage() {
       subtotal,
       discount,
       couponCode: coupon?.code ?? null,
-      shippingZone: zone.label,
-      shippingCost: zone.price,
+      shippingZone: rate.location,
+      shippingCost: rate.price,
+      deliveryTime: rate.deliveryTime,
       total: grandTotal,
-      customer: { name, phone, address, notes },
+      customer: { name, phone, city, address, notes },
     };
 
     localStorage.setItem("tfsp-last-order", JSON.stringify(order));
@@ -77,10 +80,32 @@ export default function CheckoutPage() {
               placeholder="Phone number"
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
+            <div>
+              <input
+                type="text"
+                list="delivery-cities"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Delivery city (e.g. Kathmandu)"
+                className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+              />
+              <datalist id="delivery-cities">
+                {deliveryLocations.map((loc) => (
+                  <option key={loc} value={loc} />
+                ))}
+              </datalist>
+              {city.trim().length > 0 && (
+                <p className="mt-1 text-xs text-black/50">
+                  {rate
+                    ? `NPR ${rate.price.toLocaleString()} · ${rate.deliveryTime}`
+                    : "City not found — please pick one from the list."}
+                </p>
+              )}
+            </div>
             <textarea
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Delivery address"
+              placeholder="Street address / landmark"
               rows={3}
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
@@ -91,45 +116,17 @@ export default function CheckoutPage() {
               rows={2}
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-black/60">
-                Delivery Location
-              </p>
-              <div className="mt-2 flex flex-col gap-2">
-                {shippingZones.map((z) => (
-                  <button
-                    key={z.id}
-                    type="button"
-                    onClick={() => setZoneId(z.id)}
-                    className={`flex items-center justify-between border px-3 py-2 text-left text-sm ${
-                      zoneId === z.id
-                        ? "border-black bg-black text-white"
-                        : "border-black/20 hover:border-black"
-                    }`}
-                  >
-                    <span>{z.label}</span>
-                    <span>NPR {z.price.toLocaleString()}</span>
-                  </button>
-                ))}
-              </div>
-              <p className="mt-1 text-xs text-black/50">
-                Exact rates by location coming soon — current pricing is a
-                flat estimate.
-              </p>
-            </div>
           </div>
 
           <button
             onClick={placeOrder}
-            disabled={!name.trim() || !phone.trim() || !address.trim()}
+            disabled={
+              !name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate
+            }
             className="mt-6 w-full bg-black px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             Place Order
           </button>
-          <p className="mt-2 text-xs text-black/50">
-            Cash on delivery. No online payment is processed on this site yet.
-          </p>
         </div>
 
         <div>
@@ -158,8 +155,8 @@ export default function CheckoutPage() {
               </div>
             )}
             <div className="flex justify-between">
-              <span>Shipping ({zone.label})</span>
-              <span>NPR {zone.price.toLocaleString()}</span>
+              <span>Shipping{rate ? ` (${rate.location})` : ""}</span>
+              <span>NPR {shippingCost.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-base font-semibold">
               <span>Total</span>

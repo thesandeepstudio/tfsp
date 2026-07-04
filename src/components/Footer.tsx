@@ -80,7 +80,6 @@ export default function Footer() {
           >
             TikTok
           </a>
-          <a href="#" className="hover:text-black">X</a>
         </div>
       </div>
     </footer>

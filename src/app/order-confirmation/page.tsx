@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { CartItem } from "@/context/CartContext";
+import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
 
 type Order = {
   id: string;
@@ -13,8 +14,15 @@ type Order = {
   couponCode: string | null;
   shippingZone: string;
   shippingCost: number;
+  deliveryTime: string;
   total: number;
-  customer: { name: string; phone: string; address: string; notes: string };
+  customer: {
+    name: string;
+    phone: string;
+    city: string;
+    address: string;
+    notes: string;
+  };
 };
 
 export default function OrderConfirmationPage() {
@@ -85,6 +93,11 @@ export default function OrderConfirmationPage() {
           <span>Shipping ({order.shippingZone})</span>
           <span>NPR {order.shippingCost.toLocaleString()}</span>
         </div>
+        {order.deliveryTime && (
+          <p className="pt-1 text-xs text-black/50">
+            Estimated delivery: {order.deliveryTime}
+          </p>
+        )}
         <div className="flex justify-between text-base font-semibold">
           <span>Total</span>
           <span>NPR {order.total.toLocaleString()}</span>
@@ -97,12 +110,26 @@ export default function OrderConfirmationPage() {
         </p>
         <p className="mt-1">{order.customer.name}</p>
         <p>{order.customer.address}</p>
+        <p>{order.customer.city}</p>
         <p>{order.customer.phone}</p>
       </div>
 
+      <a
+        href={buildOrderWhatsAppLink(order)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 block bg-[#25D366] px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white hover:bg-[#1ebe57]"
+      >
+        Send Order via WhatsApp
+      </a>
+      <p className="mt-2 text-xs text-black/50">
+        Please tap this so we receive your order — it opens WhatsApp with your
+        order details pre-filled.
+      </p>
+
       <Link
         href="/"
-        className="mt-8 inline-block bg-black px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85"
+        className="mt-4 inline-block border border-black/20 px-8 py-3 text-sm font-semibold uppercase tracking-wide hover:border-black"
       >
         Continue Shopping
       </Link>
