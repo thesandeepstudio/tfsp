@@ -278,7 +278,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
         <span className="text-black">{product.name}</span>
       </nav>
 
-      <div className="grid gap-6 lg:grid-cols-[240px_1fr_380px] lg:gap-10">
+      <div className="grid gap-6 lg:grid-cols-[380px_1fr_380px] lg:gap-10">
         <div className="hidden lg:block">
           {accordion}
           {trustBadges}
