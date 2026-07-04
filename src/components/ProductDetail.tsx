@@ -654,7 +654,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                 className="w-32 shrink-0"
               >
                 <div
-                  className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
+                  className={`relative aspect-square w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
                 >
                   {item.image && (
                     <Image
