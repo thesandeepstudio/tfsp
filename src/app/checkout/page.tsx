@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { shippingZones } from "@/lib/shipping";
+import { detectShippingZone } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -13,8 +13,7 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
-  const [zoneId, setZoneId] = useState(shippingZones[0].id);
-  const zone = shippingZones.find((z) => z.id === zoneId) ?? shippingZones[0];
+  const zone = detectShippingZone(address);
   const grandTotal = total + zone.price;
 
   if (items.length === 0) {
@@ -77,13 +76,20 @@ export default function CheckoutPage() {
               placeholder="Phone number"
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
-            <textarea
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Delivery address"
-              rows={3}
-              className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
-            />
+            <div>
+              <textarea
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Delivery address"
+                rows={3}
+                className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
+              />
+              {address.trim().length > 0 && (
+                <p className="mt-1 text-xs text-black/50">
+                  Delivery zone: {zone.label} — NPR {zone.price.toLocaleString()}
+                </p>
+              )}
+            </div>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -91,33 +97,6 @@ export default function CheckoutPage() {
               rows={2}
               className="w-full border border-black/20 px-3 py-2 text-sm outline-none focus:border-black"
             />
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-black/60">
-                Delivery Location
-              </p>
-              <div className="mt-2 flex flex-col gap-2">
-                {shippingZones.map((z) => (
-                  <button
-                    key={z.id}
-                    type="button"
-                    onClick={() => setZoneId(z.id)}
-                    className={`flex items-center justify-between border px-3 py-2 text-left text-sm ${
-                      zoneId === z.id
-                        ? "border-black bg-black text-white"
-                        : "border-black/20 hover:border-black"
-                    }`}
-                  >
-                    <span>{z.label}</span>
-                    <span>NPR {z.price.toLocaleString()}</span>
-                  </button>
-                ))}
-              </div>
-              <p className="mt-1 text-xs text-black/50">
-                Exact rates by location coming soon — current pricing is a
-                flat estimate.
-              </p>
-            </div>
           </div>
 
           <button
@@ -127,9 +106,6 @@ export default function CheckoutPage() {
           >
             Place Order
           </button>
-          <p className="mt-2 text-xs text-black/50">
-            Cash on delivery. No online payment is processed on this site yet.
-          </p>
         </div>
 
         <div>
