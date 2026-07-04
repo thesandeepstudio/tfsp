@@ -46,9 +46,9 @@ export default function Navbar() {
           <Image
             src={`${BASE_PATH}/logo/RED.png`}
             alt="TFSP"
-            width={180}
-            height={180}
-            className="h-45 w-45"
+            width={64}
+            height={64}
+            className="h-16 w-16"
             priority
           />
         </Link>
@@ -78,7 +78,7 @@ export default function Navbar() {
               <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
             </svg>
             {wishlistCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand text-[10px] text-white">
                 {wishlistCount}
               </span>
             )}
