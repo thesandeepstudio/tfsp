@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { CartItem } from "@/context/CartContext";
+import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
 
 type Order = {
   id: string;
@@ -113,9 +114,22 @@ export default function OrderConfirmationPage() {
         <p>{order.customer.phone}</p>
       </div>
 
+      <a
+        href={buildOrderWhatsAppLink(order)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 block bg-[#25D366] px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white hover:bg-[#1ebe57]"
+      >
+        Send Order via WhatsApp
+      </a>
+      <p className="mt-2 text-xs text-black/50">
+        Please tap this so we receive your order — it opens WhatsApp with your
+        order details pre-filled.
+      </p>
+
       <Link
         href="/"
-        className="mt-8 inline-block bg-black px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85"
+        className="mt-4 inline-block border border-black/20 px-8 py-3 text-sm font-semibold uppercase tracking-wide hover:border-black"
       >
         Continue Shopping
       </Link>
