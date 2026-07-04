@@ -299,7 +299,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           {trustBadges}
         </div>
 
-        <div className="lg:px-6">
+        <div className="lg:sticky lg:top-28 lg:self-start lg:px-6">
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
