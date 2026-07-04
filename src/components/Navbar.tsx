@@ -46,9 +46,9 @@ export default function Navbar() {
           <Image
             src={`${BASE_PATH}/logo/RED.png`}
             alt="TFSP"
-            width={140}
-            height={140}
-            className="h-10 w-10"
+            width={180}
+            height={180}
+            className="h-45 w-45"
             priority
           />
         </Link>
@@ -89,7 +89,7 @@ export default function Navbar() {
               <path d="M9 8a3 3 0 016 0" />
             </svg>
             {itemCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand text-[10px] text-white">
                 {itemCount}
               </span>
             )}
