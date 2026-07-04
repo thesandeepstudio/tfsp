@@ -8,7 +8,7 @@ import { useWishlist } from "@/context/WishlistContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
-  Sale: "bg-red-600 text-white",
+  Sale: "bg-brand text-white",
   "Back in Stock": "bg-white text-black border border-black",
 };
 
@@ -66,7 +66,7 @@ export default function ProductCard({ product }: { product: Product }) {
             fill={wishlisted ? "currentColor" : "none"}
             stroke="currentColor"
             strokeWidth="1.5"
-            className={wishlisted ? "text-red-600" : "text-black"}
+            className={wishlisted ? "text-brand" : "text-black"}
           >
             <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
           </svg>

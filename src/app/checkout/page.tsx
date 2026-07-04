@@ -4,19 +4,28 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useProducts } from "@/context/ProductsContext";
 import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
+import { STICKER_MINIMUM_ORDER_QUANTITY, getStickerQuantity } from "@/lib/products";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, coupon, discount, total, clearCart } = useCart();
+  const { products } = useProducts();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [placing, setPlacing] = useState(false);
   const rate = getDeliveryRate(city);
   const shippingCost = rate?.price ?? 0;
   const grandTotal = total + shippingCost;
+  const stickerQuantity = getStickerQuantity(items, products);
+  const belowStickerMinimum =
+    stickerQuantity > 0 && stickerQuantity < STICKER_MINIMUM_ORDER_QUANTITY;
 
   if (items.length === 0) {
     return (
@@ -33,9 +42,18 @@ export default function CheckoutPage() {
     );
   }
 
-  const placeOrder = () => {
-    if (!name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate)
+  const placeOrder = async () => {
+    if (
+      !name.trim() ||
+      !phone.trim() ||
+      !city.trim() ||
+      !address.trim() ||
+      !rate ||
+      belowStickerMinimum
+    )
       return;
+
+    setPlacing(true);
 
     const order = {
       id: `TFSP-${Date.now()}`,
@@ -50,6 +68,20 @@ export default function CheckoutPage() {
       total: grandTotal,
       customer: { name, phone, city, address, notes },
     };
+
+    try {
+      // Firestore rejects `undefined` field values, which optional cart
+      // item fields (size/color/variantLabel) can have — strip them.
+      const firestoreSafeOrder = JSON.parse(JSON.stringify(order));
+      await addDoc(collection(db, "orders"), {
+        ...firestoreSafeOrder,
+        status: "new",
+        createdAt: serverTimestamp(),
+      });
+    } catch (err) {
+      // Order log is best-effort — don't block checkout if it fails.
+      console.error("Failed to log order to Firestore:", err);
+    }
 
     localStorage.setItem("tfsp-last-order", JSON.stringify(order));
     clearCart();
@@ -118,14 +150,28 @@ export default function CheckoutPage() {
             />
           </div>
 
+          {belowStickerMinimum && (
+            <p className="mt-4 text-xs text-red-600">
+              Stickers require a minimum order of {STICKER_MINIMUM_ORDER_QUANTITY}{" "}
+              total units (mix and match designs). You currently have{" "}
+              {stickerQuantity} — add more stickers to your cart to continue.
+            </p>
+          )}
+
           <button
             onClick={placeOrder}
             disabled={
-              !name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate
+              placing ||
+              !name.trim() ||
+              !phone.trim() ||
+              !city.trim() ||
+              !address.trim() ||
+              !rate ||
+              belowStickerMinimum
             }
             className="mt-6 w-full bg-black px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
-            Place Order
+            {placing ? "Placing Order..." : "Place Order"}
           </button>
         </div>
 

@@ -1,8 +1,11 @@
+"use client";
+
 import ProductCard from "@/components/ProductCard";
-import { getProductsByCategory } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 
 export default function MerchPage() {
-  const merchProducts = getProductsByCategory("merch");
+  const { products } = useProducts();
+  const merchProducts = products.filter((p) => p.category === "merch");
 
   return (
     <section className="px-4 py-12 sm:px-8">

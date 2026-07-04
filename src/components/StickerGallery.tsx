@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import { getProductsByCategory } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 import ProductCard from "@/components/ProductCard";
 
 export default function StickerGallery() {
-  const stickers = getProductsByCategory("stickers");
+  const { products } = useProducts();
+  const stickers = products.filter((p) => p.category === "stickers");
 
   return (
     <section id="stickers" className="bg-neutral-50 px-4 py-16 sm:px-8">

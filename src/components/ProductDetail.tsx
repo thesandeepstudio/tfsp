@@ -1,29 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import {
   categoryLabels,
-  getProductsByCategory,
   isInStock,
   type PosterFormat,
   type Product,
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useProduct, useProducts } from "@/context/ProductsContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useReviews } from "@/context/ReviewsContext";
 import { useRecentlyViewed } from "@/context/RecentlyViewedContext";
 
 const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   New: "bg-black text-white",
-  Sale: "bg-red-600 text-white",
+  Sale: "bg-brand text-white",
   "Back in Stock": "bg-white text-black border border-black",
 };
 
-const views = ["Front", "Back", "Detail", "Worn"];
 const FRAME_PRICE = 300;
 
 function firstSizeFor(format: PosterFormat) {
@@ -96,7 +95,10 @@ function StarRating({
   );
 }
 
-export default function ProductDetail({ product }: { product: Product }) {
+export default function ProductDetail({ product: initialProduct }: { product: Product }) {
+  const { product: liveProduct } = useProduct(initialProduct.id);
+  const { products: allProducts } = useProducts();
+  const product = liveProduct ?? initialProduct;
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
@@ -110,6 +112,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [frameChecked, setFrameChecked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product.id);
@@ -151,9 +154,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const currentPrice = frameChecked
     ? (framedPrice ?? basePrice + FRAME_PRICE)
     : basePrice;
+  const maxQuantity = product.stockQuantity ?? Infinity;
 
-  const relatedProducts = getProductsByCategory(product.category)
-    .filter((p) => p.id !== product.id)
+  const relatedProducts = allProducts
+    .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
   const recentlyViewedFiltered = recentlyViewed.filter(
@@ -168,8 +172,128 @@ export default function ProductDetail({ product }: { product: Product }) {
         : [];
   const activeImage = images[activeView] ?? images[0];
 
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const settleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const animateScrollTop = (el: HTMLElement, target: number, duration = 400) => {
+    const start = el.scrollTop;
+    const change = target - start;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.scrollTop = start + change * eased;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const handleImageScroll = () => {
+    const el = imageContainerRef.current;
+    if (!el || el.clientHeight === 0) return;
+    const index = Math.round(el.scrollTop / el.clientHeight);
+    setActiveView(index);
+
+    // No CSS scroll-snap anymore (it fought with the wheel animation),
+    // so settle touch/trackpad scrolling onto a clean image boundary
+    // once the user stops scrolling.
+    if (settleTimeoutRef.current) clearTimeout(settleTimeoutRef.current);
+    settleTimeoutRef.current = setTimeout(() => {
+      const target = index * el.clientHeight;
+      if (Math.abs(el.scrollTop - target) > 1) {
+        animateScrollTop(el, target, 200);
+      }
+    }, 120);
+  };
+
+  const scrollToImage = (i: number) => {
+    const el = imageContainerRef.current;
+    if (el) {
+      animateScrollTop(el, i * el.clientHeight);
+    }
+    setActiveView(i);
+  };
+
+  const imageCount = images.length;
+  const wheelCooldownRef = useRef(false);
+
+  useEffect(() => {
+    const el = imageContainerRef.current;
+    if (!el || imageCount <= 1) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (wheelCooldownRef.current) {
+        e.preventDefault();
+        return;
+      }
+
+      const current = Math.round(el.scrollTop / el.clientHeight);
+      const next =
+        e.deltaY > 0
+          ? Math.min(imageCount - 1, current + 1)
+          : Math.max(0, current - 1);
+
+      // Already at the first/last image — let the page scroll normally
+      // instead of trapping the scroll gesture.
+      if (next === current) return;
+
+      e.preventDefault();
+      wheelCooldownRef.current = true;
+      animateScrollTop(el, next * el.clientHeight);
+      setActiveView(next);
+      setTimeout(() => {
+        wheelCooldownRef.current = false;
+      }, 500);
+    };
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [imageCount]);
+
+  const accordion = (
+    <div className="border-t border-black/10">
+      <AccordionItem
+        title="Details"
+        isOpen={openSection === "details"}
+        onToggle={() =>
+          setOpenSection(openSection === "details" ? null : "details")
+        }
+      >
+        {product.description}
+      </AccordionItem>
+      <AccordionItem
+        title="Shipping"
+        isOpen={openSection === "shipping"}
+        onToggle={() =>
+          setOpenSection(openSection === "shipping" ? null : "shipping")
+        }
+      >
+        Orders ship within 2-3 business days. See our shipping page for full details.
+      </AccordionItem>
+      <AccordionItem
+        title="Size Guide"
+        isOpen={openSection === "size-guide"}
+        onToggle={() =>
+          setOpenSection(openSection === "size-guide" ? null : "size-guide")
+        }
+      >
+        Check the size guide before ordering — reach out if you need help choosing.
+      </AccordionItem>
+    </div>
+  );
+
+  const trustBadges = (
+    <ul className="mt-6 space-y-1.5 text-xs text-black/60">
+      <li>Cash on delivery, anywhere in Nepal.</li>
+      <li>Easy returns — see our returns policy.</li>
+      <li>Quality checked before it ships.</li>
+    </ul>
+  );
+
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10 sm:px-8">
+    <section className="mx-auto max-w-[1600px] px-4 py-10 sm:px-8">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
         <Link href="/" className="hover:text-black">
           Home
@@ -182,33 +306,13 @@ export default function ProductDetail({ product }: { product: Product }) {
         <span className="text-black">{product.name}</span>
       </nav>
 
-      <div className="grid gap-6 lg:grid-cols-[80px_1fr_380px] lg:gap-10">
-        <div className="hidden gap-3 lg:flex lg:flex-col">
-          {images.length > 0
-            ? images.map((src, i) => (
-                <button
-                  key={src}
-                  onClick={() => setActiveView(i)}
-                  aria-label={`View ${i + 1}`}
-                  className={`relative aspect-square w-full overflow-hidden border ${
-                    activeView === i ? "border-black" : "border-transparent"
-                  }`}
-                >
-                  <Image src={`${BASE_PATH}${src}`} alt="" fill sizes="80px" className="object-cover" />
-                </button>
-              ))
-            : views.map((view, i) => (
-                <button
-                  key={view}
-                  onClick={() => setActiveView(i)}
-                  aria-label={view}
-                  className={`aspect-square w-full overflow-hidden border bg-linear-to-br ${activeGradient} ${
-                    activeView === i ? "border-black" : "border-transparent"
-                  }`}
-                />
-              ))}
+      <div className="grid gap-6 lg:grid-cols-[380px_minmax(0,1.3fr)_380px] lg:gap-10">
+        <div className="hidden lg:block">
+          {accordion}
+          {trustBadges}
         </div>
 
+        <div className="lg:sticky lg:top-28 lg:self-start lg:px-6">
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
@@ -225,16 +329,43 @@ export default function ProductDetail({ product }: { product: Product }) {
               </span>
             )
           )}
-          {activeImage && (
-            <Image
-              src={`${BASE_PATH}${activeImage}`}
-              alt={product.name}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              priority
-            />
+
+          <div
+            ref={imageContainerRef}
+            onScroll={handleImageScroll}
+            className="no-scrollbar h-full w-full overflow-y-scroll"
+          >
+            {images.map((src, i) => (
+              <div key={src} className="relative h-full w-full shrink-0">
+                <Image
+                  src={`${BASE_PATH}${src}`}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+          </div>
+
+          {images.length > 1 && (
+            <div className="absolute left-3 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2 opacity-60">
+              {images.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => scrollToImage(i)}
+                  aria-label={`View ${i + 1}`}
+                  className={`relative h-14 w-14 overflow-hidden border-2 bg-white ${
+                    activeView === i ? "border-black" : "border-white"
+                  }`}
+                >
+                  <Image src={`${BASE_PATH}${src}`} alt="" fill sizes="56px" className="object-cover" />
+                </button>
+              ))}
+            </div>
           )}
+        </div>
         </div>
 
         <div>
@@ -263,7 +394,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 fill={wishlisted ? "currentColor" : "none"}
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className={wishlisted ? "text-red-600" : "text-black"}
+                className={wishlisted ? "text-brand" : "text-black"}
               >
                 <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
               </svg>
@@ -429,35 +560,34 @@ export default function ProductDetail({ product }: { product: Product }) {
             </div>
           )}
 
-          <div className="mt-8 border-t border-black/10">
-            <AccordionItem
-              title="Details"
-              isOpen={openSection === "details"}
-              onToggle={() =>
-                setOpenSection(openSection === "details" ? null : "details")
-              }
-            >
-              {product.description}
-            </AccordionItem>
-            <AccordionItem
-              title="Shipping"
-              isOpen={openSection === "shipping"}
-              onToggle={() =>
-                setOpenSection(openSection === "shipping" ? null : "shipping")
-              }
-            >
-              Orders ship within 2-3 business days. See our shipping page for full details.
-            </AccordionItem>
-            <AccordionItem
-              title="Size Guide"
-              isOpen={openSection === "size-guide"}
-              onToggle={() =>
-                setOpenSection(openSection === "size-guide" ? null : "size-guide")
-              }
-            >
-              Check the size guide before ordering — reach out if you need help choosing.
-            </AccordionItem>
-          </div>
+          <div className="mt-8 lg:hidden">{accordion}</div>
+
+          {isInStock(product) && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Quantity
+              </p>
+              <div className="mt-2 flex h-10 w-fit items-center border border-black/20">
+                <button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  aria-label="Decrease quantity"
+                  className="flex h-full w-10 items-center justify-center hover:bg-black/5"
+                >
+                  −
+                </button>
+                <span className="flex h-full w-12 items-center justify-center text-sm">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+                  aria-label="Increase quantity"
+                  className="flex h-full w-10 items-center justify-center hover:bg-black/5"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          )}
 
           <button
             disabled={!isInStock(product)}
@@ -470,32 +600,36 @@ export default function ProductDetail({ product }: { product: Product }) {
                 frameChecked ? "Framed" : undefined,
               ].filter(Boolean) as string[];
 
-              addItem({
-                id: [
-                  product.id,
-                  activeColor,
-                  activeSize,
-                  activeFormatSize,
-                  activePaper,
-                  frameChecked ? "framed" : undefined,
-                ]
-                  .filter(Boolean)
-                  .join("-"),
-                productId: product.id,
-                slug: product.slug,
-                name: product.name,
-                image: activeImage ?? product.image ?? "",
-                price: currentPrice,
-                size: activeFormatSize ?? activeSize,
-                color: activeColor,
-                variantLabel:
-                  variantParts.length > 0 ? variantParts.join(" · ") : undefined,
-              });
+              addItem(
+                {
+                  id: [
+                    product.id,
+                    activeColor,
+                    activeSize,
+                    activeFormatSize,
+                    activePaper,
+                    frameChecked ? "framed" : undefined,
+                  ]
+                    .filter(Boolean)
+                    .join("-"),
+                  productId: product.id,
+                  slug: product.slug,
+                  name: product.name,
+                  image: activeImage ?? product.image ?? "",
+                  price: currentPrice,
+                  size: activeFormatSize ?? activeSize,
+                  color: activeColor,
+                  variantLabel:
+                    variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+                },
+                quantity
+              );
 
               setAdded(true);
+              setQuantity(1);
               setTimeout(() => setAdded(false), 1500);
             }}
-            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+            className="mt-6 flex w-full items-center justify-between bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             <span>
               {!isInStock(product)
@@ -505,7 +639,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   : "Add to Cart"}
             </span>
             {isInStock(product) && (
-              <span>NPR {currentPrice.toLocaleString()}</span>
+              <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
             )}
           </button>
           {isInStock(product) &&
@@ -515,6 +649,15 @@ export default function ProductDetail({ product }: { product: Product }) {
                 Only {product.stockQuantity} left in stock
               </p>
             )}
+
+          <Link
+            href="/checkout"
+            className="mt-3 block border border-black/20 px-5 py-3 text-center text-sm font-semibold uppercase tracking-wide hover:border-black"
+          >
+            Go to Checkout
+          </Link>
+
+          <div className="lg:hidden">{trustBadges}</div>
 
           <Link
             href={`/${product.category}`}

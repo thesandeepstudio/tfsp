@@ -593,7 +593,7 @@ export const products: Product[] = [
     id: "s1",
     slug: "logo-die-cut-sticker",
     name: "Logo Die-Cut Sticker",
-    price: 100,
+    price: 40,
     category: "stickers",
     tag: "New",
     gradient: gradients[3],
@@ -603,7 +603,7 @@ export const products: Product[] = [
     id: "s2",
     slug: "holographic-sticker-pack",
     name: "Holographic Sticker Pack",
-    price: 250,
+    price: 30,
     category: "stickers",
     gradient: gradients[4],
     description: "A pack of five holographic stickers that shift color as the light moves.",
@@ -612,7 +612,7 @@ export const products: Product[] = [
     id: "s3",
     slug: "sticker-sheet-vol-1",
     name: "Sticker Sheet Vol. 1",
-    price: 180,
+    price: 40,
     category: "stickers",
     gradient: gradients[5],
     description: "A full A5 sheet of mixed icon stickers, matte finish, easy peel backing.",
@@ -621,7 +621,7 @@ export const products: Product[] = [
     id: "s4",
     slug: "mini-icon-pack",
     name: "Mini Icon Pack",
-    price: 150,
+    price: 30,
     category: "stickers",
     tag: "Back in Stock",
     gradient: gradients[6],
@@ -631,7 +631,7 @@ export const products: Product[] = [
     id: "s5",
     slug: "glow-in-dark-sticker",
     name: "Glow-in-the-Dark Sticker",
-    price: 200,
+    price: 40,
     category: "stickers",
     gradient: gradients[7],
     description: "A single glow-in-the-dark vinyl sticker that charges under any light source.",
@@ -640,7 +640,7 @@ export const products: Product[] = [
     id: "s6",
     slug: "vinyl-bumper-sticker",
     name: "Vinyl Bumper Sticker",
-    price: 220,
+    price: 30,
     category: "stickers",
     tag: "Sale",
     gradient: gradients[8],
@@ -650,7 +650,7 @@ export const products: Product[] = [
     id: "s7",
     slug: "washi-sticker-roll",
     name: "Washi Sticker Roll",
-    price: 300,
+    price: 40,
     category: "stickers",
     gradient: gradients[0],
     description: "A roll of 50 washi-paper stickers for journaling and planners.",
@@ -659,7 +659,7 @@ export const products: Product[] = [
     id: "s8",
     slug: "enamel-look-sticker-combo",
     name: "Enamel-Look Sticker Combo",
-    price: 280,
+    price: 30,
     category: "stickers",
     gradient: gradients[1],
     description: "A combo pack pairing a glossy enamel-look sticker with two matte companions.",
@@ -668,7 +668,7 @@ export const products: Product[] = [
     id: "s9",
     slug: "sticker-bomb-pack",
     name: "Sticker Bomb Pack",
-    price: 350,
+    price: 40,
     category: "stickers",
     tag: "New",
     gradient: gradients[2],
@@ -686,4 +686,19 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 export function getProductsByTag(tag: NonNullable<Product["tag"]>): Product[] {
   return products.filter((product) => product.tag === tag);
+}
+
+export const STICKER_MINIMUM_ORDER_QUANTITY = 15;
+
+export function getStickerQuantity(
+  items: { productId: string; quantity: number }[],
+  allProducts: Product[]
+): number {
+  const stickerIds = new Set(
+    allProducts.filter((p) => p.category === "stickers").map((p) => p.id)
+  );
+  return items.reduce(
+    (sum, item) => (stickerIds.has(item.productId) ? sum + item.quantity : sum),
+    0
+  );
 }

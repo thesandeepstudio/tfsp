@@ -1,8 +1,11 @@
+"use client";
+
 import ProductCard from "@/components/ProductCard";
-import { getProductsByTag } from "@/lib/products";
+import { useProducts } from "@/context/ProductsContext";
 
 export default function SalePage() {
-  const saleProducts = getProductsByTag("Sale");
+  const { products } = useProducts();
+  const saleProducts = products.filter((p) => p.tag === "Sale");
 
   return (
     <section className="px-4 py-12 sm:px-8">

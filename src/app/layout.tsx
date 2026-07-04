@@ -6,6 +6,7 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { ReviewsProvider } from "@/context/ReviewsContext";
 import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
+import { ProductsProvider } from "@/context/ProductsContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,17 +42,19 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-black">
-        <CartProvider>
-          <WishlistProvider>
-            <ReviewsProvider>
-              <RecentlyViewedProvider>
-                <Navbar />
-                <main className="flex-1">{children}</main>
-                <Footer />
-              </RecentlyViewedProvider>
-            </ReviewsProvider>
-          </WishlistProvider>
-        </CartProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <ReviewsProvider>
+                <RecentlyViewedProvider>
+                  <Navbar />
+                  <main className="flex-1">{children}</main>
+                  <Footer />
+                </RecentlyViewedProvider>
+              </ReviewsProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </ProductsProvider>
       </body>
     </html>
   );

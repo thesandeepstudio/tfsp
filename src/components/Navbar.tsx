@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { BASE_PATH } from "@/lib/base-path";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import SearchOverlay from "@/components/SearchOverlay";
@@ -30,7 +32,7 @@ export default function Navbar() {
         <span className="hidden sm:block" />
       </div>
 
-      <div className="flex items-center justify-between border-b border-black/10 px-4 py-4 sm:px-8">
+      <div className="flex items-center justify-between border-b border-black/10 px-4 py-0.5 sm:px-8">
         <button
           className="flex flex-col gap-1.5 md:hidden"
           aria-label="Toggle menu"
@@ -40,11 +42,15 @@ export default function Navbar() {
           <span className="h-0.5 w-6 bg-black" />
         </button>
 
-        <Link
-          href="/"
-          className="font-display text-3xl tracking-widest"
-        >
-          TFSP
+        <Link href="/" aria-label="TFSP home" className="shrink-0">
+          <Image
+            src={`${BASE_PATH}/logo/RED.png`}
+            alt="TFSP"
+            width={64}
+            height={64}
+            className="h-16 w-16"
+            priority
+          />
         </Link>
 
         <nav className="hidden gap-8 text-sm font-medium uppercase tracking-wide md:flex">
@@ -72,7 +78,7 @@ export default function Navbar() {
               <path d="M12 21s-7.5-4.6-10-9.1C.5 8.4 2.3 5 6 5c2 0 3.6 1.2 6 3.6C14.4 6.2 16 5 18 5c3.7 0 5.5 3.4 4 6.9-2.5 4.5-10 9.1-10 9.1z" />
             </svg>
             {wishlistCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand text-[10px] text-white">
                 {wishlistCount}
               </span>
             )}
@@ -83,7 +89,7 @@ export default function Navbar() {
               <path d="M9 8a3 3 0 016 0" />
             </svg>
             {itemCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand text-[10px] text-white">
                 {itemCount}
               </span>
             )}
