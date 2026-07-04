@@ -687,3 +687,18 @@ export function getProductBySlug(slug: string): Product | undefined {
 export function getProductsByTag(tag: NonNullable<Product["tag"]>): Product[] {
   return products.filter((product) => product.tag === tag);
 }
+
+export const STICKER_MINIMUM_ORDER_QUANTITY = 15;
+
+export function getStickerQuantity(
+  items: { productId: string; quantity: number }[],
+  allProducts: Product[]
+): number {
+  const stickerIds = new Set(
+    allProducts.filter((p) => p.category === "stickers").map((p) => p.id)
+  );
+  return items.reduce(
+    (sum, item) => (stickerIds.has(item.productId) ? sum + item.quantity : sum),
+    0
+  );
+}

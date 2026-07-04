@@ -4,13 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useProducts } from "@/context/ProductsContext";
 import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
+import { STICKER_MINIMUM_ORDER_QUANTITY, getStickerQuantity } from "@/lib/products";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, coupon, discount, total, clearCart } = useCart();
+  const { products } = useProducts();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
@@ -20,6 +23,9 @@ export default function CheckoutPage() {
   const rate = getDeliveryRate(city);
   const shippingCost = rate?.price ?? 0;
   const grandTotal = total + shippingCost;
+  const stickerQuantity = getStickerQuantity(items, products);
+  const belowStickerMinimum =
+    stickerQuantity > 0 && stickerQuantity < STICKER_MINIMUM_ORDER_QUANTITY;
 
   if (items.length === 0) {
     return (
@@ -37,7 +43,14 @@ export default function CheckoutPage() {
   }
 
   const placeOrder = async () => {
-    if (!name.trim() || !phone.trim() || !city.trim() || !address.trim() || !rate)
+    if (
+      !name.trim() ||
+      !phone.trim() ||
+      !city.trim() ||
+      !address.trim() ||
+      !rate ||
+      belowStickerMinimum
+    )
       return;
 
     setPlacing(true);
@@ -137,6 +150,14 @@ export default function CheckoutPage() {
             />
           </div>
 
+          {belowStickerMinimum && (
+            <p className="mt-4 text-xs text-red-600">
+              Stickers require a minimum order of {STICKER_MINIMUM_ORDER_QUANTITY}{" "}
+              total units (mix and match designs). You currently have{" "}
+              {stickerQuantity} — add more stickers to your cart to continue.
+            </p>
+          )}
+
           <button
             onClick={placeOrder}
             disabled={
@@ -145,7 +166,8 @@ export default function CheckoutPage() {
               !phone.trim() ||
               !city.trim() ||
               !address.trim() ||
-              !rate
+              !rate ||
+              belowStickerMinimum
             }
             className="mt-6 w-full bg-black px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >

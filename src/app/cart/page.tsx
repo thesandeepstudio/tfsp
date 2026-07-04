@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
 import { useCart } from "@/context/CartContext";
+import { useProducts } from "@/context/ProductsContext";
+import { STICKER_MINIMUM_ORDER_QUANTITY, getStickerQuantity } from "@/lib/products";
 
 export default function CartPage() {
   const {
@@ -19,7 +21,12 @@ export default function CartPage() {
     applyCoupon,
     removeCoupon,
   } = useCart();
+  const { products } = useProducts();
   const [couponInput, setCouponInput] = useState("");
+
+  const stickerQuantity = getStickerQuantity(items, products);
+  const belowStickerMinimum =
+    stickerQuantity > 0 && stickerQuantity < STICKER_MINIMUM_ORDER_QUANTITY;
 
   if (items.length === 0) {
     return (
@@ -153,12 +160,25 @@ export default function CartPage() {
         Shipping is calculated at checkout.
       </p>
 
-      <Link
-        href="/checkout"
-        className="mt-6 block bg-black px-5 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85"
-      >
-        Proceed to Checkout
-      </Link>
+      {belowStickerMinimum && (
+        <p className="mt-3 text-xs text-red-600">
+          Stickers require a minimum order of {STICKER_MINIMUM_ORDER_QUANTITY} total units
+          (mix and match designs). You currently have {stickerQuantity}.
+        </p>
+      )}
+
+      {belowStickerMinimum ? (
+        <span className="mt-6 block cursor-not-allowed bg-black/30 px-5 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white">
+          Proceed to Checkout
+        </span>
+      ) : (
+        <Link
+          href="/checkout"
+          className="mt-6 block bg-black px-5 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white hover:bg-black/85"
+        >
+          Proceed to Checkout
+        </Link>
+      )}
       <Link
         href="/"
         className="mt-4 block text-center text-sm underline hover:opacity-70"
