@@ -196,8 +196,10 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
     if (!el || imageCount <= 1) return;
 
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (wheelCooldownRef.current) return;
+      if (wheelCooldownRef.current) {
+        e.preventDefault();
+        return;
+      }
 
       const current = Math.round(el.scrollTop / el.clientHeight);
       const next =
@@ -205,8 +207,11 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           ? Math.min(imageCount - 1, current + 1)
           : Math.max(0, current - 1);
 
+      // Already at the first/last image — let the page scroll normally
+      // instead of trapping the scroll gesture.
       if (next === current) return;
 
+      e.preventDefault();
       wheelCooldownRef.current = true;
       el.scrollTo({ top: next * el.clientHeight, behavior: "smooth" });
       setActiveView(next);
