@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
@@ -23,7 +23,6 @@ const tagStyles: Record<NonNullable<Product["tag"]>, string> = {
   "Back in Stock": "bg-white text-black border border-black",
 };
 
-const views = ["Front", "Back", "Detail", "Worn"];
 const FRAME_PRICE = 300;
 
 function firstSizeFor(format: PosterFormat) {
@@ -173,8 +172,56 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
         : [];
   const activeImage = images[activeView] ?? images[0];
 
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleImageScroll = () => {
+    const el = imageContainerRef.current;
+    if (!el || el.clientHeight === 0) return;
+    setActiveView(Math.round(el.scrollTop / el.clientHeight));
+  };
+
+  const scrollToImage = (i: number) => {
+    const el = imageContainerRef.current;
+    if (el) {
+      el.scrollTo({ top: i * el.clientHeight, behavior: "smooth" });
+    }
+    setActiveView(i);
+  };
+
+  const accordion = (
+    <div className="border-t border-black/10">
+      <AccordionItem
+        title="Details"
+        isOpen={openSection === "details"}
+        onToggle={() =>
+          setOpenSection(openSection === "details" ? null : "details")
+        }
+      >
+        {product.description}
+      </AccordionItem>
+      <AccordionItem
+        title="Shipping"
+        isOpen={openSection === "shipping"}
+        onToggle={() =>
+          setOpenSection(openSection === "shipping" ? null : "shipping")
+        }
+      >
+        Orders ship within 2-3 business days. See our shipping page for full details.
+      </AccordionItem>
+      <AccordionItem
+        title="Size Guide"
+        isOpen={openSection === "size-guide"}
+        onToggle={() =>
+          setOpenSection(openSection === "size-guide" ? null : "size-guide")
+        }
+      >
+        Check the size guide before ordering — reach out if you need help choosing.
+      </AccordionItem>
+    </div>
+  );
+
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10 sm:px-8">
+    <section className="px-4 py-10 sm:px-8">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
         <Link href="/" className="hover:text-black">
           Home
@@ -187,32 +234,8 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
         <span className="text-black">{product.name}</span>
       </nav>
 
-      <div className="grid gap-6 lg:grid-cols-[80px_1fr_380px] lg:gap-10">
-        <div className="hidden gap-3 lg:flex lg:flex-col">
-          {images.length > 0
-            ? images.map((src, i) => (
-                <button
-                  key={src}
-                  onClick={() => setActiveView(i)}
-                  aria-label={`View ${i + 1}`}
-                  className={`relative aspect-square w-full overflow-hidden border ${
-                    activeView === i ? "border-black" : "border-transparent"
-                  }`}
-                >
-                  <Image src={`${BASE_PATH}${src}`} alt="" fill sizes="80px" className="object-cover" />
-                </button>
-              ))
-            : views.map((view, i) => (
-                <button
-                  key={view}
-                  onClick={() => setActiveView(i)}
-                  aria-label={view}
-                  className={`aspect-square w-full overflow-hidden border bg-linear-to-br ${activeGradient} ${
-                    activeView === i ? "border-black" : "border-transparent"
-                  }`}
-                />
-              ))}
-        </div>
+      <div className="grid gap-6 lg:grid-cols-[240px_1fr_380px] lg:gap-10">
+        <div className="hidden lg:block">{accordion}</div>
 
         <div
           className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
@@ -230,15 +253,41 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
               </span>
             )
           )}
-          {activeImage && (
-            <Image
-              src={`${BASE_PATH}${activeImage}`}
-              alt={product.name}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              priority
-            />
+
+          <div
+            ref={imageContainerRef}
+            onScroll={handleImageScroll}
+            className="no-scrollbar h-full w-full snap-y snap-mandatory overflow-y-scroll"
+          >
+            {images.map((src, i) => (
+              <div key={src} className="relative h-full w-full shrink-0 snap-start">
+                <Image
+                  src={`${BASE_PATH}${src}`}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+          </div>
+
+          {images.length > 1 && (
+            <div className="absolute bottom-3 left-3 z-10 flex flex-col gap-2">
+              {images.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => scrollToImage(i)}
+                  aria-label={`View ${i + 1}`}
+                  className={`relative h-14 w-14 overflow-hidden border-2 bg-white ${
+                    activeView === i ? "border-black" : "border-white"
+                  }`}
+                >
+                  <Image src={`${BASE_PATH}${src}`} alt="" fill sizes="56px" className="object-cover" />
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
@@ -434,111 +483,85 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
             </div>
           )}
 
-          <div className="mt-8 border-t border-black/10">
-            <AccordionItem
-              title="Details"
-              isOpen={openSection === "details"}
-              onToggle={() =>
-                setOpenSection(openSection === "details" ? null : "details")
-              }
-            >
-              {product.description}
-            </AccordionItem>
-            <AccordionItem
-              title="Shipping"
-              isOpen={openSection === "shipping"}
-              onToggle={() =>
-                setOpenSection(openSection === "shipping" ? null : "shipping")
-              }
-            >
-              Orders ship within 2-3 business days. See our shipping page for full details.
-            </AccordionItem>
-            <AccordionItem
-              title="Size Guide"
-              isOpen={openSection === "size-guide"}
-              onToggle={() =>
-                setOpenSection(openSection === "size-guide" ? null : "size-guide")
-              }
-            >
-              Check the size guide before ordering — reach out if you need help choosing.
-            </AccordionItem>
-          </div>
+          <div className="mt-8 lg:hidden">{accordion}</div>
 
-          {isInStock(product) && (
-            <div className="mt-8 flex items-center border border-black/20">
-              <button
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                aria-label="Decrease quantity"
-                className="flex h-11 w-11 items-center justify-center text-lg hover:bg-black/5"
-              >
-                −
-              </button>
-              <span className="flex h-11 flex-1 items-center justify-center text-sm">
-                {quantity}
-              </span>
-              <button
-                onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
-                aria-label="Increase quantity"
-                className="flex h-11 w-11 items-center justify-center text-lg hover:bg-black/5"
-              >
-                +
-              </button>
-            </div>
-          )}
-
-          <button
-            disabled={!isInStock(product)}
-            onClick={() => {
-              const variantParts = [
-                selectedFormat && product.formats && product.formats.length > 1
-                  ? selectedFormat.name
-                  : undefined,
-                selectedPaperOption?.name,
-                frameChecked ? "Framed" : undefined,
-              ].filter(Boolean) as string[];
-
-              addItem(
-                {
-                  id: [
-                    product.id,
-                    activeColor,
-                    activeSize,
-                    activeFormatSize,
-                    activePaper,
-                    frameChecked ? "framed" : undefined,
-                  ]
-                    .filter(Boolean)
-                    .join("-"),
-                  productId: product.id,
-                  slug: product.slug,
-                  name: product.name,
-                  image: activeImage ?? product.image ?? "",
-                  price: currentPrice,
-                  size: activeFormatSize ?? activeSize,
-                  color: activeColor,
-                  variantLabel:
-                    variantParts.length > 0 ? variantParts.join(" · ") : undefined,
-                },
-                quantity
-              );
-
-              setAdded(true);
-              setQuantity(1);
-              setTimeout(() => setAdded(false), 1500);
-            }}
-            className="mt-3 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
-          >
-            <span>
-              {!isInStock(product)
-                ? "Out of Stock"
-                : added
-                  ? "Added ✓"
-                  : "Add to Cart"}
-            </span>
+          <div className="mt-8 flex items-stretch gap-2">
             {isInStock(product) && (
-              <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
+              <div className="flex items-center border border-black/20">
+                <button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  aria-label="Decrease quantity"
+                  className="flex h-full w-10 items-center justify-center hover:bg-black/5"
+                >
+                  −
+                </button>
+                <span className="flex h-full w-10 items-center justify-center text-sm">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+                  aria-label="Increase quantity"
+                  className="flex h-full w-10 items-center justify-center hover:bg-black/5"
+                >
+                  +
+                </button>
+              </div>
             )}
-          </button>
+
+            <button
+              disabled={!isInStock(product)}
+              onClick={() => {
+                const variantParts = [
+                  selectedFormat && product.formats && product.formats.length > 1
+                    ? selectedFormat.name
+                    : undefined,
+                  selectedPaperOption?.name,
+                  frameChecked ? "Framed" : undefined,
+                ].filter(Boolean) as string[];
+
+                addItem(
+                  {
+                    id: [
+                      product.id,
+                      activeColor,
+                      activeSize,
+                      activeFormatSize,
+                      activePaper,
+                      frameChecked ? "framed" : undefined,
+                    ]
+                      .filter(Boolean)
+                      .join("-"),
+                    productId: product.id,
+                    slug: product.slug,
+                    name: product.name,
+                    image: activeImage ?? product.image ?? "",
+                    price: currentPrice,
+                    size: activeFormatSize ?? activeSize,
+                    color: activeColor,
+                    variantLabel:
+                      variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+                  },
+                  quantity
+                );
+
+                setAdded(true);
+                setQuantity(1);
+                setTimeout(() => setAdded(false), 1500);
+              }}
+              className="flex flex-1 items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+            >
+              <span>
+                {!isInStock(product)
+                  ? "Out of Stock"
+                  : added
+                    ? "Added ✓"
+                    : "Add to Cart"}
+              </span>
+              {isInStock(product) && (
+                <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
+              )}
+            </button>
+          </div>
           {isInStock(product) &&
             product.stockQuantity !== undefined &&
             product.stockQuantity <= 5 && (
@@ -553,6 +576,12 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           >
             Go to Checkout
           </Link>
+
+          <ul className="mt-6 space-y-1.5 text-xs text-black/60">
+            <li>Cash on delivery, anywhere in Nepal.</li>
+            <li>Easy returns — see our returns policy.</li>
+            <li>Quality checked before it ships.</li>
+          </ul>
 
           <Link
             href={`/${product.category}`}
