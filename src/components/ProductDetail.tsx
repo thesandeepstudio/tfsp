@@ -301,7 +301,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
 
         <div className="lg:px-6">
         <div
-          className={`relative aspect-square w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
+          className={`relative aspect-4/5 w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
         >
           {!isInStock(product) ? (
             <span className="absolute left-3 top-3 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
@@ -681,7 +681,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                 className="w-32 shrink-0"
               >
                 <div
-                  className={`relative aspect-square w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
+                  className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${item.gradient}`}
                 >
                   {item.image && (
                     <Image

@@ -26,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div
-        className={`relative aspect-square w-full overflow-hidden bg-linear-to-br ${product.gradient}`}
+        className={`relative aspect-4/5 w-full overflow-hidden bg-linear-to-br ${product.gradient}`}
       >
         {!inStock ? (
           <span className="absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black">
