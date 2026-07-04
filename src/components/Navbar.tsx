@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { BASE_PATH } from "@/lib/base-path";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import SearchOverlay from "@/components/SearchOverlay";
@@ -40,11 +42,15 @@ export default function Navbar() {
           <span className="h-0.5 w-6 bg-black" />
         </button>
 
-        <Link
-          href="/"
-          className="font-display text-3xl tracking-widest"
-        >
-          TFSP
+        <Link href="/" aria-label="TFSP home" className="shrink-0">
+          <Image
+            src={`${BASE_PATH}/logo/RED.png`}
+            alt="TFSP"
+            width={140}
+            height={140}
+            className="h-10 w-10"
+            priority
+          />
         </Link>
 
         <nav className="hidden gap-8 text-sm font-medium uppercase tracking-wide md:flex">
