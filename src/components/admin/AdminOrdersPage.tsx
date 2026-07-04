@@ -57,7 +57,10 @@ export default function AdminOrdersPage() {
         );
         setLoading(false);
       },
-      () => setLoading(false)
+      (err) => {
+        console.error("Failed to load orders from Firestore:", err);
+        setLoading(false);
+      }
     );
     return () => unsubscribe();
   }, []);

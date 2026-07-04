@@ -62,8 +62,9 @@ export default function CheckoutPage() {
         status: "new",
         createdAt: serverTimestamp(),
       });
-    } catch {
+    } catch (err) {
       // Order log is best-effort — don't block checkout if it fails.
+      console.error("Failed to log order to Firestore:", err);
     }
 
     localStorage.setItem("tfsp-last-order", JSON.stringify(order));

@@ -42,8 +42,9 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
         setOverrides(next);
         setOverridesLoaded(true);
       },
-      () => {
-        // Offline or rules issue — fall back to static catalog silently.
+      (err) => {
+        // Offline or rules issue — fall back to static catalog.
+        console.error("Failed to load product overrides from Firestore:", err);
         setOverridesLoaded(true);
       }
     );
