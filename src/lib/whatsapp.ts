@@ -3,7 +3,14 @@ export const BUSINESS_WHATSAPP_NUMBER = "9779749355345";
 
 type OrderForMessage = {
   id: string;
-  items: { name: string; quantity: number; price: number }[];
+  items: {
+    name: string;
+    quantity: number;
+    price: number;
+    size?: string;
+    color?: string;
+    variantLabel?: string;
+  }[];
   subtotal: number;
   discount: number;
   couponCode: string | null;
@@ -17,10 +24,13 @@ export function buildOrderWhatsAppLink(order: OrderForMessage): string {
   const lines = [
     `New order ${order.id}`,
     "",
-    ...order.items.map(
-      (item) =>
-        `${item.name} x${item.quantity} - NPR ${(item.price * item.quantity).toLocaleString()}`
-    ),
+    ...order.items.map((item) => {
+      const variant = [item.color, item.size, item.variantLabel]
+        .filter(Boolean)
+        .join(", ");
+      const variantSuffix = variant ? ` (${variant})` : "";
+      return `${item.name}${variantSuffix} x${item.quantity} - NPR ${(item.price * item.quantity).toLocaleString()}`;
+    }),
     "",
     `Subtotal: NPR ${order.subtotal.toLocaleString()}`,
   ];
