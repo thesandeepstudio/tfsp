@@ -113,6 +113,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   const [frameChecked, setFrameChecked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>("details");
   const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product.id);
@@ -154,6 +155,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   const currentPrice = frameChecked
     ? (framedPrice ?? basePrice + FRAME_PRICE)
     : basePrice;
+  const maxQuantity = product.stockQuantity ?? Infinity;
 
   const relatedProducts = allProducts
     .filter((p) => p.category === product.category && p.id !== product.id)
@@ -462,6 +464,28 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
             </AccordionItem>
           </div>
 
+          {isInStock(product) && (
+            <div className="mt-8 flex items-center border border-black/20">
+              <button
+                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                aria-label="Decrease quantity"
+                className="flex h-11 w-11 items-center justify-center text-lg hover:bg-black/5"
+              >
+                −
+              </button>
+              <span className="flex h-11 flex-1 items-center justify-center text-sm">
+                {quantity}
+              </span>
+              <button
+                onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+                aria-label="Increase quantity"
+                className="flex h-11 w-11 items-center justify-center text-lg hover:bg-black/5"
+              >
+                +
+              </button>
+            </div>
+          )}
+
           <button
             disabled={!isInStock(product)}
             onClick={() => {
@@ -473,32 +497,36 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                 frameChecked ? "Framed" : undefined,
               ].filter(Boolean) as string[];
 
-              addItem({
-                id: [
-                  product.id,
-                  activeColor,
-                  activeSize,
-                  activeFormatSize,
-                  activePaper,
-                  frameChecked ? "framed" : undefined,
-                ]
-                  .filter(Boolean)
-                  .join("-"),
-                productId: product.id,
-                slug: product.slug,
-                name: product.name,
-                image: activeImage ?? product.image ?? "",
-                price: currentPrice,
-                size: activeFormatSize ?? activeSize,
-                color: activeColor,
-                variantLabel:
-                  variantParts.length > 0 ? variantParts.join(" · ") : undefined,
-              });
+              addItem(
+                {
+                  id: [
+                    product.id,
+                    activeColor,
+                    activeSize,
+                    activeFormatSize,
+                    activePaper,
+                    frameChecked ? "framed" : undefined,
+                  ]
+                    .filter(Boolean)
+                    .join("-"),
+                  productId: product.id,
+                  slug: product.slug,
+                  name: product.name,
+                  image: activeImage ?? product.image ?? "",
+                  price: currentPrice,
+                  size: activeFormatSize ?? activeSize,
+                  color: activeColor,
+                  variantLabel:
+                    variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+                },
+                quantity
+              );
 
               setAdded(true);
+              setQuantity(1);
               setTimeout(() => setAdded(false), 1500);
             }}
-            className="mt-8 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+            className="mt-3 flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             <span>
               {!isInStock(product)
@@ -508,7 +536,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                   : "Add to Cart"}
             </span>
             {isInStock(product) && (
-              <span>NPR {currentPrice.toLocaleString()}</span>
+              <span>NPR {(currentPrice * quantity).toLocaleString()}</span>
             )}
           </button>
           {isInStock(product) &&
@@ -518,6 +546,13 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                 Only {product.stockQuantity} left in stock
               </p>
             )}
+
+          <Link
+            href="/checkout"
+            className="mt-3 block border border-black/20 px-5 py-3 text-center text-sm font-semibold uppercase tracking-wide hover:border-black"
+          >
+            Go to Checkout
+          </Link>
 
           <Link
             href={`/${product.category}`}
