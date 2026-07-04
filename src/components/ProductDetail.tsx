@@ -180,10 +180,25 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
     setActiveView(Math.round(el.scrollTop / el.clientHeight));
   };
 
+  const animateScrollTop = (el: HTMLElement, target: number, duration = 400) => {
+    const start = el.scrollTop;
+    const change = target - start;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.scrollTop = start + change * eased;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
   const scrollToImage = (i: number) => {
     const el = imageContainerRef.current;
     if (el) {
-      el.scrollTo({ top: i * el.clientHeight, behavior: "smooth" });
+      animateScrollTop(el, i * el.clientHeight);
     }
     setActiveView(i);
   };
@@ -213,7 +228,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
 
       e.preventDefault();
       wheelCooldownRef.current = true;
-      el.scrollTo({ top: next * el.clientHeight, behavior: "smooth" });
+      animateScrollTop(el, next * el.clientHeight);
       setActiveView(next);
       setTimeout(() => {
         wheelCooldownRef.current = false;
@@ -305,7 +320,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           <div
             ref={imageContainerRef}
             onScroll={handleImageScroll}
-            className="no-scrollbar h-full w-full scroll-smooth snap-y snap-mandatory overflow-y-scroll"
+            className="no-scrollbar h-full w-full snap-y snap-mandatory overflow-y-scroll"
           >
             {images.map((src, i) => (
               <div key={src} className="relative h-full w-full shrink-0 snap-start">
