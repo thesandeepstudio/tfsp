@@ -271,7 +271,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
       </nav>
 
       <div className="grid gap-6 lg:grid-cols-[240px_1fr_380px] lg:gap-10">
-        <div className="hidden lg:block lg:pt-20">{accordion}</div>
+        <div className="hidden lg:block">{accordion}</div>
 
         <div
           className={`relative aspect-square w-full overflow-hidden ${activeImage ? "" : `bg-linear-to-br ${activeGradient}`}`}
@@ -327,7 +327,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           )}
         </div>
 
-        <div className="lg:pt-20">
+        <div>
           <p className="text-xs uppercase tracking-wide text-black/50">
             {categoryLabels[product.category]}
           </p>
