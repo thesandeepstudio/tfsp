@@ -188,6 +188,37 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
     setActiveView(i);
   };
 
+  const imageCount = images.length;
+  const wheelCooldownRef = useRef(false);
+
+  useEffect(() => {
+    const el = imageContainerRef.current;
+    if (!el || imageCount <= 1) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (wheelCooldownRef.current) return;
+
+      const current = Math.round(el.scrollTop / el.clientHeight);
+      const next =
+        e.deltaY > 0
+          ? Math.min(imageCount - 1, current + 1)
+          : Math.max(0, current - 1);
+
+      if (next === current) return;
+
+      wheelCooldownRef.current = true;
+      el.scrollTo({ top: next * el.clientHeight, behavior: "smooth" });
+      setActiveView(next);
+      setTimeout(() => {
+        wheelCooldownRef.current = false;
+      }, 500);
+    };
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [imageCount]);
+
   const accordion = (
     <div className="border-t border-black/10">
       <AccordionItem
@@ -257,7 +288,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           <div
             ref={imageContainerRef}
             onScroll={handleImageScroll}
-            className="no-scrollbar h-full w-full snap-y snap-mandatory overflow-y-scroll"
+            className="no-scrollbar h-full w-full scroll-smooth snap-y snap-mandatory overflow-y-scroll"
           >
             {images.map((src, i) => (
               <div key={src} className="relative h-full w-full shrink-0 snap-start">
