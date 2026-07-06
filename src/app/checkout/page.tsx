@@ -73,11 +73,20 @@ export default function CheckoutPage() {
       // Firestore rejects `undefined` field values, which optional cart
       // item fields (size/color/variantLabel) can have — strip them.
       const firestoreSafeOrder = JSON.parse(JSON.stringify(order));
-      await addDoc(collection(db, "orders"), {
-        ...firestoreSafeOrder,
-        status: "new",
-        createdAt: serverTimestamp(),
-      });
+      // Ad blockers / privacy extensions can silently block Firestore's
+      // connection without rejecting the promise, leaving it hanging
+      // forever. Race it against a timeout so checkout can never get
+      // stuck waiting on the order log.
+      await Promise.race([
+        addDoc(collection(db, "orders"), {
+          ...firestoreSafeOrder,
+          status: "new",
+          createdAt: serverTimestamp(),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Firestore order write timed out")), 6000)
+        ),
+      ]);
     } catch (err) {
       // Order log is best-effort — don't block checkout if it fails.
       console.error("Failed to log order to Firestore:", err);
