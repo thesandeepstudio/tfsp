@@ -104,9 +104,7 @@ const posterFormats: PosterFormat[] = [
   },
 ];
 
-import customProductsData from "./custom-products.json";
-
-const staticProducts: Product[] = [
+export const products: Product[] = [
   // Merch
   {
     id: "m7",
@@ -676,11 +674,6 @@ const staticProducts: Product[] = [
     gradient: gradients[2],
     description: "A dense 20-sticker bomb pack for covering laptops, boards, and cases edge to edge.",
   },
-];
-
-export const products: Product[] = [
-  ...staticProducts,
-  ...(customProductsData as Product[]),
 ];
 
 export function getProductsByCategory(category: Category): Product[] {
