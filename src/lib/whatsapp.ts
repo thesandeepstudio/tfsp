@@ -1,9 +1,7 @@
+import { SITE_URL } from "./base-path";
+
 // Business WhatsApp number (digits only, country code first, no "+").
 export const BUSINESS_WHATSAPP_NUMBER = "9779749355345";
-
-// Live site origin, used to turn relative image paths into absolute
-// URLs WhatsApp can preview in the chat.
-const SITE_URL = "https://thesandeepstudio.github.io/tfsp";
 
 type OrderForMessage = {
   id: string;
