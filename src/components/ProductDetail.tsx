@@ -174,6 +174,47 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
         : [];
   const activeImage = images[activeView] ?? images[0];
 
+  const handleAddToCart = () => {
+    const variantParts = [
+      selectedFormat && product.formats && product.formats.length > 1
+        ? selectedFormat.name
+        : undefined,
+      selectedPaperOption?.name,
+      frameChecked ? "Framed" : undefined,
+      activeFinish,
+    ].filter(Boolean) as string[];
+
+    addItem(
+      {
+        id: [
+          product.id,
+          activeColor,
+          activeSize,
+          activeFormatSize,
+          activePaper,
+          frameChecked ? "framed" : undefined,
+          activeFinish,
+        ]
+          .filter(Boolean)
+          .join("-"),
+        productId: product.id,
+        slug: product.slug,
+        name: product.name,
+        image: activeImage ?? product.image ?? "",
+        price: currentPrice,
+        size: activeFormatSize ?? activeSize,
+        color: activeColor,
+        variantLabel:
+          variantParts.length > 0 ? variantParts.join(" · ") : undefined,
+      },
+      quantity
+    );
+
+    setAdded(true);
+    setQuantity(1);
+    setTimeout(() => setAdded(false), 1500);
+  };
+
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const settleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -295,7 +336,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   );
 
   return (
-    <section className="mx-auto max-w-[1600px] px-4 py-10 sm:px-8">
+    <section className="mx-auto max-w-[1600px] px-4 py-10 pb-24 sm:px-8 lg:pb-10">
       <nav className="mb-6 text-xs uppercase tracking-wide text-black/50">
         <Link href="/" className="hover:text-black">
           Home
@@ -632,46 +673,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
 
           <button
             disabled={!isInStock(product)}
-            onClick={() => {
-              const variantParts = [
-                selectedFormat && product.formats && product.formats.length > 1
-                  ? selectedFormat.name
-                  : undefined,
-                selectedPaperOption?.name,
-                frameChecked ? "Framed" : undefined,
-                activeFinish,
-              ].filter(Boolean) as string[];
-
-              addItem(
-                {
-                  id: [
-                    product.id,
-                    activeColor,
-                    activeSize,
-                    activeFormatSize,
-                    activePaper,
-                    frameChecked ? "framed" : undefined,
-                    activeFinish,
-                  ]
-                    .filter(Boolean)
-                    .join("-"),
-                  productId: product.id,
-                  slug: product.slug,
-                  name: product.name,
-                  image: activeImage ?? product.image ?? "",
-                  price: currentPrice,
-                  size: activeFormatSize ?? activeSize,
-                  color: activeColor,
-                  variantLabel:
-                    variantParts.length > 0 ? variantParts.join(" · ") : undefined,
-                },
-                quantity
-              );
-
-              setAdded(true);
-              setQuantity(1);
-              setTimeout(() => setAdded(false), 1500);
-            }}
+            onClick={handleAddToCart}
             className="mt-6 flex w-full items-center justify-between bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
           >
             <span>
@@ -830,6 +832,22 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
             Submit Review
           </button>
         </div>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-black/10 bg-white p-3 lg:hidden">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium">{product.name}</p>
+          <p className="text-sm text-black/60">
+            NPR {(currentPrice * quantity).toLocaleString()}
+          </p>
+        </div>
+        <button
+          disabled={!isInStock(product)}
+          onClick={handleAddToCart}
+          className="shrink-0 bg-black px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/30"
+        >
+          {!isInStock(product) ? "Out of Stock" : added ? "Added ✓" : "Add to Cart"}
+        </button>
       </div>
     </section>
   );
