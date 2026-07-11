@@ -599,7 +599,7 @@ export const products: Product[] = [
     finishes: ["Matte", "Glossy"],
     tag: "New",
     gradient: gradients[7],
-    description: "A set of six football moment stickers for the die-hard fans.",
+    description: "A set of ten football moment stickers for the die-hard fans.",
     image: "/products/Sticker/football-players-pack.png",
   },
   {
@@ -611,7 +611,7 @@ export const products: Product[] = [
     finishes: ["Matte", "Glossy"],
     tag: "New",
     gradient: gradients[8],
-    description: "A set of six icon face-cutout stickers.",
+    description: "A set of ten icon face-cutout stickers.",
     image: "/products/Sticker/celebrity-faces-pack.png",
   },
   {
@@ -622,7 +622,7 @@ export const products: Product[] = [
     category: "stickers",
     finishes: ["Matte", "Glossy"],
     gradient: gradients[6],
-    description: "A set of six original hand-drawn character face stickers.",
+    description: "A set of ten original hand-drawn character face stickers.",
     image: "/products/Sticker/cartoon-character-heads-pack.png",
   },
   {
