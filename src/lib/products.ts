@@ -590,6 +590,38 @@ export const products: Product[] = [
 
   // Stickers
   {
+    id: "s14",
+    slug: "football-players-sticker-pack",
+    name: "Football Players Pack",
+    price: 40,
+    category: "stickers",
+    tag: "New",
+    gradient: gradients[7],
+    description: "A set of six football moment stickers for the die-hard fans.",
+    image: "/products/Sticker/football-players-pack.png",
+  },
+  {
+    id: "s15",
+    slug: "celebrity-faces-sticker-pack",
+    name: "Celebrity Faces Pack",
+    price: 40,
+    category: "stickers",
+    tag: "New",
+    gradient: gradients[8],
+    description: "A set of six icon face-cutout stickers.",
+    image: "/products/Sticker/celebrity-faces-pack.png",
+  },
+  {
+    id: "s13",
+    slug: "cartoon-character-sticker-pack",
+    name: "Cartoon Character Sticker Pack",
+    price: 40,
+    category: "stickers",
+    gradient: gradients[6],
+    description: "A set of six original hand-drawn character face stickers.",
+    image: "/products/Sticker/cartoon-character-heads-pack.png",
+  },
+  {
     id: "s1",
     slug: "trust-me-graphic-designer-sticker",
     name: "Trust Me I'm a Graphic Designer",
@@ -714,16 +746,6 @@ export const products: Product[] = [
     gradient: gradients[5],
     description: "A colorful mixed-type sticker with a little clock icon for good measure.",
     image: "/products/Sticker/good-thing-takes-time-pile.png",
-  },
-  {
-    id: "s13",
-    slug: "cartoon-character-sticker-pack",
-    name: "Cartoon Character Sticker Pack",
-    price: 40,
-    category: "stickers",
-    gradient: gradients[6],
-    description: "A set of six original hand-drawn character face stickers.",
-    image: "/products/Sticker/cartoon-character-heads-pack.png",
   },
 ];
 
