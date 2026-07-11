@@ -34,8 +34,8 @@ export default function Home() {
         products={products.filter((p) => p.category === "badges")}
         viewAllHref="/badges"
       />
-      <Lookbook />
       <StickerGallery />
+      <Lookbook />
       <Newsletter />
     </>
   );
