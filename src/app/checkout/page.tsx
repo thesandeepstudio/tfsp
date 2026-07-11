@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { useProducts } from "@/context/ProductsContext";
 import { deliveryLocations, getDeliveryRate } from "@/lib/shipping";
 import { STICKER_MINIMUM_ORDER_QUANTITY, getStickerQuantity } from "@/lib/products";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export default function CheckoutPage() {
@@ -78,7 +78,7 @@ export default function CheckoutPage() {
       // forever. Race it against a timeout so checkout can never get
       // stuck waiting on the order log.
       await Promise.race([
-        addDoc(collection(db, "orders"), {
+        setDoc(doc(db, "orders", order.id), {
           ...firestoreSafeOrder,
           status: "new",
           createdAt: serverTimestamp(),

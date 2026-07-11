@@ -7,6 +7,7 @@ import { WishlistProvider } from "@/context/WishlistContext";
 import { ReviewsProvider } from "@/context/ReviewsContext";
 import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
 import { ProductsProvider } from "@/context/ProductsContext";
+import { SITE_URL } from "@/lib/base-path";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,10 +26,28 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
 });
 
+const title = "TFSP | Streetwear & Footwear";
+const description =
+  "TFSP — contemporary streetwear, footwear and accessories. New drops weekly.";
+
 export const metadata: Metadata = {
-  title: "TFSP | Streetwear & Footwear",
-  description:
-    "TFSP — contemporary streetwear, footwear and accessories. New drops weekly.",
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: SITE_URL,
+    siteName: "TFSP",
+    images: [{ url: "/logo/RED.png", width: 1080, height: 1080, alt: "TFSP" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+    images: ["/logo/RED.png"],
+  },
 };
 
 export default function RootLayout({

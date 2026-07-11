@@ -100,6 +100,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   const { products: allProducts } = useProducts();
   const product = liveProduct ?? initialProduct;
   const [activeView, setActiveView] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
   const [activeFinish, setActiveFinish] = useState(product.finishes?.[0]);
@@ -338,12 +339,20 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           >
             {images.map((src, i) => (
               <div key={src} className="relative h-full w-full shrink-0">
+                {!loadedImages[src] && (
+                  <div className="absolute inset-0 animate-pulse bg-black/10" />
+                )}
                 <Image
                   src={`${BASE_PATH}${src}`}
                   alt={product.name}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
+                  onLoad={() =>
+                    setLoadedImages((prev) => ({ ...prev, [src]: true }))
+                  }
+                  className={`object-cover transition-opacity duration-300 ${
+                    loadedImages[src] ? "opacity-100" : "opacity-0"
+                  }`}
                   priority={i === 0}
                 />
               </div>
