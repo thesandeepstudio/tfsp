@@ -102,6 +102,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
   const [activeView, setActiveView] = useState(0);
   const [activeColor, setActiveColor] = useState(product.colors?.[0]?.name);
   const [activeSize, setActiveSize] = useState<string | undefined>(undefined);
+  const [activeFinish, setActiveFinish] = useState(product.finishes?.[0]);
   const [activeFormat, setActiveFormat] = useState(product.formats?.[0]?.name);
   const [activePaper, setActivePaper] = useState(
     product.formats?.[0]?.paperOptions?.[0]?.name
@@ -560,6 +561,35 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
             </div>
           )}
 
+          {product.finishes && product.finishes.length > 0 && (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-black/60">
+                Finish
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {product.finishes.map((finish) => (
+                  <button
+                    key={finish}
+                    onClick={() => setActiveFinish(finish)}
+                    className={`flex h-10 min-w-10 items-center justify-center px-3 text-sm ${
+                      activeFinish === finish
+                        ? "bg-black text-white"
+                        : "border border-black/20 hover:border-black"
+                    }`}
+                  >
+                    {finish}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {product.category === "stickers" && (
+            <p className="mt-4 text-xs text-black/50">
+              Standard size: 6cm. Want a custom size? DM us and we&apos;ll sort it out.
+            </p>
+          )}
+
           <div className="mt-8 lg:hidden">{accordion}</div>
 
           {isInStock(product) && (
@@ -598,6 +628,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                   : undefined,
                 selectedPaperOption?.name,
                 frameChecked ? "Framed" : undefined,
+                activeFinish,
               ].filter(Boolean) as string[];
 
               addItem(
@@ -609,6 +640,7 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
                     activeFormatSize,
                     activePaper,
                     frameChecked ? "framed" : undefined,
+                    activeFinish,
                   ]
                     .filter(Boolean)
                     .join("-"),
