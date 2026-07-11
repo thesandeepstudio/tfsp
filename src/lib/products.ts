@@ -673,6 +673,14 @@ export const products: Product[] = [
     tag: "New",
     gradient: gradients[2],
     description: "A dense 20-sticker bomb pack for covering laptops, boards, and cases edge to edge.",
+    image: "/products/Sticker/tfsp-branded-full-flatlay.png",
+    gallery: [
+      "/products/Sticker/tfsp-branded-full-flatlay.png",
+      "/products/Sticker/bad-decisions-good-stories-pile-1.png",
+      "/products/Sticker/daddy-chill-pile.png",
+      "/products/Sticker/no-risk-no-story-pile.png",
+      "/products/Sticker/suck-it-pile.png",
+    ],
   },
 ];
 
