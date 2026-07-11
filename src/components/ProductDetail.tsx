@@ -339,9 +339,11 @@ export default function ProductDetail({ product: initialProduct }: { product: Pr
           >
             {images.map((src, i) => (
               <div key={src} className="relative h-full w-full shrink-0">
-                {!loadedImages[src] && (
-                  <div className="absolute inset-0 animate-pulse bg-black/10" />
-                )}
+                <div
+                  className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${
+                    loadedImages[src] ? "opacity-0" : "animate-pulse opacity-100"
+                  }`}
+                />
                 <Image
                   src={`${BASE_PATH}${src}`}
                   alt={product.name}
