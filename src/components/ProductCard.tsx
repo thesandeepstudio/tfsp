@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/base-path";
@@ -22,6 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const { isWishlisted, toggleWishlist } = useWishlist();
   const wishlisted = isWishlisted(product.id);
   const inStock = isInStock(product);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
@@ -72,15 +74,21 @@ export default function ProductCard({ product }: { product: Product }) {
           </svg>
         </button>
         {product.image ? (
-          <Image
-            src={`${BASE_PATH}${product.image}`}
-            alt={product.name}
-            fill
-            sizes="(min-width: 1024px) 16vw, 45vw"
-            className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
-              !inStock ? "opacity-50" : ""
-            }`}
-          />
+          <>
+            {!imageLoaded && (
+              <div className="absolute inset-0 animate-pulse bg-black/10" />
+            )}
+            <Image
+              src={`${BASE_PATH}${product.image}`}
+              alt={product.name}
+              fill
+              sizes="(min-width: 1024px) 16vw, 45vw"
+              onLoad={() => setImageLoaded(true)}
+              className={`object-cover transition duration-300 group-hover:scale-105 ${
+                !imageLoaded ? "opacity-0" : !inStock ? "opacity-50" : "opacity-100"
+              }`}
+            />
+          </>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-black/20 transition-transform duration-300 group-hover:scale-105">
             <svg
