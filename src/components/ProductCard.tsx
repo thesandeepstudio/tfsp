@@ -75,9 +75,11 @@ export default function ProductCard({ product }: { product: Product }) {
         </button>
         {product.image ? (
           <>
-            {!imageLoaded && (
-              <div className="absolute inset-0 animate-pulse bg-black/10" />
-            )}
+            <div
+              className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${
+                imageLoaded ? "opacity-0" : "animate-pulse opacity-100"
+              }`}
+            />
             <Image
               src={`${BASE_PATH}${product.image}`}
               alt={product.name}
