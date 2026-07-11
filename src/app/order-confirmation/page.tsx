@@ -128,8 +128,14 @@ export default function OrderConfirmationPage() {
       </p>
 
       <Link
-        href="/"
+        href="/track-order"
         className="mt-4 inline-block border border-black/20 px-8 py-3 text-sm font-semibold uppercase tracking-wide hover:border-black"
+      >
+        Track Your Order
+      </Link>
+      <Link
+        href="/"
+        className="mt-4 block text-center text-sm underline hover:opacity-70"
       >
         Continue Shopping
       </Link>

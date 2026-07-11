@@ -34,7 +34,12 @@ service cloud.firestore {
                     && request.resource.data.customer.phone is string
                     && request.resource.data.customer.phone.size() > 0
                     && request.resource.data.status == 'new';
-      allow read, update, delete: if request.auth != null;
+      // Anyone who already has the exact order ID (given at checkout) can
+      // look up that one order to track it - but browsing/listing all
+      // orders stays admin-only, so PII can't be scraped in bulk.
+      allow get: if true;
+      allow list: if request.auth != null;
+      allow update, delete: if request.auth != null;
     }
   }
 }
